@@ -29,6 +29,7 @@ $basePoints = array();
 $scoringPoints = array();
 $return_message_textscore = array();
 $gameResult = array();
+$oka = 0;
 
 foreach($array as $value){
     preg_match('/^([一-龥ぁ-ん]+)([-]*[0-9]+)/', $value, $matches);
@@ -39,7 +40,7 @@ foreach($array as $value){
 	$gameResult = $gameResult + array($matches[1]=>intval($matches[2]));
 }
 
-	arsort($gameResult);
+	asort($gameResult);
 
 //$return_message_text = echo $gameResult;
 
@@ -51,11 +52,15 @@ foreach($gameResult as $key => $value){
 	} else {
 		$scoringPoints[$key] = "+".floor($basePoints[$key]);
 	}
-	
+
+	$oka = $oka + $scoringPoints[$key];
+
 $return_message_text = $return_message_text . $key . "さんは" . $scoringPoints[$key];
 //$return_message_text = $message_text;
 
 }
+
+$return_message_text = $return_message_text ."\n" . $oka;
 
 //返信実行
 sending_messages($accessToken, $replyToken, $message_type, $return_message_text);

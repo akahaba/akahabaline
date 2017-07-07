@@ -51,18 +51,18 @@ foreach($gameResult as $key => $value){
 
 	$basePoints[$key] = ($gameResult[$key] - 30000)/1000;
 	if($basePoints[$key]<0){
+		$oka = $oka + ceil($basePoints[$key]);
 		$scoringPoints[$key] = ceil($basePoints[$key]);
 	} else {
+		$oka = $oka + floor($basePoints[$key]);
+		if($i==4){
+		$scoringPoints[$key] = "+".(floor($basePoints[$key])-$oka);
+		}
 		$scoringPoints[$key] = "+".floor($basePoints[$key]);
 	}
 
-	$oka = $oka + $scoringPoints[$key];
+	$return_message_text = $return_message_text . $key . "さんは" . $scoringPoints[$key];
 
-	if($i<4){
-		$return_message_text = $return_message_text . $key . "さんは" . $scoringPoints[$key];
-	} else {
-		$return_message_text = $return_message_text . $key . "さんは" . $scoringPoints[$key]-$oka;
-	}
 }
 
 //$return_message_text = $return_message_text ."\n" . $oka;

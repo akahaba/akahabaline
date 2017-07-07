@@ -32,7 +32,7 @@ foreach($array as $value){
 
 	$basePoints = ($points - 30000)/1000;
 	if($basePoints<0){
-		$scoringPoints = ceil($basePoints);
+		$scoringPoints = "+".ceil($basePoints);
 	} else {
 		$scoringPoints = floor($basePoints);
 	}

@@ -16,9 +16,16 @@ if($message_type != "text") exit;
  
 //返信メッセージ
 //$return_message_text = "「" . $message_text . "」じゃねーよｗｗｗ";
-$return_message_text = "2017/7/3 10回戦(23:45終了)\n
+//$return_message_text = "2017/7/3 10回戦(23:45終了)\n
 朝倉　-50\t-20\t✕✕✕\n甘蔗　+10\t±0\t〇\n嵯峨　-21\t-11\t✕\n寳閣　+61\t+31\t〇〇〇\nトータル\n嵯峨　+66\n甘蔗　+37\n朝倉　+31\n寳閣　-134\n\nみんな頑張って！";
 
+$str = $message_text;
+    preg_match('/^([0-9]+)(.+)$/sD', $str, $matches);
+ 
+    $matches[1]; // 数値部分
+    $matches[2]; // それ以降
+
+$return_message_text = $matches[1] . "さんは" . $matches[2] . "点でした。";
 
 //返信実行
 sending_messages($accessToken, $replyToken, $message_type, $return_message_text);

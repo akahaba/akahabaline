@@ -33,8 +33,8 @@ $gameResult = array();
 foreach($array as $value){
     preg_match('/^([一-龥ぁ-ん]+)([-]*[0-9]+)/', $value, $matches);
  
-    $matches[1]; // 名前部分
-    $points[$key] = intval($matches[2]); // 得点部分
+    //$matches[1]; // 名前部分
+    //intval($matches[2]); // 得点部分
 
 	$gameResult = $gameResult + array($matches[1]=>intval($matches[2]));
 }
@@ -52,7 +52,7 @@ foreach($gameResult as $key => $value){
 		$scoringPoints[$key] = "+".floor($basePoints[$key]);
 	}
 	
-$return_message_text = $return_message_text . $value . "さんは" . $scoringPoints[$key];
+$return_message_text = $return_message_text . $key . "さんは" . $scoringPoints[$key];
 //$return_message_text = $message_text;
 
 }

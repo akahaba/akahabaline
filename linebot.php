@@ -62,7 +62,7 @@ foreach($gameResult as $key => $value){
 		}
 	}
 
-	$return_message_text = $return_message_text .$i. $key . "さんは" . $scoringPoints[$key];
+	$return_message_text = $key . "さんは" . $scoringPoints[$key].$return_message_text;
 $i = $i +1;
 }
 

@@ -20,10 +20,10 @@ if($message_type != "text") exit;
 //朝倉　-50\t-20\t✕✕✕\n甘蔗　+10\t±0\t〇\n嵯峨　-21\t-11\t✕\n寳閣　+61\t+31\t〇〇〇\nトータル\n嵯峨　+66\n甘蔗　+37\n朝倉　+31\n寳閣　-134\n\nみんな頑張って！";
 
 $str = $message_text;
-    preg_match('/^([0-9]+)(.+)$/sD', $str, $matches);
+    preg_match('/^(.+)([0-9]+)$/sD', $str, $matches);
  
-    $matches[1]; // 数値部分
-    $matches[2]; // それ以降
+    $matches[1]; // 名前部分
+    $matches[2]; // 得点部分
 
 $return_message_text = $matches[1] . "さんは" . $matches[2] . "点でした。";
 //$return_message_text = $message_text;

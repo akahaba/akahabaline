@@ -24,15 +24,15 @@ $array = array_map('trim', $array); // 各行にtrim()をかける
 $array = array_filter($array, 'strlen'); // 文字数が0の行を取り除く
 $array = array_values($array); // これはキーを連番に振りなおしてるだけ
 
-
-$str = $array[0];
-    preg_match('/^([一-龥ぁ-ん]+)([-]*[0-9]+)/', $str, $matches);
+foreach($array as $value){
+    preg_match('/^([一-龥ぁ-ん]+)([-]*[0-9]+)/', $value, $matches);
  
     $matches[1]; // 名前部分
     $matches[2]; // 得点部分
 
-$return_message_text = $matches[1] . "さんは" . $matches[2] . "点でした。";
+$return_message_text = $return_message_text . $matches[1] . "さんは" . $matches[2] . "点でした。\n";
 //$return_message_text = $message_text;
+}
 
 //返信実行
 sending_messages($accessToken, $replyToken, $message_type, $return_message_text);

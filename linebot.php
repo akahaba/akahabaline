@@ -26,7 +26,7 @@ $str = $message_text;
     $matches[2]; // それ以降
 
 //$return_message_text = $matches[1] . "さんは" . $matches[2] . "点でした。";
-$return_message_text = $str;
+$return_message_text = $message_text;
 
 //返信実行
 sending_messages($accessToken, $replyToken, $message_type, $return_message_text);

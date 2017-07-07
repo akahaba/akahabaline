@@ -20,12 +20,13 @@ if(strpos($message_text,'確認') !== false){
 
 	$return_message_text = "あかんやん";
 
-} else {
+} 
+//else {
   //messageのなかに'確認'が含まれていない場合
 
-	return_score($message_text);
+//	return_score($message_text);
 	$return_message_text = "どや";
-}
+//}
 
 //返信実行
 sending_messages($accessToken, $replyToken, $message_type, $return_message_text);

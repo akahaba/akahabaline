@@ -13,11 +13,105 @@ $message_text = $json_object->{"events"}[0]->{"message"}->{"text"};    //メッ�
  
 //メッセージタイプが「text」以外のときは何も返さず終了
 if($message_type != "text") exit;
- 
-//返信メッセージ
-//$return_message_text = "「" . $message_text . "」じゃねーよｗｗｗ";
-//$return_message_text = "2017/7/3 10回戦(23:45終了)\n
-//朝倉　-50\t-20\t✕✕✕\n甘蔗　+10\t±0\t〇\n嵯峨　-21\t-11\t✕\n寳閣　+61\t+31\t〇〇〇\nトータル\n嵯峨　+66\n甘蔗　+37\n朝倉　+31\n寳閣　-134\n\nみんな頑張って！";
+
+
+// 送られてきたメッセージの中身からレスポンスのタイプを選択
+if ($message_text->{"text"} == '確認') {
+    // 確認ダイアログタイプ
+    $messageData = [
+        'type' => 'template',
+        'altText' => '確認ダイアログ',
+        'template' => [
+            'type' => 'confirm',
+            'text' => '元気ですかー？',
+            'actions' => [
+                [
+                    'type' => 'message',
+                    'label' => '元気です',
+                    'text' => '元気です'
+                ],
+                [
+                    'type' => 'message',
+                    'label' => 'まあまあです',
+                    'text' => 'まあまあです'
+                ],
+            ]
+        ]
+    ];
+} elseif ($message_text->{"text"} == 'ボタン') {
+    // ボタンタイプ
+    $messageData = [
+        'type' => 'template',
+        'altText' => 'ボタン',
+        'template' => [
+            'type' => 'buttons',
+            'title' => 'タイトルです',
+            'text' => '選択してね',
+            'actions' => [
+                [
+                    'type' => 'postback',
+                    'label' => 'webhookにpost送信',
+                    'data' => 'value'
+                ],
+                [
+                    'type' => 'uri',
+                    'label' => 'googleへ移動',
+                    'uri' => 'https://google.com'
+                ]
+            ]
+        ]
+    ];
+} elseif ($message_text->{"text"} == 'カルーセル') {
+    // カルーセルタイプ
+    $messageData = [
+        'type' => 'template',
+        'altText' => 'カルーセル',
+        'template' => [
+            'type' => 'carousel',
+            'columns' => [
+                [
+                    'title' => 'カルーセル1',
+                    'text' => 'カルーセル1です',
+                    'actions' => [
+                        [
+                            'type' => 'postback',
+                            'label' => 'webhookにpost送信',
+                            'data' => 'value'
+                        ],
+                        [
+                            'type' => 'uri',
+                            'label' => '美容の口コミ広場を見る',
+                            'uri' => 'http://clinic.e-kuchikomi.info/'
+                        ]
+                    ]
+                ],
+                [
+                    'title' => 'カルーセル2',
+                    'text' => 'カルーセル2です',
+                    'actions' => [
+                        [
+                            'type' => 'postback',
+                            'label' => 'webhookにpost送信',
+                            'data' => 'value'
+                        ],
+                        [
+                            'type' => 'uri',
+                            'label' => '女美会を見る',
+                            'uri' => 'https://jobikai.com/'
+                        ]
+                    ]
+                ],
+            ]
+        ]
+    ];
+} else {
+    // それ以外は送られてきたテキストをオウム返し
+    $messageData = [
+        'type' => 'text',
+        'text' => $message->{"text"}
+    ];
+}
+
 
 $array = explode("\n", $message_text); // とりあえず行に分割
 $array = array_map('trim', $array); // 各行にtrim()をかける

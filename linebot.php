@@ -57,7 +57,7 @@ foreach($gameResult as $key => $value){
 	$oka = $oka + $scoringPoints[$key];
 
 	if($i==3){
-		$scoringPoints[$key] = $scoringPoints[$key] + $oka*-1;
+		$scoringPoints[$key] = $oka*-1;
 	}
 $return_message_text = $return_message_text . $key . "さんは" . $scoringPoints[$key];
 //$return_message_text = $message_text;

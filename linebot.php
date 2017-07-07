@@ -32,9 +32,9 @@ foreach($array as $value){
 
 	$basePoints = ($points - 30000)/1000;
 	if($basePoints<0){
-		$scoringPoints = "+".ceil($basePoints);
+		$scoringPoints = ceil($basePoints);
 	} else {
-		$scoringPoints = floor($basePoints);
+		$scoringPoints = "+".floor($basePoints);
 	}
 	
 $return_message_text = $return_message_text . $matches[1] . "さんは" . $scoringPoints . "でした。\n";

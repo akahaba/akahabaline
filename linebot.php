@@ -15,17 +15,17 @@ $message_text = $json_object->{"events"}[0]->{"message"}->{"text"};    //メッ�
 //メッセージタイプが「text」以外のときは何も返さず終了
 if($message_type != "text") exit;
 
-if(strpos($message_text,'確認') !== false){
+//if(strpos($message_text,'確認') !== false){
   //messageのなかに'確認'が含まれている場合
 
 	$return_message_text = "あかんやん";
 
-} 
+//} 
 //else {
   //messageのなかに'確認'が含まれていない場合
 
 //	return_score($message_text);
-	$return_message_text = "どや";
+//	$return_message_text = "どや";
 //}
 
 //返信実行

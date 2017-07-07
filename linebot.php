@@ -66,7 +66,7 @@ foreach($gameResult as $key => $value){
 
 	$totalPoints[$key] = intval($scoringPoints[$key])+$umaPoints[$i];
 
-	$return_message_text = $key . "さんは" . $scoringPoints[$key]."\t".$uma[$i]."\t".$totalPoints[$key].$return_message_text;
+	$return_message_text = $key . "さんは" . $scoringPoints[$key]."\t".$uma[$i]."\t".$totalPoints[$key]."\n".$return_message_text;
 $i = $i-1;
 }
 

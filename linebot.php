@@ -36,12 +36,12 @@ foreach($array as $key => $value){
     $matches[1]; // 名前部分
     $points[$key] = intval($matches[2]); // 得点部分
 
-	$gameResult = $gameResult + array($matches[1]=>intval($matches[2]));
+	$gameResult = $gameResult + array($key => $matches[1],intval($matches[2]));
 }
 
 	asort($gameResult);
 
-$return_message_text = print_r($gameResult);
+//$return_message_text = echo $gameResult;
 
 foreach($gameResult as $key => $value){
 
@@ -52,7 +52,7 @@ foreach($gameResult as $key => $value){
 		$scoringPoints[$key] = "+".floor($basePoints[$key]);
 	}
 	
-//$return_message_text = $return_message_text . $gameResult[$key] . "さんは" . $scoringPoints[$key];
+$return_message_text = $return_message_text . $gameResult[$key] . "さんは" . $scoringPoints[$key];
 //$return_message_text = $message_text;
 
 }

@@ -67,8 +67,6 @@ foreach($array as $value){
 
 	asort($gameResult);
 
-//$return_message_text = echo $gameResult;
-
 $i = 3;
 foreach($gameResult as $key => $value){
 
@@ -96,12 +94,11 @@ $i = $i-1;
 
 $return_message_text = $return_message_text. "\nみなさん頑張ってくださいね～";
 
-}
-
 //返信実行
 sending_messages($accessToken, $replyToken, $message_type, $return_message_text);
-?>
-<?php
+
+}
+
 //メッセージの送信
 function sending_messages($accessToken, $replyToken, $message_type, $return_message_text){
     //レスポンスフォーマット

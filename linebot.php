@@ -19,7 +19,13 @@ if($message_type != "text") exit;
 //$return_message_text = "2017/7/3 10回戦(23:45終了)\n
 //朝倉　-50\t-20\t✕✕✕\n甘蔗　+10\t±0\t〇\n嵯峨　-21\t-11\t✕\n寳閣　+61\t+31\t〇〇〇\nトータル\n嵯峨　+66\n甘蔗　+37\n朝倉　+31\n寳閣　-134\n\nみんな頑張って！";
 
-$str = $message_text;
+$array = explode("\n", $message_text); // とりあえず行に分割
+$array = array_map('trim', $array); // 各行にtrim()をかける
+$array = array_filter($array, 'strlen'); // 文字数が0の行を取り除く
+$array = array_values($array); // これはキーを連番に振りなおしてるだけ
+
+
+$str = $array(0);
     preg_match('/^([一-龥ぁ-ん]+)([-]*[0-9]+)/', $str, $matches);
  
     $matches[1]; // 名前部分

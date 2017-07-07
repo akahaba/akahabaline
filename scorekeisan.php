@@ -1,6 +1,10 @@
 <?php
 
 function return_score($message_text) {
+return "あほ";
+}
+
+function return_score1($message_text) {
 
 	$array = explode("\n", $message_text); // とりあえず行に分割
 	$array = array_map('trim', $array); // 各行にtrim()をかける

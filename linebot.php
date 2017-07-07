@@ -25,7 +25,7 @@ $array = array_filter($array, 'strlen'); // 文字数が0の行を取り除く
 $array = array_values($array); // これはキーを連番に振りなおしてるだけ
 
 
-$str = $array(0);
+$str = $array[0];
     preg_match('/^([一-龥ぁ-ん]+)([-]*[0-9]+)/', $str, $matches);
  
     $matches[1]; // 名前部分

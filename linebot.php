@@ -73,7 +73,7 @@ foreach($gameResult as $key => $value){
 $i = $i-1;
 }
 
-//$return_message_text = $return_message_text ."\n" . $oka;
+$return_message_text = $return_message_text. "みなさん頑張ってください！";
 
 //返信実行
 sending_messages($accessToken, $replyToken, $message_type, $return_message_text);

@@ -56,7 +56,7 @@ function return_score($message_text) {
 
 		$return_message_text = $return_message_text. "\nみなさん頑張ってくださいね～";
 
-echo $return_message_text;
+	return $return_message_text;
 
 	}
 

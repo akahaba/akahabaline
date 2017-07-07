@@ -28,9 +28,16 @@ foreach($array as $value){
     preg_match('/^([一-龥ぁ-ん]+)([-]*[0-9]+)/', $value, $matches);
  
     $matches[1]; // 名前部分
-    $matches[2]; // 得点部分
+    $points = intval($matches[2]); // 得点部分
 
-$return_message_text = $return_message_text . $matches[1] . "さんは" . $matches[2] . "点でした。\n";
+	$basePoints = ($points - 30000)/1000;
+	if($basePoints<0){
+		$scoringPoints = ceil($basePoints);
+	} else {
+		$scoringPoints = floor($basePoints);
+	}
+	
+$return_message_text = $return_message_text . $matches[1] . "さんは" . $scoringPoints . "でした。\n";
 //$return_message_text = $message_text;
 }
 

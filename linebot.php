@@ -31,7 +31,7 @@ $return_message_textscore = array();
 $gameResult = array();
 $oka = 0;
 $i = 0;
-$uma = array(30,10,-10,-30);
+$uma = array("〇〇〇","〇","✕","✕✕✕");
 
 foreach($array as $value){
     preg_match('/^([一-龥ぁ-ん]+)([-]*[0-9]+)/', $value, $matches);
@@ -62,7 +62,7 @@ foreach($gameResult as $key => $value){
 		}
 	}
 
-	$return_message_text = $key . "さんは" . $scoringPoints[$key]." ".$uma[$i]."\n".$return_message_text;
+	$return_message_text = $key . "さんは" . $scoringPoints[$key]."\t".$uma[$i]."\n".$return_message_text;
 $i = $i-1;
 }
 

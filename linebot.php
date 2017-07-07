@@ -30,7 +30,7 @@ $scoringPoints = array();
 $return_message_textscore = array();
 $gameResult = array();
 
-foreach($array as $key => $value){
+foreach($array as $value){
     preg_match('/^([一-龥ぁ-ん]+)([-]*[0-9]+)/', $value, $matches);
  
     $matches[1]; // 名前部分
@@ -45,7 +45,7 @@ foreach($array as $key => $value){
 
 foreach($gameResult as $key => $value){
 
-	$basePoints[$key] = ($points[$key] - 30000)/1000;
+	$basePoints[$key] = ($gameResult[$key] - 30000)/1000;
 	if($basePoints[$key]<0){
 		$scoringPoints[$key] = ceil($basePoints[$key]);
 	} else {

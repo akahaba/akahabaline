@@ -56,7 +56,6 @@ $i = $i-1;
 
 $return_message_text = $return_message_text. "\nみなさん頑張ってくださいね～";
 
-return $return_message_text;
 }
 
 ?>

@@ -23,7 +23,7 @@ if(strpos($message_text,'確認') !== false){
 } else {
   //messageのなかに'確認'が含まれていない場合
 
-	$return_message_text = return_score($message_text);
+	$return_message_text = return_score();
 //	$return_message_text = "どや";
 }
 

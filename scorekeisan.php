@@ -1,6 +1,6 @@
 <?php
 
-function return_score($message_text) {
+function return_score() {
 return "あほ";
 }
 

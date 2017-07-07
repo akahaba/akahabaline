@@ -44,7 +44,7 @@ foreach($array as $value){
 
 //$return_message_text = echo $gameResult;
 
-i = 0;
+$i = 0;
 foreach($gameResult as $key => $value){
 
 	$basePoints[$key] = ($gameResult[$key] - 30000)/1000;

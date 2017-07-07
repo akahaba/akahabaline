@@ -15,8 +15,10 @@ $message_text = $json_object->{"events"}[0]->{"message"}->{"text"};    //メッ�
 if($message_type != "text") exit;
  
 //返信メッセージ
-$return_message_text = "「" . $message_text . "」じゃねーよｗｗｗ";
- 
+//$return_message_text = "「" . $message_text . "」じゃねーよｗｗｗ";
+$return_message_text = "朝倉　-50\n甘蔗　+10\n嵯峨　-21\n寳閣　+61\n\n嵯峨　+66\n甘蔗　+37\n朝倉　+31\n寳閣　-134";
+
+
 //返信実行
 sending_messages($accessToken, $replyToken, $message_type, $return_message_text);
 ?>

@@ -39,7 +39,7 @@ foreach($array as $value){
 	$gameResult = $gameResult + array($matches[1]=>intval($matches[2]));
 }
 
-	asort($gameResult);
+	arsort($gameResult);
 
 //$return_message_text = echo $gameResult;
 

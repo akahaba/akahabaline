@@ -14,10 +14,6 @@ $message_text = $json_object->{"events"}[0]->{"message"}->{"text"};    //メッ�
 //メッセージタイプが「text」以外のときは何も返さず終了
 if($message_type != "text") exit;
 
-if($message_text=='確認') {
-	$return_message_text = "確認せな！";
-}
-
 $array = explode("\n", $message_text); // とりあえず行に分割
 $array = array_map('trim', $array); // 各行にtrim()をかける
 $array = array_filter($array, 'strlen'); // 文字数が0の行を取り除く

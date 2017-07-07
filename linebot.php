@@ -40,14 +40,6 @@ foreach($array as $value){
 	$gameResult = $gameResult + array($matches[1]=>intval($matches[2]));
 }
 
-if($gameResult[0] == "確認") {
-	$return_message_text = "\nみなさん頑張ってくださいね～";
-	//返信実行
-	sending_messages($accessToken, $replyToken, $message_type, $return_message_text);
-	exit;
-} else {
-
-
 	asort($gameResult);
 
 $i = 3;
@@ -79,7 +71,7 @@ $return_message_text = $return_message_text. "\nみなさん頑張ってくだ�
 
 //返信実行
 sending_messages($accessToken, $replyToken, $message_type, $return_message_text);
-}
+
 
 //メッセージの送信
 function sending_messages($accessToken, $replyToken, $message_type, $return_message_text){

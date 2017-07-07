@@ -24,20 +24,24 @@ $array = array_map('trim', $array); // 各行にtrim()をかける
 $array = array_filter($array, 'strlen'); // 文字数が0の行を取り除く
 $array = array_values($array); // これはキーを連番に振りなおしてるだけ
 
-foreach($array as $value){
+$points = array();
+$basePoints = array();
+$scoringPoints = array();
+
+foreach($array as $key => $value){
     preg_match('/^([一-龥ぁ-ん]+)([-]*[0-9]+)/', $value, $matches);
  
     $matches[1]; // 名前部分
-    $points = intval($matches[2]); // 得点部分
+    $points[$key] = intval($matches[2]); // 得点部分
 
-	$basePoints = ($points - 30000)/1000;
-	if($basePoints<0){
-		$scoringPoints = ceil($basePoints);
+	$basePoints[$key] = ($points[$key] - 30000)/1000;
+	if($basePoints[$key]<0){
+		$scoringPoints[$key] = ceil($basePoints[$key]);
 	} else {
-		$scoringPoints = "+".floor($basePoints);
+		$scoringPoints[$key] = "+".floor($basePoints[$key]);
 	}
 	
-$return_message_text = $return_message_text . $matches[1] . "さんは" . $scoringPoints . "でした。\n";
+$return_message_text = $return_message_text . $matches[1] . "さんは" . $scoringPoints[$key];
 //$return_message_text = $message_text;
 }
 

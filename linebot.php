@@ -16,7 +16,7 @@ if($message_type != "text") exit;
  
 //返信メッセージ
 //$return_message_text = "「" . $message_text . "」じゃねーよｗｗｗ";
-$return_message_text = "朝倉　-50\n甘蔗　+10\n嵯峨　-21\n寳閣　+61\n\n嵯峨　+66\n甘蔗　+37\n朝倉　+31\n寳閣　-134";
+$return_message_text = "10回戦\n朝倉　-50\n甘蔗　+10\n嵯峨　-21\n寳閣　+61\nトータル\n嵯峨　+66\n甘蔗　+37\n朝倉　+31\n寳閣　-134";
 
 
 //返信実行

@@ -57,8 +57,9 @@ foreach($gameResult as $key => $value){
 		$oka = $oka + floor($basePoints[$key]);
 		if($i==4){
 		$scoringPoints[$key] = "+".(floor($basePoints[$key])-$oka);
-		}
+		}else {
 		$scoringPoints[$key] = "+".floor($basePoints[$key]);
+		}
 	}
 
 	$return_message_text = $return_message_text .$i. $key . "さんは" . $scoringPoints[$key];

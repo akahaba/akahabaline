@@ -41,6 +41,8 @@ foreach($array as $key => $value){
 
 	asort($gameResult);
 
+$return_message_text = print_r($members);
+
 foreach($gameResult as $key => $value){
 
 	$basePoints[$key] = ($points[$key] - 30000)/1000;
@@ -50,7 +52,7 @@ foreach($gameResult as $key => $value){
 		$scoringPoints[$key] = "+".floor($basePoints[$key]);
 	}
 	
-$return_message_text = $return_message_text . $gameResult[$key] . "さんは" . $scoringPoints[$key];
+//$return_message_text = $return_message_text . $gameResult[$key] . "さんは" . $scoringPoints[$key];
 //$return_message_text = $message_text;
 
 }

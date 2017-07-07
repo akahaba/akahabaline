@@ -36,7 +36,7 @@ foreach($array as $key => $value){
     $matches[1]; // 名前部分
     $points[$key] = intval($matches[2]); // 得点部分
 
-	$gameResult = $gameResult + array($key => $matches[1],intval($matches[2]));
+	$gameResult = $gameResult + array($matches[1]=>intval($matches[2]));
 }
 
 	asort($gameResult);

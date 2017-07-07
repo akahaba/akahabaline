@@ -27,11 +27,13 @@ $array = array_values($array); // これはキーを連番に振りなおして�
 $points = array();
 $basePoints = array();
 $scoringPoints = array();
+$totalPoints = array();
 $return_message_textscore = array();
 $gameResult = array();
 $oka = 0;
 $i = 0;
-$uma = array("〇〇〇","〇","✕","✕✕✕");
+$uma = array("〇〇〇","〇　　","✕　　","✕✕✕");
+$umaPoints = array(30,10,-10,-30);
 
 foreach($array as $value){
     preg_match('/^([一-龥ぁ-ん]+)([-]*[0-9]+)/', $value, $matches);
@@ -62,7 +64,9 @@ foreach($gameResult as $key => $value){
 		}
 	}
 
-	$return_message_text = $key . "さんは" . $scoringPoints[$key]."\t".$uma[$i]."\n".$return_message_text;
+	$totalPoints[$key] = intval($scoringPoints[$key])+$umaPoints[$i];
+
+	$return_message_text = $key . "さんは" . $scoringPoints[$key]."\t".$uma[$i]."\t".$totalPoints[$key].$return_message_text;
 $i = $i-1;
 }
 

@@ -40,6 +40,7 @@ function sending_messages($accessToken, $replyToken, $message_type, $return_mess
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_PROXY,'http://fixie:lLQfKY2h6yaq478@velodrome.usefixie.com');
     curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($post_data));
     curl_setopt($ch, CURLOPT_HTTPHEADER, array(
         'Content-Type: application/json; charser=UTF-8',

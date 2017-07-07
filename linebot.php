@@ -41,7 +41,7 @@ foreach($array as $key => $value){
 
 	asort($gameResult);
 
-$return_message_text = print_r($members);
+$return_message_text = print_r($gameResult);
 
 foreach($gameResult as $key => $value){
 

@@ -14,31 +14,6 @@ $message_text = $json_object->{"events"}[0]->{"message"}->{"text"};    //メッ�
 //メッセージタイプが「text」以外のときは何も返さず終了
 if($message_type != "text") exit;
 
-// 送られてきたメッセージの中身からレスポンスのタイプを選択
-if ($message_text == '確認') {
-    // 確認ダイアログタイプ
-    $response_format_text = [
-        'type' => 'template',
-        'altText' => '確認ダイアログ',
-        'template' => [
-            'type' => 'confirm',
-            'text' => '元気ですかー？',
-            'actions' => [
-                [
-                    'type' => 'message',
-                    'label' => '元気です',
-                    'text' => '元気です'
-                ],
-                [
-                    'type' => 'message',
-                    'label' => 'まあまあです',
-                    'text' => 'まあまあです'
-                ],
-            ]
-        ]
-    ];
-} else {
-
 
 $array = explode("\n", $message_text); // とりあえず行に分割
 $array = array_map('trim', $array); // 各行にtrim()をかける
@@ -97,7 +72,6 @@ $return_message_text = $return_message_text. "\nみなさん頑張ってくだ�
 //返信実行
 sending_messages($accessToken, $replyToken, $message_type, $return_message_text);
 
-}
 
 //メッセージの送信
 function sending_messages($accessToken, $replyToken, $message_type, $return_message_text){

@@ -29,6 +29,17 @@ function return_score($message_text) {
 		$gameResult = $gameResult + array($matches[1]=>intval($matches[2]));
 		}
 
+	//最後の行はコマンド　登録　修正　削除＋ゲーム番号
+	$cmdstr = get_last_key($gameResult);
+	
+	if($cmdstr=='登録') {
+		$return_message_text = "登録モードです";
+	} elseif($cmdstr=='修正') {
+		$return_message_text = "修正モードです";
+	} elseif($cmdstr=='削除') {
+		$return_message_text = "削除モードです";
+	} else {
+
 		asort($gameResult);
 
 	$i = 3;
@@ -70,6 +81,15 @@ function return_score($message_text) {
 	return $return_message_text;
 
 	}
+	
+	}
 
+//第一引数・・・最後のキーを取得したい配列
+//返り値・・・最後のキー
+function get_last_key($array)
+{
+    end($array);
+    return key($array);
+}
 
 ?>

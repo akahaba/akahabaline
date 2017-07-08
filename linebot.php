@@ -18,14 +18,14 @@ if($message_type != "text") exit;
 
 if(strpos($message_text,'確認') !== false){
 //  if(preg_match('/^([確認]+)/',$message_text)) {
-  //messageのなかに'確認'が含まれている場合
+  //messageの先頭に'確認'が含まれている場合
 
 	$return_message_text = "現在の結果だよ！";
 //	$return_message_text = record_score();
 
 
 } else {
-  //messageのなかに'確認'が含まれていない場合
+  //messageの先頭に'確認'が含まれていない場合
 
 	$return_message_text = return_score($message_text);
 //	$return_message_text = "どや";

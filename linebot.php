@@ -121,10 +121,10 @@ if(strpos($message_text,'確認') !== false){
 
 } elseif(strpos($message_text,'精算') !== false){
 
-	$return_message_text = "現在の結果だよ!";
+	$return_message_text = "本日の精算額はこちら！";
 //	$return_message_text = record_score();
 
-	$sqlcmd="SELECT player, Sum(scoringpoints) As pt,Sum(umapoints) As uma,Sum(totalpoints) As total FROM mjtable WHERE date='".$date_s."' GROUP BY player order by total desc;";
+	$sqlcmd="SELECT player,Sum(totalpoints)*50 As total FROM mjtable WHERE date='".$date_s."' GROUP BY player order by total desc;";
 
 		//DB接続
 		// 各種パラメータを指定して接続
@@ -146,7 +146,7 @@ if(strpos($message_text,'確認') !== false){
 			$resultScore ="";
 			for ($i = 0 ; $i < pg_num_rows($res) ; $i++){
 			    $rows = pg_fetch_array($res, NULL, PGSQL_ASSOC);
-			    $resultScore=$resultScore.$rows['player']."\t".$rows['pt']."\t".$rows['uma']."\t".$rows['total']."\n";
+			    $resultScore=$resultScore.$rows['player']."\t".$rows['total']."円\n";
 			}
 
 				$db_message = "クエリ実行できました";
@@ -158,7 +158,7 @@ if(strpos($message_text,'確認') !== false){
 			// データベースとの接続を切断
 			pg_close($pg_conn);
 
-			$return_message_text=$return_message_text."\n\n".$val."回戦終了時点トータル\n".$resultScore;
+			$return_message_text=$return_message_text."\n\n".$val."回戦終了時点精算額\n".$resultScore;
 
 
 

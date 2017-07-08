@@ -102,7 +102,7 @@ $sqlrollup = "select handnumber,sum(case player when '朝倉' then totalpoints e
 			// データベースとの接続を切断
 			pg_close($pg_conn);
 
-	$return_message_text=$return_message_text."\n\n".$i.$db_message.$resultScore;
+	$return_message_text="今日のゲームの履歴です"."\n".$resultScore;
 
 } else {
   //messageの先頭に'確認'が含まれていない場合

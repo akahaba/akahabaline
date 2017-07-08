@@ -31,12 +31,19 @@ if( $pg_conn ) {
 	// データを登録するためのSQLを作成
 	for($i=2;$i<=5;$i++) {
 
-	$player = $obj[$i];
-	$score = $obj[$i]["score"];
-	$rank = $obj[$i]["rank"];
-	$scoringPoints = $obj[$i]["scoringPoints"];
-	$umaPoints = $obj[$i]["umaPoints"];
-	$totalPoints = $obj[$i]["totalPoints"];
+	//$player = $obj[$i];
+	//$score = $obj[$i]["score"];
+	//$rank = $obj[$i]["rank"];
+	//$scoringPoints = $obj[$i]["scoringPoints"];
+	//$umaPoints = $obj[$i]["umaPoints"];
+	//$totalPoints = $obj[$i]["totalPoints"];
+	
+	$player = "甘蔗";
+	$score = 32600;
+	$rank = 1;
+	$scoringPoints = 21;
+	$umaPoints = 30;
+	$totalPoints = 51;
 	
 	$sql = "INSERT INTO mjtable (
 	date,time,player,score,rank,scoringPoints,umaPoints,totalPoints

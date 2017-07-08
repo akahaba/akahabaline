@@ -50,12 +50,13 @@ if( $pg_conn ) {
 ) VALUES (
 	$date,$time,$player,$score,$rank,$scoringPoints,$umaPoints,$totalPoints
 	)";
-
+	
+	$return_text = $sql;
 	// SQLクエリ実行
 	$res = pg_query( $pg_conn, $sql);
 	var_dump($res);
 	}
-	$return_text = "データ登録しました";
+	//$return_text = "データ登録しました";
 	
 } else {
 	$return_text = "接続できませんでした";

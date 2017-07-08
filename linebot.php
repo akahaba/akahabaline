@@ -82,12 +82,13 @@ if(strpos($message_text,'確認') !== false){
 				$db_message = "接続に成功しました";
 
 				$sqlPlayer="select player from mjtable where date='".$date_s."' group by player order by player desc;";
+				$return_message_text=$sqlPlayer;
 				//参加者名の取得
 				$playerToday = array();
 				$resPlayer = pg_query( $pg_conn, $sqlPlayer);
 				for ($i = 0 ; $i < pg_num_rows($resPlayer) ; $i++){
 				    $rows = pg_fetch_array($resPlayer, NULL,PGSQL_NUM );
-				$playerToday[$i]=$rows[1];
+				$playerToday[$i]=$rows[0];
 				$return_message_text=$return_message_text.$playerToday[$i];
 				}
 				

@@ -44,6 +44,10 @@ if(strpos($message_text,'確認') !== false){
 			if( $pg_conn ) {
 				$db_message = "接続に成功しました";
 
+				// SQLクエリ実行 終了ゲーム数
+				$sqlhndno ="SELECT MAX('handnumber') FROM mjtable WHERE date='".$date_s."';";
+				$resHandnumber = pg_query( $pg_conn, $sqlhndno);
+
 				// SQLクエリ実行
 				$res = pg_query( $pg_conn, $sqlcmd);
 				//var_dump($res);
@@ -54,8 +58,6 @@ if(strpos($message_text,'確認') !== false){
 			    $resultScore=$resultScore.$rows['player']."\t".$rows['pt']."\t".$rows['uma']."\t".$rows['total']."\n";
 			}
 
-
-
 				$db_message = "クエリ実行できました";
 				
 			} else {
@@ -65,7 +67,7 @@ if(strpos($message_text,'確認') !== false){
 			// データベースとの接続を切断
 			pg_close($pg_conn);
 
-	$return_message_text=$return_message_text."\n\n".$resultScore;
+	$return_message_text=$return_message_text."\n\n".$resHandnumber.$resultScore;
 
 } else {
   //messageの先頭に'確認'が含まれていない場合

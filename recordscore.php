@@ -20,7 +20,7 @@ if( $pg_conn ) {
 	$json = file_get_contents("/tmp/test.json");
 	$obj = json_decode($json);
 	// パースに失敗した時は処理終了
-	if ($obj == NULL) {
+	if ($obj === NULL) {
 	$return_text = "JSONファイルがありません";
 	return $return_text;
 	}

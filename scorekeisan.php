@@ -38,6 +38,11 @@ function return_score($message_text)
 			array_pop($gameResult);
 		}
 	
+	//$sql = "INSERT INTO mjtable (date,time,player,score,rank,scoringPoints,umaPoints,totalPoints
+	//) VALUES ($player,$score,$rank,$scoringPoints,$umaPoints,$totalPoints)";
+	$sql_str = "INSERT INTO mjtable (date,time,player,score,rank,scoringPoints,umaPoints,totalPoints) VALUES (";
+	$sql = array();
+	
 	asort($gameResult);
     
 	$i = 3;
@@ -66,6 +71,7 @@ function return_score($message_text)
 		//$result = array_merge($arrGame,"name"=>$key);
 		//$arrGame += array($key=>$arrPlayerResult);
 
+		$sql[$i]= $sql_str. $key .",". $gameResult[$key].",".$scoringPoints[$key]).",". $umaPoints[$i].",".$totalPoints[$key].");";
 		$return_message_text = $key . "さんは" . $scoringPoints[$key]."\t".$uma[$i]."\t".$totalPoints[$key]."\n".$return_message_text;
 		$i = $i-1;
 		}
@@ -77,6 +83,7 @@ function return_score($message_text)
 
 		if($cmdstr=='登録') {
 			$return_message_text = $return_message_text."\n登録モードです\n"."ゲーム番号".$gameNm;
+			$return_message_text = $return_message_text.$sql[0]
 		
 		} elseif($cmdstr=='修正') {
 			$return_message_text =  $return_message_text."\n修正モードです\n"."ゲーム番号".$gameNm;

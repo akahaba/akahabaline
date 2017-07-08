@@ -122,6 +122,9 @@ function return_score($message_text)
 
 				// SQLクエリ実行
 				$res = pg_query( $pg_conn, $sql[0]);
+				$res = pg_query( $pg_conn, $sql[1]);
+				$res = pg_query( $pg_conn, $sql[2]);
+				$res = pg_query( $pg_conn, $sql[3]);
 				//var_dump($res);
 
 				$db_message = "データ登録しました";

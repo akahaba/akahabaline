@@ -72,7 +72,8 @@ if(strpos($message_text,'確認') !== false){
 
 	$return_message_text=$return_message_text."\n\n".$val."回戦終了時点トータル\n".$resultScore;
 
-} elseif(preg_match('/^([履歴]+)/',$message_text)) {
+} elseif(strpos($message_text,'履歴') !== false) {
+//} elseif(preg_match('/^([履歴]+)/',$message_text)) {
 	//messageの先頭に履歴が含まれている場合
 
 
@@ -119,10 +120,10 @@ if(strpos($message_text,'確認') !== false){
 	$return_message_text=$return_message_text."今日のゲームの履歴です"."\n".$headertitle.$resultScore;
 
 } else {
-  //messageの先頭に'確認'が含まれていない場合
+  //messageの先頭に'確認''履歴'が含まれていない場合
 
 	$return_message_text = return_score($message_text);
-//	$return_message_text = "どや";
+
 }
 
 //返信実行

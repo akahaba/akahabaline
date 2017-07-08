@@ -52,7 +52,7 @@ if( $pg_conn ) {
 	$datestr,$timestr,$player,$score,$rank,$scoringPoints,$umaPoints,$totalPoints
 	)";
 	
-	$return_text = $sql;
+	$return_text = $obj;
 	// SQLクエリ実行
 	//$res = pg_query( $pg_conn, $sql);
 	//var_dump($res);

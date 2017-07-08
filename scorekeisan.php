@@ -31,7 +31,7 @@ function return_score($message_text) {
 
 	//最後の行はコマンド　登録　修正　削除＋ゲーム番号
 	$cmdstr = get_last_key($gameResult);
-	$gameNm = get_last_value($gameResult);
+	//$gameNm = get_last_value($gameResult);
 	
 	if($cmdstr=='登録') {
 		$return_message_text = "登録モードです\n"."ゲーム番号".$gameNm;

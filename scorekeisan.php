@@ -154,7 +154,7 @@ function return_score($message_text)
 			pg_close($pg_conn);
 
 
-			$return_message_text = $return_message_text."\n".$db_message.$sqlCheck;
+			$return_message_text = $return_message_text."\n".$db_message.$sqlCheck.pg_num_rows($resCheck);
 		
 		} elseif($cmdstr=='修正') {
 			$return_message_text =  $return_message_text."\n修正モードです\n"."ゲーム番号".$gameNm;

@@ -31,18 +31,19 @@ function return_score($message_text) {
 
 	//最後の行はコマンド　登録　修正　削除＋ゲーム番号
 	$cmdstr = get_last_key($gameResult);
+	$gameNm = get_last_value($gameResult);
 	
 	if($cmdstr=='登録') {
-		$return_message_text = "登録モードです";
+		$return_message_text = "登録モードです\n"."ゲーム番号".$gameNm;
 	} elseif($cmdstr=='修正') {
-		$return_message_text = "修正モードです";
+		$return_message_text = "修正モードです\n"."ゲーム番号".$gameNm;
 	} elseif($cmdstr=='削除') {
-		$return_message_text = "削除モードです";
+		$return_message_text = "削除モードです\n"."ゲーム番号".$gameNm;
 	} else {	//表示モード
 
 		//array_pop($gameResult);
 
-		asort($gameResult);
+	asort($gameResult);
 
 	$i = 3;
 	foreach($gameResult as $key => $value){
@@ -92,6 +93,13 @@ function get_last_key($array)
 {
     end($array);
     return key($array);
+}
+
+/第一引数・・・最後の値を取得したい配列
+//返り値・・・最後の値
+function get_last_value($array)
+{
+    return end($array);
 }
 
 ?>

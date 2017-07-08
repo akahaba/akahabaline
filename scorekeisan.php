@@ -102,7 +102,10 @@ function return_score($message_text)
 
 		if($cmdstr=='登録') {
 			$return_message_text = $return_message_text."\n登録モードです\n"."ゲーム番号".$gameNm;
-			$return_message_text = $return_message_text.$sql[0];
+
+			$sqlreturn_message_text = record_score($sql);
+
+			$return_message_text = $return_message_text.$sqlreturn_message_text;
 		
 		} elseif($cmdstr=='修正') {
 			$return_message_text =  $return_message_text."\n修正モードです\n"."ゲーム番号".$gameNm;
@@ -133,5 +136,42 @@ function get_last_value($array)
 {
     return end($array);
 }
+
+//record
+function record_score($arr) {
+
+$DB_SERVER = getenv('DB_HOST');
+$Port = "5432";
+$DB_NAME = getenv('DB_DATABASE');
+$DB_UID = getenv('DB_USERNAME');
+$DB_PASS = getenv('DB_PASSWORD');
+
+define("DB_CONECT","host=$DB_SERVER port=$Port dbname=$DB_NAME user=$DB_UID password=$DB_PASS");
+
+// 各種パラメータを指定して接続
+$pg_conn = pg_connect(DB_CONECT);
+//$pg_conn = pg_connect("host=localhost port=5432 dbname=test user=testuser password=testtest");
+
+if( $pg_conn ) {
+	$return_text = "接続に成功しました";
+
+	foreach($arr as $value) {
+	// SQLクエリ実行
+	$res = pg_query( $pg_conn, $value);
+	var_dump($res);
+	}
+
+	}
+	$return_text = "データ登録しました";
+	
+} else {
+	$return_text = "接続できませんでした";
+}
+
+// データベースとの接続を切断
+pg_close($pg_conn);
+return $return_text;
+}
+
 
 ?>

@@ -53,8 +53,8 @@ if( $pg_conn ) {
 	
 	$return_text = $sql;
 	// SQLクエリ実行
-	$res = pg_query( $pg_conn, $sql);
-	var_dump($res);
+	//$res = pg_query( $pg_conn, $sql);
+	//var_dump($res);
 	}
 	//$return_text = "データ登録しました";
 	

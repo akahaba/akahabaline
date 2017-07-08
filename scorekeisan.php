@@ -131,15 +131,21 @@ function return_score($message_text)
 			if( $pg_conn ) {
 				$db_message = "接続に成功しました";
 
-				// SQLクエリ実行
-				$UpdRows=0;
-				for($n=0;$n<4;$n++){
-				$res = pg_query( $pg_conn, $sql[$n]);
-				$UpdRows += pg_affected_rows($res);
+				//追加可能かのcheck
+				$sqlCheck = "SELECT * FROM mjtable WHERE handnumber=".$handnumber.";";
+				$resCheck = pg_query($pg_conn, $sqlCheck);
+				if(pg_num_rows($resCheck)<1) {
+					$db_message="既にゲームが登録されています";
+				} else {
+					// SQLクエリ実行
+					$UpdRows=0;
+					for($n=0;$n<4;$n++){
+					$res = pg_query( $pg_conn, $sql[$n]);
+					$UpdRows += pg_affected_rows($res);
+					}
+				
+					$db_message = $UpdRows."件データ登録しました";
 				}
-				
-				$db_message = $UpdRows."件データ登録しました";
-				
 			} else {
 				$db_message = "接続できませんでした";
 			}

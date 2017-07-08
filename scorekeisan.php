@@ -17,6 +17,8 @@ function return_score($message_text) {
 	$i = 0;
 	$uma = array("〇〇〇","〇　　","✕　　","✕✕✕");
 	$umaPoints = array(30,10,-10,-30);
+	//JSON用変数宣言
+	$arrGame = array("date"=>date("Ymd"),"endTime"=>date("H:i:s"));
 
 	foreach($array as $value){
 	    preg_match('/^([一-龥ぁ-ん]+)([-]*[0-9]+)/', $value, $matches);
@@ -51,15 +53,17 @@ function return_score($message_text) {
 			}
 
 		//JSON用arrayへの代入
-		$arrPlayerResult = array("name"=>$key,"rank"=>($i+1),"score"=>$gameResult[$key],"scoringPoints"=>$scoringPoints[$key],"umaPoints"=>$umaPoints[$i],"totalPoints"=>$totalPoints[$key]);
-		$arrPlayerResult = json_encode($arrPlayerResult);
-		file_put_contents("/tmp/test.json" , $arrPlayerResult);
+		$arrPlayerResult = array("rank"=>($i+1),"score"=>$gameResult[$key],"scoringPoints"=>$scoringPoints[$key],"umaPoints"=>$umaPoints[$i],"totalPoints"=>$totalPoints[$key]);
+		array_push($arrGame,"name"=>$key);
 
 		$return_message_text = $key . "さんは" . $scoringPoints[$key]."\t".$uma[$i]."\t".$totalPoints[$key]."\n".$return_message_text;
 		$i = $i-1;
 		}
 
-		$return_message_text = $return_message_text. "\nみなさん頑張ってくださいね～".$arrPlayerResult;
+		$arrGame = json_encode($arrGame);
+		file_put_contents("/tmp/test.json" , $arrGame);
+		
+		$return_message_text = $return_message_text. "\nみなさん頑張ってくださいね～".$arrGame;
 
 	return $return_message_text;
 

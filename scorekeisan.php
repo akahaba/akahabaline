@@ -55,7 +55,7 @@ function return_score($message_text) {
 		$totalPoints[$key] = intval($scoringPoints[$key])+$umaPoints[$i];
 		if($totalPoints[$key]>0){
 		$totalPoints[$key] = "+".$totalPoints[$key];
-			}
+			} //if
 
 		//JSON用arrayへの代入
 		//$arrPlayerResult = array("rank"=>($i+1),"score"=>$gameResult[$key],"scoringPoints"=>$scoringPoints[$key],"umaPoints"=>$umaPoints[$i],"totalPoints"=>$totalPoints[$key]);
@@ -73,7 +73,7 @@ function return_score($message_text) {
 	return $return_message_text;
 
 	}
-	
+	}
 
 //第一引数・・・最後のキーを取得したい配列
 //返り値・・・最後のキー

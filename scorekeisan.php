@@ -40,11 +40,12 @@ function return_score($message_text)
 	
 	//$sql = "INSERT INTO mjtable (date,time,player,score,rank,scoringPoints,umaPoints,totalPoints
 	//) VALUES ($player,$score,$rank,$scoringPoints,$umaPoints,$totalPoints)";
-	$sql_str = "INSERT INTO mjtable (date,time,player,score,rank,scoringPoints,umaPoints,totalPoints) VALUES (";
+	$sql_str = "INSERT INTO mjtable (date,time,handnumber,player,score,rank,scoringPoints,umaPoints,totalPoints) VALUES (";
 	//$sql = array();
 	
 	$date_s=(string)date("Ymd");
 	$endTime_s=date("H:i:s", strtotime('+9 hour'));
+	$handnumber=$gameNm;
 	$player_s="";
 	$score_s=0;
 	$rank_s=0;
@@ -89,7 +90,7 @@ function return_score($message_text)
 
 		//.$date_s."','".$endTime_s."','"
 		//$sql[$i]= $sql_str. $key .",". $gameResult[$key].",".$scoringPoints[$key]).",". $umaPoints[$i].",".$totalPoints[$key].");";
-		$sql_test=$sql_str."'".$date_s."','".$endTime_s."','".$player_s."',".$score_s.",".$rank_s.",".$scoringPoints_s.",".$umaPoints_s.",".$totalPoints_s.");";
+		$sql_test=$sql_str."'".$date_s."','".$endTime_s."',".$handnumber.",'".$player_s."',".$score_s.",".$rank_s.",".$scoringPoints_s.",".$umaPoints_s.",".$totalPoints_s.");";
 		$return_message_text = $key . "さんは" . $scoringPoints[$key]."\t".$uma[$i]."\t".$totalPoints[$key]."\n".$return_message_text;
 		$i = $i-1;
 		}

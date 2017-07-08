@@ -180,7 +180,7 @@ function return_score($message_text)
 			// データベースとの接続を切断
 			pg_close($pg_conn);
 
-			$return_message_text =$return_message_text."\n".$db_message;
+			$return_message_text =$return_message_text."\n".$db_message."\n".$sqlUpd[3];
 
 		} elseif($cmdstr=='削除') {
 			$return_message_text =  $return_message_text."\n削除モードです\n"."ゲーム番号".$gameNm."\n";

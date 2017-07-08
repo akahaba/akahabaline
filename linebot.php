@@ -33,7 +33,7 @@ if(strpos($message_text,'確認') !== false){
 	$return_message_text = "現在の結果だよ！";
 //	$return_message_text = record_score();
 
-	$sqlcmd="SELECT player, Sum(totalpoints) As total FROM mjtable GROUP BY player;";
+	$sqlcmd="SELECT player, Sum(totalpoints) As total FROM mjtable GROUP BY player order by total desc;";
 
 		//DB接続
 		// 各種パラメータを指定して接続

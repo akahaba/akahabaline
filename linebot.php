@@ -103,7 +103,7 @@ from mjtable group by rollup(handnumber) order by handnumber asc;";
 			// データベースとの接続を切断
 			pg_close($pg_conn);
 
-	$return_message_text=$return_message_text."\n\n".$i.$resultScore;
+	$return_message_text=$return_message_text."\n\n".$i.$db_message.$resultScore;
 
 } else {
   //messageの先頭に'確認'が含まれていない場合

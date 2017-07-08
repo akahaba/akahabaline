@@ -123,9 +123,7 @@ function return_score($message_text)
 				// SQLクエリ実行
 				//$res = pg_query( $pg_conn, $sqlcmd);
 				//var_dump($res);
-				}
 
-				}
 				//$db_message = "データ登録しました";
 				
 			} else {

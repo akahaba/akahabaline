@@ -150,10 +150,8 @@ define("DB_CONECT","host=$DB_SERVER port=$Port dbname=$DB_NAME user=$DB_UID pass
 
 // 各種パラメータを指定して接続
 $pg_conn = pg_connect(DB_CONECT);
-//$pg_conn = pg_connect("host=localhost port=5432 dbname=test user=testuser password=testtest");
 
-$sql="INSERT INTO mjtable (date,time,player,score,rank,scoringPoints,umaPoints,totalPoints) VALUES ('20170708','17:05:26','嵯峨',32600,1,21,30,51);
-";
+$sql="INSERT INTO mjtable (date,time,player,score,rank,scoringPoints,umaPoints,totalPoints) VALUES ('20170708','17:05:26','嵯峨',32600,1,21,30,51);";
 
 if( $pg_conn ) {
 	//$return_text = "接続に成功しました";

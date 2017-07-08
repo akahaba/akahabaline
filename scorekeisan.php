@@ -43,7 +43,7 @@ function return_score($message_text)
 	$sql_str = "INSERT INTO mjtable (date,time,player,score,rank,scoringPoints,umaPoints,totalPoints) VALUES (";
 	//$sql = array();
 	
-	//$date_s=date("Ymd");
+	$date_s=(string)date("Ymd");
 	//$endTime_s=date("H:i:s", strtotime('+9 hour');
 	$player_s="";
 	$score_s=0;

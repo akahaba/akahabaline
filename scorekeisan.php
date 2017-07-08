@@ -22,6 +22,16 @@ function return_score($message_text)
 	$uma = array("〇〇〇","〇　　","✕　　","✕✕✕");
 	$umaPoints = array(30,10,-10,-30);
 
+	//DB接続用パラメーター
+	$DB_SERVER = getenv('DB_HOST');
+	$Port = "5432";
+	$DB_NAME = getenv('DB_DATABASE');
+	$DB_UID = getenv('DB_USERNAME');
+	$DB_PASS = getenv('DB_PASSWORD');
+
+	define("DB_CONECT","host=$DB_SERVER port=$Port dbname=$DB_NAME user=$DB_UID password=$DB_PASS");
+
+
 	foreach($array as $value){
 	    preg_match('/^([一-龥ぁ-ん]+)([-]*[0-9]+)/', $value, $matches);
 	 

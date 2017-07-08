@@ -34,16 +34,6 @@ function return_score($message_text) {
 	$cmdstr = get_last_key($gameResult);
 	$gameNm = get_last_value($gameResult);
 	
-	if($cmdstr=='登録') {
-		$return_message_text = "登録モードです\n"."ゲーム番号".$gameNm;
-	} elseif($cmdstr=='修正') {
-		$return_message_text = "修正モードです\n"."ゲーム番号".$gameNm;
-	} elseif($cmdstr=='削除') {
-		$return_message_text = "削除モードです\n"."ゲーム番号".$gameNm;
-	} else {	//表示モード
-
-		//array_pop($gameResult);
-
 	asort($gameResult);
 
 	$i = 3;
@@ -79,6 +69,20 @@ function return_score($message_text) {
 		//$arrGame = json_encode($arrGame);
 		//$arrPlayerResult = json_encode($arrPlayerResult);
 		//file_put_contents("/tmp/test.json" , $arrGame);
+
+		if($cmdstr=='登録') {
+			$return_message_text = $return_message_text."\n登録モードです\n"."ゲーム番号".$gameNm;
+		
+		$sql = "INSERT INTO mjtable (date,time,player,score,rank,scoringPoints,umaPoints,totalPoints
+) VALUES ($player,$score,$rank,$scoringPoints,$umaPoints,$totalPoints
+	)";
+		
+		
+	} elseif($cmdstr=='修正') {
+		$return_message_text =  $return_message_text."\n修正モードです\n"."ゲーム番号".$gameNm;
+	} elseif($cmdstr=='削除') {
+		$return_message_text =  $return_message_text."\n削除モードです\n"."ゲーム番号".$gameNm;
+	} else {	//表示モード
 		
 		$return_message_text = $return_message_text. "\nみなさん頑張ってくださいね～";
 

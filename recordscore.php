@@ -16,21 +16,9 @@ $pg_conn = pg_connect(DB_CONECT);
 if( $pg_conn ) {
 	$return_text = "接続に成功しました";
 
-	//JSONファイルの読み込み
-	$json = file_get_contents("/tmp/test.json");
-	$obj = json_decode($json);
-	// パースに失敗した時は処理終了
-	if ($obj === NULL) {
-	$return_text = "JSONファイルがありません";
-	return $return_text;
-	}
-
 	//$datestr = '20170708';
 	//$datestr = $obj->{'date'};
 	//$timestr = strval($obj['endTime']);
-
-	// データを登録するためのSQLを作成
-	//for($i=2;$i<=5;$i++) {
 
 	//$player = $obj[$i];
 	//$score = $obj[$i]["score"];
@@ -39,21 +27,19 @@ if( $pg_conn ) {
 	//$umaPoints = $obj[$i]["umaPoints"];
 	//$totalPoints = $obj[$i]["totalPoints"];
 	
-	$player = '甘蔗';
-	$score = 32600;
-	$rank = 1;
-	$scoringPoints = 21;
-	$umaPoints = 30;
-	$totalPoints = 51;
+	//$player = '甘蔗';
+	//$score = 32600;
+	//$rank = 1;
+	//$scoringPoints = 21;
+	//$umaPoints = 30;
+	//$totalPoints = 51;
 	
-	$sql = "INSERT INTO mjtable (
+	//$sql = "INSERT INTO mjtable (
 	date,time,player,score,rank,scoringPoints,umaPoints,totalPoints
 ) VALUES (
 	$player,$score,$rank,$scoringPoints,$umaPoints,$totalPoints
 	)";
 	
-	$return_text = sizeof($json);
-	//$return_text = $sql;
 	// SQLクエリ実行
 	//$res = pg_query( $pg_conn, $sql);
 	//var_dump($res);

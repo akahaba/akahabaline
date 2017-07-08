@@ -103,9 +103,9 @@ function return_score($message_text)
 		if($cmdstr=='登録') {
 			$return_message_text = $return_message_text."\n登録モードです\n"."ゲーム番号".$gameNm;
 
-			record_score($sql[0]);
+			//record_score($sql[0]);
 
-			$return_message_text = $return_message_text.$sqlreturn_message_text;
+			$return_message_text = $return_message_text.$sql[0]; //$sqlreturn_message_text;
 		
 		} elseif($cmdstr=='修正') {
 			$return_message_text =  $return_message_text."\n修正モードです\n"."ゲーム番号".$gameNm;

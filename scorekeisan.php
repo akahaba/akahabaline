@@ -121,10 +121,10 @@ function return_score($message_text)
 				$db_message = "接続に成功しました";
 
 				// SQLクエリ実行
-				//$res = pg_query( $pg_conn, $sqlcmd);
+				$res = pg_query( $pg_conn, $sql[0]);
 				//var_dump($res);
 
-				//$db_message = "データ登録しました";
+				$db_message = "データ登録しました";
 				
 			} else {
 				$db_message = "接続できませんでした";

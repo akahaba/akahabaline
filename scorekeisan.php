@@ -32,8 +32,21 @@ function return_score($message_text)
 		}
 
 	//最後の行はコマンド　登録　修正　削除＋ゲーム番号
-	$cmdstr = get_last_key($gameResult);
-	$gameNm = get_last_value($gameResult);
+	if(count($gameResult<4){
+		$return_message_text = "レコード数が足りないよ";
+		return $return_message_text;
+		} elseif(count($gameResult>5) {
+		$return_message_text = "レコード数が多いよ";
+		return $return_message_text;
+		} elseif(count($gameResult==5) {
+			$cmdstr = get_last_key($gameResult);
+			$gameNm = get_last_value($gameResult);
+			array_pop($gameResult);
+		} else {
+			$cmdstr = "";
+			$gameNm = "";
+		}
+	
 	
 	asort($gameResult);
     

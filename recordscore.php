@@ -14,9 +14,9 @@ $pg_conn = pg_connect(DB_CONECT);
 //$pg_conn = pg_connect("host=localhost port=5432 dbname=test user=testuser password=testtest");
 
 if( $pg_conn ) {
-	var_dump("接続に成功しました");
+	return var_dump("接続に成功しました");
 } else {
-	var_dump("接続できませんでした");
+	return var_dump("接続できませんでした");
 }
 
 // データベースとの接続を切断

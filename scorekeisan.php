@@ -103,7 +103,7 @@ function return_score($message_text)
 		if($cmdstr=='登録') {
 			$return_message_text = $return_message_text."\n登録モードです\n"."ゲーム番号".$gameNm;
 
-			//$sqlreturn_message_text = record_score($sql);
+			record_score($sql[0]);
 
 			$return_message_text = $return_message_text.$sqlreturn_message_text;
 		
@@ -138,7 +138,7 @@ function get_last_value($array)
 }
 
 //record
-function record_score($arr) {
+function record_score($sqlcmd) {
 
 $DB_SERVER = getenv('DB_HOST');
 $Port = "5432";
@@ -155,9 +155,8 @@ $pg_conn = pg_connect(DB_CONECT);
 if( $pg_conn ) {
 	$return_text = "接続に成功しました";
 
-	foreach($arr as $value) {
 	// SQLクエリ実行
-	$res = pg_query( $pg_conn, $value);
+	$res = pg_query( $pg_conn, $sqlcmd);
 	var_dump($res);
 	}
 

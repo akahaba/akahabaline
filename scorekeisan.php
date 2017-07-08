@@ -44,11 +44,11 @@ function return_score($message_text)
 	//$sql = array();
 	
 	$player_s="";
-	$score_s="";
-	$rank_s="";
-	$scoringPoints_s="";
-	$umaPoints_s="";
-	$totalPoints_s="";
+	$score_s=0;
+	$rank_s=0;
+	$scoringPoints_s=0;
+	$umaPoints_s=0;
+	$totalPoints_s=0;
 	
 	asort($gameResult);
     
@@ -74,11 +74,11 @@ function return_score($message_text)
 			} //if
 
 		$player_s= $key;
-		$score_s= $gameResult[$key];
+		$score_s= intval($gameResult[$key]);
 		$rank_s=$i+1;
 		$scoringPoints_s=intval($scoringPoints[$key]);
-		$umaPoints_s=$umaPoints[$i];
-		$totalPoints_s=$totalPoints[$key];
+		$umaPoints_s=intval($umaPoints[$i]);
+		$totalPoints_s=intval($totalPoints[$key]);
 
 		//JSON用arrayへの代入
 		//$arrPlayerResult = array("rank"=>($i+1),"score"=>$gameResult[$key],"scoringPoints"=>$scoringPoints[$key],"umaPoints"=>$umaPoints[$i],"totalPoints"=>$totalPoints[$key]);
@@ -86,7 +86,7 @@ function return_score($message_text)
 		//$arrGame += array($key=>$arrPlayerResult);
 
 		//$sql[$i]= $sql_str. $key .",". $gameResult[$key].",".$scoringPoints[$key]).",". $umaPoints[$i].",".$totalPoints[$key].");";
-		$sql_test=$sql_str.$player_s.$score_s.$rank_s.$scoringPoints_s.$umaPoints_s.$totalPoints_s;
+		$sql_test=$sql_str."'".$player_s."',".$score_s.",".$rank_s.",".$scoringPoints_s.",".$umaPoints_s.",".$totalPoints_s.");";
 		$return_message_text = $key . "さんは" . $scoringPoints[$key]."\t".$uma[$i]."\t".$totalPoints[$key]."\n".$return_message_text;
 		$i = $i-1;
 		}

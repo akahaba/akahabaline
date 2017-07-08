@@ -90,7 +90,7 @@ $sqlrollup = "select handnumber,sum(case player when '朝倉' then totalpoints e
 			$resultScore ="";
 			for ($i = 0 ; $i < pg_num_rows($res) ; $i++){
 			    $rows = pg_fetch_array($res, NULL,PGSQL_NUM );
-			    $resultScore=$resultScore.$rows[0]."\t".$rows[1]."\t".$rows[2]."\t".$rows[3]."\t".$rows[4]."\n";
+			    $resultScore=$resultScore.$rows[0]."\t".str_pad($rows[1], 4, " ", STR_PAD_LEFT)."\t".str_pad($rows[2], 4, " ", STR_PAD_LEFT)."\t".str_pad($rows[3], 4, " ", STR_PAD_LEFT)."\t".str_pad($rows[4], 4, " ", STR_PAD_LEFT)."\n";
 			}
 
 				$db_message = "クエリ実行できました";

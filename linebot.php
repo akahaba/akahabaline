@@ -35,7 +35,25 @@ if(strpos($message_text,'確認') !== false){
 
 	$sqlcmd="SELECT player, Sum(totalpoints) FROM mjtable GROUP BY player;";
 
+		//DB接続
+		// 各種パラメータを指定して接続
+			$pg_conn = pg_connect(DB_CONECT);
 
+			if( $pg_conn ) {
+				$db_message = "接続に成功しました";
+
+				// SQLクエリ実行
+				$res = pg_query( $pg_conn, $sqlcmd);
+				//var_dump($res);
+
+				$db_message = "クエリ実行できました";
+				
+			} else {
+				$db_message = "クエリ実行できまませんでした";
+			}
+
+			// データベースとの接続を切断
+			pg_close($pg_conn);
 
 
 } else {

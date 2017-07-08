@@ -41,7 +41,14 @@ function return_score($message_text)
 	//$sql = "INSERT INTO mjtable (date,time,player,score,rank,scoringPoints,umaPoints,totalPoints
 	//) VALUES ($player,$score,$rank,$scoringPoints,$umaPoints,$totalPoints)";
 	$sql_str = "INSERT INTO mjtable (date,time,player,score,rank,scoringPoints,umaPoints,totalPoints) VALUES (";
-	$sql = array();
+	//$sql = array();
+	
+	$player_s="";
+	$score_s="";
+	$rank_s="";
+	$scoringPoints_s="";
+	$umaPoints_s="";
+	$totalPoints_s="";
 	
 	asort($gameResult);
     
@@ -66,12 +73,20 @@ function return_score($message_text)
 		$totalPoints[$key] = "+".$totalPoints[$key];
 			} //if
 
+		$player_s= $key;
+		$score_s= $gameResult[$key];
+		$rank_s="";
+		$scoringPoints_s=intval($scoringPoints[$key]);
+		$umaPoints_s=$umaPoints[$i];
+		$totalPoints_s=$totalPoints[$key];
+
 		//JSON用arrayへの代入
 		//$arrPlayerResult = array("rank"=>($i+1),"score"=>$gameResult[$key],"scoringPoints"=>$scoringPoints[$key],"umaPoints"=>$umaPoints[$i],"totalPoints"=>$totalPoints[$key]);
 		//$result = array_merge($arrGame,"name"=>$key);
 		//$arrGame += array($key=>$arrPlayerResult);
 
 		//$sql[$i]= $sql_str. $key .",". $gameResult[$key].",".$scoringPoints[$key]).",". $umaPoints[$i].",".$totalPoints[$key].");";
+		$sql_test=$sql_str.$player_s.$score_s.$rank_s.$scoringPoints_s.$umaPoints_s.$totalPoints_s;
 		$return_message_text = $key . "さんは" . $scoringPoints[$key]."\t".$uma[$i]."\t".$totalPoints[$key]."\n".$return_message_text;
 		$i = $i-1;
 		}
@@ -83,7 +98,7 @@ function return_score($message_text)
 
 		if($cmdstr=='登録') {
 			$return_message_text = $return_message_text."\n登録モードです\n"."ゲーム番号".$gameNm;
-			$return_message_text = $return_message_text.$sql_str;
+			$return_message_text = $return_message_text.$sql_test;
 		
 		} elseif($cmdstr=='修正') {
 			$return_message_text =  $return_message_text."\n修正モードです\n"."ゲーム番号".$gameNm;

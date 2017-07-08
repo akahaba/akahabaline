@@ -119,6 +119,49 @@ if(strpos($message_text,'確認') !== false){
 	$headertitle=str_pad("回戦", 4, " ", STR_PAD_LEFT).str_pad($playerToday[0], 5, " ", STR_PAD_LEFT).str_pad($playerToday[1], 5, " ", STR_PAD_LEFT).str_pad($playerToday[2], 5, " ", STR_PAD_LEFT).str_pad($playerToday[3], 5, " ", STR_PAD_LEFT)."\n";
 	$return_message_text=$return_message_text."今日のゲームの履歴です"."\n".$headertitle.$resultScore;
 
+} elseif(strpos($message_text,'精算') !== false){
+
+	$return_message_text = "現在の結果だよ!";
+//	$return_message_text = record_score();
+
+	$sqlcmd="SELECT player, Sum(scoringpoints) As pt,Sum(umapoints) As uma,Sum(totalpoints) As total FROM mjtable WHERE date='".$date_s."' GROUP BY player order by total desc;";
+
+		//DB接続
+		// 各種パラメータを指定して接続
+			$pg_conn = pg_connect(DB_CONECT);
+
+			if( $pg_conn ) {
+				$db_message = "接続に成功しました";
+
+				// SQLクエリ実行 終了ゲーム数
+				$sqlhndno ="SELECT MAX(handnumber) FROM mjtable WHERE date='".$date_s."';";
+				$resHandnumber = pg_query( $pg_conn, $sqlhndno);
+
+				$val = pg_fetch_result($resHandnumber, 0, 0);
+
+				// SQLクエリ実行
+				$res = pg_query( $pg_conn, $sqlcmd);
+				//var_dump($res);
+
+			$resultScore ="";
+			for ($i = 0 ; $i < pg_num_rows($res) ; $i++){
+			    $rows = pg_fetch_array($res, NULL, PGSQL_ASSOC);
+			    $resultScore=$resultScore.$rows['player']."\t".$rows['pt']."\t".$rows['uma']."\t".$rows['total']."\n";
+			}
+
+				$db_message = "クエリ実行できました";
+				
+			} else {
+				$db_message = "クエリ実行できまませんでした";
+			}
+
+			// データベースとの接続を切断
+			pg_close($pg_conn);
+
+			$return_message_text=$return_message_text."\n\n".$val."回戦終了時点トータル\n".$resultScore;
+
+
+
 } else {
   //messageの先頭に'確認''履歴'が含まれていない場合
 

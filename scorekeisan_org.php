@@ -1,7 +1,6 @@
 <?php
 
-function return_score($message_text) 
-{
+function return_score($message_text) {
 
 	//JSON用変数宣言
 	$arrGame = array("date"=>date("Ymd"),"endTime"=>date("H:i:s", strtotime('+9 hour')));
@@ -36,7 +35,7 @@ function return_score($message_text)
 	$gameNm = get_last_value($gameResult);
 	
 	asort($gameResult);
-    
+
 	$i = 3;
 	foreach($gameResult as $key => $value){
 
@@ -73,7 +72,7 @@ function return_score($message_text)
 
 	return $return_message_text;
 
-}
+	}
 
 
 //第一引数・・・最後のキーを取得したい配列

@@ -26,8 +26,8 @@ if( $pg_conn ) {
 	return $return_text;
 	}
 
-	$datestr = strval($obj['date']);
-	$timestr = strval($obj['endTime']);
+	//$datestr = strval($obj['date']);
+	//$timestr = strval($obj['endTime']);
 
 	// データを登録するためのSQLを作成
 	//for($i=2;$i<=5;$i++) {

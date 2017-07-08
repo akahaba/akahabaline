@@ -38,7 +38,9 @@ function return_score($message_text) {
 		$return_message_text = "修正モードです";
 	} elseif($cmdstr=='削除') {
 		$return_message_text = "削除モードです";
-	} else {
+	} else {	//表示モード
+
+		array_pop($gameResult);
 
 		asort($gameResult);
 

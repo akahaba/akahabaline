@@ -19,14 +19,15 @@ if( $pg_conn ) {
 	//JSONファイルの読み込み
 	$json = file_get_contents("/tmp/test.json");
 	$obj = json_decode($json);
+	$obj = mb_convert_encoding($obj, 'UTF8', 'ASCII,JIS,UTF-8,EUC-JP,SJIS-WIN');
 	// パースに失敗した時は処理終了
 	if ($obj === NULL) {
 	$return_text = "JSONファイルがありません";
 	return $return_text;
 	}
 
-	//$date = strval($obj['date']);
-	//$time = strval($obj['endTime']);
+	$datestr = strval($obj['date']);
+	$timestr = strval($obj['endTime']);
 
 	// データを登録するためのSQLを作成
 	//for($i=2;$i<=5;$i++) {
@@ -48,7 +49,7 @@ if( $pg_conn ) {
 	$sql = "INSERT INTO mjtable (
 	date,time,player,score,rank,scoringPoints,umaPoints,totalPoints
 ) VALUES (
-	$player,$score,$rank,$scoringPoints,$umaPoints,$totalPoints
+	$datestr,$timestr,$player,$score,$rank,$scoringPoints,$umaPoints,$totalPoints
 	)";
 	
 	$return_text = $sql;

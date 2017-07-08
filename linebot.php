@@ -7,7 +7,17 @@ $accessToken = 'M12Yguz2fW3gq0AYBLk2m49F8VcL8HocX7Q+F5RM9zlHxfNns/mhFZvZKh77HAhv
 //ユーザーからのメッセージ取得
 $json_string = file_get_contents('php://input');
 $json_object = json_decode($json_string);
- 
+
+//DB接続用パラメーター
+$DB_SERVER = getenv('DB_HOST');
+$Port = "5432";
+$DB_NAME = getenv('DB_DATABASE');
+$DB_UID = getenv('DB_USERNAME');
+$DB_PASS = getenv('DB_PASSWORD');
+
+define("DB_CONECT","host=$DB_SERVER port=$Port dbname=$DB_NAME user=$DB_UID password=$DB_PASS");
+
+
 //取得データ
 $replyToken = $json_object->{"events"}[0]->{"replyToken"};        //返信用トークン
 $message_type = $json_object->{"events"}[0]->{"message"}->{"type"};    //メッセージタイプ
@@ -22,6 +32,10 @@ if(strpos($message_text,'確認') !== false){
 
 	$return_message_text = "現在の結果だよ！";
 //	$return_message_text = record_score();
+
+	$sqlcmd="SELECT player, Sum(totalpoints) FROM mjtable GROUP BY player;";
+
+
 
 
 } else {

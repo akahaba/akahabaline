@@ -103,9 +103,9 @@ function return_score($message_text)
 		if($cmdstr=='登録') {
 			$return_message_text = $return_message_text."\n登録モードです\n"."ゲーム番号".$gameNm;
 
-			record_score();
+			$returnmessage = record_score();
 
-			$return_message_text = $return_message_text.$sql[0]; //$sqlreturn_message_text;
+			$return_message_text = $return_message_text.$sql[0].$returnmessage; //$sqlreturn_message_text;
 		
 		} elseif($cmdstr=='修正') {
 			$return_message_text =  $return_message_text."\n修正モードです\n"."ゲーム番号".$gameNm;
@@ -151,13 +151,13 @@ define("DB_CONECT","host=$DB_SERVER port=$Port dbname=$DB_NAME user=$DB_UID pass
 // 各種パラメータを指定して接続
 $pg_conn = pg_connect(DB_CONECT);
 
-$sql="INSERT INTO mjtable (date,time,player,score,rank,scoringPoints,umaPoints,totalPoints) VALUES ('20170708','17:05:26','嵯峨',32600,1,21,30,51);";
+//$sql="INSERT INTO mjtable (date,time,player,score,rank,scoringPoints,umaPoints,totalPoints) VALUES ('20170708','17:05:26','嵯峨',32600,1,21,30,51);";
 
 if( $pg_conn ) {
-	//$return_text = "接続に成功しました";
+	$return_text = "接続に成功しました";
 
 	// SQLクエリ実行
-	$res = pg_query( $pg_conn, $sql);
+	//$res = pg_query( $pg_conn, $sql);
 	//var_dump($res);
 	}
 

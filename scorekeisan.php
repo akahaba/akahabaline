@@ -149,6 +149,29 @@ function return_score($message_text)
 		} elseif($cmdstr=='修正') {
 			$return_message_text =  $return_message_text."\n修正モードです\n"."ゲーム番号".$gameNm;
 
+		//DB接続
+		// 各種パラメータを指定して接続
+			$pg_conn = pg_connect(DB_CONECT);
+
+			if( $pg_conn ) {
+				$db_message = "接続に成功しました";
+
+				// SQLクエリ実行
+				$res = pg_query( $pg_conn, $sqlUpd[0]);
+				$res = pg_query( $pg_conn, $sqlUpd[1]);
+				$res = pg_query( $pg_conn, $sqlUpd[2]);
+				$res = pg_query( $pg_conn, $sqlUpd[3]);
+				//var_dump($res);
+
+				$db_message = "データ登録しました";
+				
+			} else {
+				$db_message = "接続できませんでした";
+			}
+
+			// データベースとの接続を切断
+			pg_close($pg_conn);
+
 			$return_message_text =$return_message_text."\n".$sqlUpd[0];
 
 		} elseif($cmdstr=='削除') {

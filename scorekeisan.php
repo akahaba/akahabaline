@@ -102,7 +102,7 @@ function return_score($message_text)
 
 		if($cmdstr=='登録') {
 			$return_message_text = $return_message_text."\n登録モードです\n"."ゲーム番号".$gameNm;
-
+return $return_message_text;
 			$sqlreturn_message_text = record_score($sql);
 
 			$return_message_text = $return_message_text.$sqlreturn_message_text;

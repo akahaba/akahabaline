@@ -74,8 +74,7 @@ if(strpos($message_text,'確認') !== false){
 	//messageの先頭に履歴が含まれている場合
 
 
-$sqlrollup = "select handnumber As '回戦',sum(case player when '朝倉' then totalpoints else 0 end) as '朝倉',sum(case player when '甘蔗' then totalpoints else 0 end) as '甘蔗',sum(case player when '嵯峨' then totalpoints else 0 end) as '嵯峨',sum(case player when '寳閣' then totalpoints else 0 end) as '寳閣'
-from mjtable group by rollup(handnumber) order by handnumber asc;";
+$sqlrollup = "select handnumber,sum(case player when '朝倉' then totalpoints else 0 end) ,sum(case player when '甘蔗' then totalpoints else 0 end) ,sum(case player when '嵯峨' then totalpoints else 0 end) ,sum(case player when '寳閣' then totalpoints else 0 end) from mjtable group by rollup(handnumber) order by handnumber asc;";
 
 		//DB接続
 		// 各種パラメータを指定して接続

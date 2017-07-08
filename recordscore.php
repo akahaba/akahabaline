@@ -20,7 +20,7 @@ if( $pg_conn ) {
 	$json = file_get_contents("/tmp/test.json");
 	$obj = json_decode($json);
 	// パースに失敗した時は処理終了
-	if ($obj === NULL) {
+	if ($obj == NULL) {
 	$return_text = "JSONファイルがありません";
 	return $return_text;
 	}
@@ -52,7 +52,7 @@ if( $pg_conn ) {
 	$player,$score,$rank,$scoringPoints,$umaPoints,$totalPoints
 	)";
 	
-	$return_text = var_dump($obj);
+	$return_text = var_dump($json);
 	//$return_text = $sql;
 	// SQLクエリ実行
 	//$res = pg_query( $pg_conn, $sql);

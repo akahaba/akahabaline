@@ -1,5 +1,6 @@
 <?php
 require "scorekeisan.php";
+require "recordscore.php";
 
 $accessToken = 'M12Yguz2fW3gq0AYBLk2m49F8VcL8HocX7Q+F5RM9zlHxfNns/mhFZvZKh77HAhvrT9RHuNORApTXUzr67gQhtq6FWl8GyD6oZFruqus8SM8xgumE1lvBHG5A2vEhItq5MYUX5//QEu4kXP3WVnKpQdB04t89/1O/w1cDnyilFU=';
  
@@ -19,7 +20,9 @@ if(strpos($message_text,'登録') !== false){
 //  if(preg_match('/^([登録]+)/',$message_text)) {
   //messageのなかに'登録'が含まれている場合
 
-	$return_message_text = "あかんやん";
+//	$return_message_text = "あかんやん";
+	$return_message_text = record_score();
+
 
 } else {
   //messageのなかに'確認'が含まれていない場合

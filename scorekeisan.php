@@ -78,11 +78,11 @@ function return_score($message_text) {
 		
 		$return_message_text = $return_message_text. "\nみなさん頑張ってくださいね～".$arrGame;
 
+	}
 	return $return_message_text;
 
 	}
 	
-	}
 
 //第一引数・・・最後のキーを取得したい配列
 //返り値・・・最後のキー

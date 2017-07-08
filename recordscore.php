@@ -15,6 +15,41 @@ $pg_conn = pg_connect(DB_CONECT);
 
 if( $pg_conn ) {
 	$return_text = "接続に成功しました";
+
+	//JSONファイルの読み込み
+	$json = file_get_contents("/tmp/test.json");
+	$obj = json_decode($json);
+	// パースに失敗した時は処理終了
+	if ($obj === NULL) {
+	$return_text = "JSONファイルがありません";
+	return $return_text;
+	}
+
+	$date = $obj['date'];
+	$time = $obj['endTime'];
+
+	// データを登録するためのSQLを作成
+	for($i=2;$i<=5;$i++) {
+
+	$player = $obj[$i];
+	$score = $obj[$i]["score"];
+	$rank = $obj[$i]["rank"];
+	$scoringPoints = $obj[$i]["scoringPoints"];
+	$umaPoints = $obj[$i]["umaPoints"];
+	$totalPoints = $obj[$i]["totalPoints"];
+	
+	$sql = "INSERT INTO mjtable (
+	date,time,player,score,rank,scoringPoints,umaPoints,totalPoints
+) VALUES (
+	$date,$time,$player,$score,$rank,$scoringPoints,$umaPoints,$totalPoints
+	)";
+
+	// SQLクエリ実行
+	$res = pg_query( $pg_conn, $sql);
+	var_dump($res);
+	}
+	$return_text = "データ登録しました";
+	
 } else {
 	$return_text = "接続できませんでした";
 }

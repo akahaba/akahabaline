@@ -45,7 +45,7 @@ if(strpos($message_text,'確認') !== false){
 				$db_message = "接続に成功しました";
 
 				// SQLクエリ実行 終了ゲーム数
-				$sqlhndno ="SELECT MAX('handnumber') FROM mjtable WHERE date='".$date_s."';";
+				$sqlhndno ="SELECT MAX(handnumber) FROM mjtable WHERE date='".$date_s."';";
 				$resHandnumber = pg_query( $pg_conn, $sqlhndno);
 
 				// SQLクエリ実行

@@ -53,6 +53,7 @@ function return_score($message_text)
 	$sql_str = "INSERT INTO mjtable (date,time,handnumber,player,score,rank,scoringPoints,umaPoints,totalPoints) VALUES (";
 	$sql = array();
 	$sqlUpd = array();
+	$sqlDel = array();
 	
 	$date_s=(string)date("Ymd");
 	$endTime_s=date("H:i:s", strtotime('+9 hour'));
@@ -107,6 +108,9 @@ function return_score($message_text)
 
 		//update修正の場合のSQL文
 		$sqlUpd[$i]="UPDATE mjtable SET date='".$date_s."',time='".$endTime_s."',handnumber=".$handnumber.",player='".$player_s."',score=".$score_s.",rank=".$rank_s.",scoringPoints=".$scoringPoints_s.",umaPoints=".$umaPoints_s.",totalPoints=".$totalPoints_s."WHERE player='".$player_s."' and date='".$date_s."' and handnumber=".$handnumber.";";
+
+		//update削除の場合のSQL文
+		$sqlDel[$i]="DELETE FROM mjtable WHERE player='".$player_s."' and date='".$date_s."' and handnumber=".$handnumber.";";
 
 		$return_message_text = $key . "さんは" . $scoringPoints[$key]."\t".$uma[$i]."\t".$totalPoints[$key]."\n".$return_message_text;
 		$i = $i-1;
@@ -175,9 +179,30 @@ function return_score($message_text)
 			$return_message_text =$return_message_text."\n".$sqlUpd[0];
 
 		} elseif($cmdstr=='削除') {
-			$return_message_text =  $return_message_text."\n削除モードです\n"."ゲーム番号".$gameNm;
+			$return_message_text =  $return_message_text."\n削除モードです\n"."ゲーム番号".$gameNm."\n\n".$sqlDel[0];
 
+		//DB接続
+		// 各種パラメータを指定して接続
+			$pg_conn = pg_connect(DB_CONECT);
 
+			if( $pg_conn ) {
+				$db_message = "接続に成功しました";
+
+				// SQLクエリ実行
+				$res = pg_query( $pg_conn, $sqlDel[0]);
+				$res = pg_query( $pg_conn, $sqlDel[1]);
+				$res = pg_query( $pg_conn, $sqlDel[2]);
+				$res = pg_query( $pg_conn, $sqlDel[3]);
+				//var_dump($res);
+
+				$db_message = "データ登録しました";
+				
+			} else {
+				$db_message = "接続できませんでした";
+			}
+
+			// データベースとの接続を切断
+			pg_close($pg_conn);
 
 
 		} else {	//表示モード

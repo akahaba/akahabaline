@@ -26,7 +26,8 @@ if( $pg_conn ) {
 	return $return_text;
 	}
 
-	$datestr = $obj->{'date'};
+	$datestr = '20170708';
+	//$datestr = $obj->{'date'};
 	//$timestr = strval($obj['endTime']);
 
 	// データを登録するためのSQLを作成

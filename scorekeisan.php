@@ -34,11 +34,11 @@ function return_score($message_text) {
 	//$gameNm = get_last_value($gameResult);
 	
 	if($cmdstr=='登録') {
-		$return_message_text = "登録モードです\n"."ゲーム番号".$gameNm;
+		$return_message_text = "登録モードです\n"."ゲーム番号";
 	} elseif($cmdstr=='修正') {
-		$return_message_text = "修正モードです\n"."ゲーム番号".$gameNm;
+		$return_message_text = "修正モードです\n"."ゲーム番号";
 	} elseif($cmdstr=='削除') {
-		$return_message_text = "削除モードです\n"."ゲーム番号".$gameNm;
+		$return_message_text = "削除モードです\n"."ゲーム番号";
 	} else {	//表示モード
 
 		//array_pop($gameResult);

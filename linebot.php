@@ -107,7 +107,7 @@ from mjtable group by rollup(handnumber) order by handnumber asc;";
 			// データベースとの接続を切断
 			pg_close($pg_conn);
 
-	$return_message_text=$return_message_text."\n\n".$val."回戦終了時点トータル\n".$resultScore;
+	$return_message_text=$return_message_text."\n\n".$i.$resultScore;
 
 } else {
   //messageの先頭に'確認'が含まれていない場合

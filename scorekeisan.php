@@ -87,8 +87,9 @@ function return_score($message_text)
 		//$result = array_merge($arrGame,"name"=>$key);
 		//$arrGame += array($key=>$arrPlayerResult);
 
+		//.$date_s."','".$endTime_s."','"
 		//$sql[$i]= $sql_str. $key .",". $gameResult[$key].",".$scoringPoints[$key]).",". $umaPoints[$i].",".$totalPoints[$key].");";
-		$sql_test=$sql_str."'".$date_s."','".$endTime_s."','".$player_s."',".$score_s.",".$rank_s.",".$scoringPoints_s.",".$umaPoints_s.",".$totalPoints_s.");";
+		$sql_test=$sql_str."'".$player_s."',".$score_s.",".$rank_s.",".$scoringPoints_s.",".$umaPoints_s.",".$totalPoints_s.");";
 		$return_message_text = $key . "さんは" . $scoringPoints[$key]."\t".$uma[$i]."\t".$totalPoints[$key]."\n".$return_message_text;
 		$i = $i-1;
 		}

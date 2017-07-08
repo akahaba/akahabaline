@@ -73,20 +73,15 @@ function return_score($message_text) {
 		if($cmdstr=='登録') {
 			$return_message_text = $return_message_text."\n登録モードです\n"."ゲーム番号".$gameNm;
 		
-		$sql = "INSERT INTO mjtable (date,time,player,score,rank,scoringPoints,umaPoints,totalPoints
-) VALUES ($player,$score,$rank,$scoringPoints,$umaPoints,$totalPoints
-	)";
+		} elseif($cmdstr=='修正') {
+			$return_message_text =  $return_message_text."\n修正モードです\n"."ゲーム番号".$gameNm;
+		} elseif($cmdstr=='削除') {
+			$return_message_text =  $return_message_text."\n削除モードです\n"."ゲーム番号".$gameNm;
+		} else {	//表示モード
 		
-		
-	} elseif($cmdstr=='修正') {
-		$return_message_text =  $return_message_text."\n修正モードです\n"."ゲーム番号".$gameNm;
-	} elseif($cmdstr=='削除') {
-		$return_message_text =  $return_message_text."\n削除モードです\n"."ゲーム番号".$gameNm;
-	} else {	//表示モード
-		
-		$return_message_text = $return_message_text. "\nみなさん頑張ってくださいね～";
+			$return_message_text = $return_message_text. "\nみなさん頑張ってくださいね～";
+		}
 
-	}
 	return $return_message_text;
 
 	}

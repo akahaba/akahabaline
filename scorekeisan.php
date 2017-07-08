@@ -95,7 +95,7 @@ function get_last_key($array)
     return key($array);
 }
 
-/第一引数・・・最後の値を取得したい配列
+//第一引数・・・最後の値を取得したい配列
 //返り値・・・最後の値
 function get_last_value($array)
 {

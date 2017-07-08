@@ -184,7 +184,7 @@ function return_score($message_text)
 			// データベースとの接続を切断
 			pg_close($pg_conn);
 
-			$return_message_text =$return_message_text."\n".$db_message."\n".$sqlUpd[3];
+			$return_message_text =$return_message_text."\n".$db_message."\n";
 
 		} elseif($cmdstr=='削除') {
 			$return_message_text =  $return_message_text."\n削除モードです\n"."ゲーム番号".$gameNm."\n";
@@ -196,14 +196,13 @@ function return_score($message_text)
 			if( $pg_conn ) {
 				$db_message = "接続に成功しました";
 
-				// SQLクエリ実行
-				$res = pg_query( $pg_conn, $sqlDel[0]);
-				$res = pg_query( $pg_conn, $sqlDel[1]);
-				$res = pg_query( $pg_conn, $sqlDel[2]);
-				$res = pg_query( $pg_conn, $sqlDel[3]);
-				//var_dump($res);
+				$UpdRows=0;
+				for($n=0;$n<4;$n++){
+				$res = pg_query( $pg_conn, $sqlDel[$n]);
+				$UpdRows += pg_affected_rows($res);
+				}
 
-				$db_message = "データ削除しました";
+				$db_message = $UpdRows."件データ削除しました";
 				
 			} else {
 				$db_message = "接続できませんでした";

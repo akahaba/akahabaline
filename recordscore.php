@@ -25,8 +25,8 @@ if( $pg_conn ) {
 	return $return_text;
 	}
 
-	$date = $obj['date'];
-	$time = $obj['endTime'];
+	$date = strval($obj['date']);
+	$time = strval($obj['endTime']);
 
 	// データを登録するためのSQLを作成
 	for($i=2;$i<=5;$i++) {
@@ -38,7 +38,7 @@ if( $pg_conn ) {
 	//$umaPoints = $obj[$i]["umaPoints"];
 	//$totalPoints = $obj[$i]["totalPoints"];
 	
-	$player = "甘蔗";
+	$player = '甘蔗';
 	$score = 32600;
 	$rank = 1;
 	$scoringPoints = 21;

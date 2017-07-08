@@ -22,7 +22,9 @@ define("DB_CONECT","host=$DB_SERVER port=$Port dbname=$DB_NAME user=$DB_UID pass
 $replyToken = $json_object->{"events"}[0]->{"replyToken"};        //返信用トークン
 $message_type = $json_object->{"events"}[0]->{"message"}->{"type"};    //メッセージタイプ
 $message_text = $json_object->{"events"}[0]->{"message"}->{"text"};    //メッセージ内容
- 
+
+$date_s=(string)date("Ymd");
+
 //メッセージタイプが「text」以外のときは何も返さず終了
 if($message_type != "text") exit;
 
@@ -32,7 +34,6 @@ if(strpos($message_text,'確認') !== false){
 
 	$return_message_text = "現在の結果だよ！";
 //	$return_message_text = record_score();
-	$date_s=(string)date("Ymd");
 
 	$sqlcmd="SELECT player, Sum(scoringpoints) As pt,Sum(umapoints) As uma,Sum(totalpoints) As total FROM mjtable WHERE date='".$date_s."' GROUP BY player order by total desc;";
 

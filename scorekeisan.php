@@ -65,7 +65,7 @@ function return_score($message_text) {
 		$arrPlayerResult = json_encode($arrPlayerResult);
 		//file_put_contents("/tmp/test.json" , $arrGame);
 		
-		$return_message_text = $return_message_text. "\nみなさん頑張ってくださいね～".$arrPlayerResult.$arrGame;
+		$return_message_text = $return_message_text. "\nみなさん頑張ってくださいね～".$arrGame;
 
 	return $return_message_text;
 

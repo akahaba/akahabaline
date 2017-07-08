@@ -148,7 +148,7 @@ function return_score($message_text)
 			pg_close($pg_conn);
 
 
-			$return_message_text = $return_message_text.$sql[0].$db_message; //$sqlreturn_message_text;
+			$return_message_text = $return_message_text."\n".$db_message; //$sqlreturn_message_text;
 		
 		} elseif($cmdstr=='修正') {
 			$return_message_text =  $return_message_text."\n修正モードです\n"."ゲーム番号".$gameNm;
@@ -167,7 +167,7 @@ function return_score($message_text)
 				$res = pg_query( $pg_conn, $sqlUpd[3]);
 				//var_dump($res);
 
-				$db_message = "データ登録しました";
+				$db_message = "データ更新しました";
 				
 			} else {
 				$db_message = "接続できませんでした";
@@ -176,10 +176,10 @@ function return_score($message_text)
 			// データベースとの接続を切断
 			pg_close($pg_conn);
 
-			$return_message_text =$return_message_text."\n".$sqlUpd[0];
+			$return_message_text =$return_message_text."\n".$db_message;
 
 		} elseif($cmdstr=='削除') {
-			$return_message_text =  $return_message_text."\n削除モードです\n"."ゲーム番号".$gameNm."\n\n".$sqlDel[0];
+			$return_message_text =  $return_message_text."\n削除モードです\n"."ゲーム番号".$gameNm."\n";
 
 		//DB接続
 		// 各種パラメータを指定して接続
@@ -195,7 +195,7 @@ function return_score($message_text)
 				$res = pg_query( $pg_conn, $sqlDel[3]);
 				//var_dump($res);
 
-				$db_message = "データ登録しました";
+				$db_message = "データ削除しました";
 				
 			} else {
 				$db_message = "接続できませんでした";
@@ -204,10 +204,11 @@ function return_score($message_text)
 			// データベースとの接続を切断
 			pg_close($pg_conn);
 
+			$return_message_text =  $return_message_text.$db_message;
 
 		} else {	//表示モード
 		
-			$return_message_text = $return_message_text. "\nみなさん頑張ってくださいね～";
+			$return_message_text = $return_message_text. "\n確認の上、登録ください";
 		}
 
 

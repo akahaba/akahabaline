@@ -40,7 +40,7 @@ function return_score($message_text) {
 		$return_message_text = "削除モードです";
 	} else {	//表示モード
 
-		array_pop($gameResult);
+		//array_pop($gameResult);
 
 		asort($gameResult);
 

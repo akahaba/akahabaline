@@ -33,7 +33,7 @@ if(strpos($message_text,'確認') !== false){
 	$return_message_text = "現在の結果だよ！";
 //	$return_message_text = record_score();
 
-	$sqlcmd="SELECT player, Sum(totalpoints) FROM mjtable GROUP BY player;";
+	$sqlcmd="SELECT player, Sum(totalpoints) As total FROM mjtable GROUP BY player;";
 
 		//DB接続
 		// 各種パラメータを指定して接続
@@ -49,7 +49,7 @@ if(strpos($message_text,'確認') !== false){
 			$resultScore ="";
 			for ($i = 0 ; $i < pg_num_rows($res) ; $i++){
 			    $rows = pg_fetch_array($res, NULL, PGSQL_ASSOC);
-			    $resultScore=$resultScore.$rows['player']."\t".$rows['Sum(totalpoints)']."\n";
+			    $resultScore=$resultScore.$rows['player']."\t".$rows['total']."\n";
 			}
 
 

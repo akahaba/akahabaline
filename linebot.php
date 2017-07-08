@@ -73,8 +73,7 @@ if(strpos($message_text,'確認') !== false){
 	$return_message_text=$return_message_text."\n\n".$val."回戦終了時点トータル\n".$resultScore;
 
 } elseif(strpos($message_text,'履歴') !== false) {
-//} elseif(preg_match('/^([履歴]+)/',$message_text)) {
-	//messageの先頭に履歴が含まれている場合
+	//messageに履歴が含まれている場合
 
 
 		//DB接続
@@ -120,9 +119,8 @@ if(strpos($message_text,'確認') !== false){
 	$return_message_text=$return_message_text."今日のゲームの履歴です"."\n".$headertitle.$resultScore;
 
 } elseif(strpos($message_text,'精算') !== false){
-
+	//messageに'精算'が含まれている場合
 	$return_message_text = "本日の精算額はこちら！";
-//	$return_message_text = record_score();
 
 	$sqlcmd="SELECT player,Sum(totalpoints)*50 As total FROM mjtable WHERE date='".$date_s."' GROUP BY player order by total desc;";
 
@@ -160,13 +158,14 @@ if(strpos($message_text,'確認') !== false){
 
 			$return_message_text=$return_message_text."\n\n".$val."回戦終了時点精算額\n".$resultScore;
 
-
-
 } else {
-  //messageの先頭に'確認''履歴'が含まれていない場合
+  //messageに'確認''履歴''精算'が含まれていない場合
 
-	$return_message_text = return_score($message_text);
-
+	if(preg_match('/^[^0-9]+[0-9]+/',$message_text)) {
+		$return_message_text = return_score($message_text);
+	} else {
+		$return_message_text = "麻雀したいなぁ～～～";
+	}
 }
 
 //返信実行

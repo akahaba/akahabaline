@@ -87,7 +87,7 @@ if(strpos($message_text,'確認') !== false){
 				$resPlayer = pg_query( $pg_conn, $sqlPlayer);
 				for ($i = 0 ; $i < pg_num_rows($resPlayer) ; $i++){
 				    $rows = pg_fetch_array($resPlayer, NULL,PGSQL_NUM );
-				$playerToday[$i]=$rows[0];
+				$playerToday[$i]=$rows[1];
 				$return_message_text=$return_message_text.$playerToday[$i];
 				}
 				

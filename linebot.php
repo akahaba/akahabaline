@@ -55,6 +55,7 @@ if(strpos($message_text,'確認') !== false){
 			// データベースとの接続を切断
 			pg_close($pg_conn);
 
+	$return_message_text=$return_message_text."\n\n".$res;
 
 } else {
   //messageの先頭に'確認'が含まれていない場合

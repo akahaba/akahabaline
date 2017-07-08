@@ -54,16 +54,16 @@ function return_score($message_text) {
 
 		//JSON用arrayへの代入
 		$arrPlayerResult = array("rank"=>($i+1),"score"=>$gameResult[$key],"scoringPoints"=>$scoringPoints[$key],"umaPoints"=>$umaPoints[$i],"totalPoints"=>$totalPoints[$key]);
-		$result = array_merge($arrGame,"name"=>$key);
+		//$result = array_merge($arrGame,"name"=>$key);
 
 		$return_message_text = $key . "さんは" . $scoringPoints[$key]."\t".$uma[$i]."\t".$totalPoints[$key]."\n".$return_message_text;
 		$i = $i-1;
 		}
 
-		$result = json_encode($result);
+		$arrPlayerResult = json_encode($arrPlayerResult);
 		//file_put_contents("/tmp/test.json" , $arrGame);
 		
-		$return_message_text = $return_message_text. "\nみなさん頑張ってくださいね～".$result;
+		$return_message_text = $return_message_text. "\nみなさん頑張ってくださいね～".$arrPlayerResult;
 
 	return $return_message_text;
 

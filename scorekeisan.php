@@ -75,7 +75,7 @@ function return_score($message_text)
 
 		$player_s= $key;
 		$score_s= $gameResult[$key];
-		$rank_s=$i;
+		$rank_s=$i+1;
 		$scoringPoints_s=intval($scoringPoints[$key]);
 		$umaPoints_s=$umaPoints[$i];
 		$totalPoints_s=$totalPoints[$key];

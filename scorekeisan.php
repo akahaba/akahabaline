@@ -134,7 +134,7 @@ function return_score($message_text)
 				//追加可能かのcheck
 				$sqlCheck = "SELECT * FROM mjtable WHERE handnumber=".$handnumber.";";
 				$resCheck = pg_query($pg_conn, $sqlCheck);
-				if(pg_num_rows($resCheck)<1) {
+				if(pg_num_rows($resCheck)) {
 					$db_message="既にゲームが登録されています";
 				} else {
 					// SQLクエリ実行

@@ -25,8 +25,8 @@ if( $pg_conn ) {
 	return $return_text;
 	}
 
-	$date = strval($obj['date']);
-	$time = strval($obj['endTime']);
+	//$date = strval($obj['date']);
+	//$time = strval($obj['endTime']);
 
 	// データを登録するためのSQLを作成
 	//for($i=2;$i<=5;$i++) {
@@ -48,7 +48,7 @@ if( $pg_conn ) {
 	$sql = "INSERT INTO mjtable (
 	date,time,player,score,rank,scoringPoints,umaPoints,totalPoints
 ) VALUES (
-	$date,$time,$player,$score,$rank,$scoringPoints,$umaPoints,$totalPoints
+	$player,$score,$rank,$scoringPoints,$umaPoints,$totalPoints
 	)";
 	
 	$return_text = $sql;

@@ -18,7 +18,7 @@ function return_score($message_text) {
 	$uma = array("〇〇〇","〇　　","✕　　","✕✕✕");
 	$umaPoints = array(30,10,-10,-30);
 	//JSON用変数宣言
-	$arrGame = array("date"=>date("Ymd"),"endTime"=>date("H:i:s"));
+	$arrGame = array("date"=>date("Ymd"),"endTime"=>date("H:i:s", strtotime('+9 hour')));
 
 	foreach($array as $value){
 	    preg_match('/^([一-龥ぁ-ん]+)([-]*[0-9]+)/', $value, $matches);

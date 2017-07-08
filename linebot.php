@@ -88,8 +88,9 @@ if(strpos($message_text,'確認') !== false){
 				for ($i = 0 ; $i < pg_num_rows($resPlayer) ; $i++){
 				    $rows = pg_fetch_array($resPlayer, NULL,PGSQL_NUM );
 				$playerToday[$i]=$rows[0];
+				$return_message_text=$return_message_text.$playerToday[$i];
 				}
-
+				
 				$sqlrollup = "select handnumber,sum(case player when '朝倉' then totalpoints else 0 end) ,sum(case player when '甘蔗' then totalpoints else 0 end) ,sum(case player when '嵯峨' then totalpoints else 0 end) ,sum(case player when '寳閣' then totalpoints else 0 end) from mjtable group by rollup(handnumber) order by handnumber asc;";
 
 				// SQLクエリ実行
@@ -111,7 +112,7 @@ if(strpos($message_text,'確認') !== false){
 			// データベースとの接続を切断
 			pg_close($pg_conn);
 
-	$return_message_text="今日のゲームの履歴です"."\n".$resultScore;
+	$return_message_text=$return_message_text."今日のゲームの履歴です"."\n".$resultScore;
 
 } else {
   //messageの先頭に'確認'が含まれていない場合

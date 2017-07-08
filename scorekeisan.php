@@ -132,7 +132,7 @@ function return_score($message_text)
 				$db_message = "接続に成功しました";
 
 				//追加可能かのcheck
-				$sqlCheck = "SELECT * FROM mjtable WHERE handnumber=".$handnumber.";";
+				$sqlCheck = "SELECT * FROM mjtable WHERE date='".$date_s."' and handnumber=".$handnumber.";";
 				$resCheck = pg_query($pg_conn, $sqlCheck);
 				if(pg_num_rows($resCheck)) {
 					$db_message="既にゲームが登録されています";

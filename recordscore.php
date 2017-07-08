@@ -29,7 +29,7 @@ if( $pg_conn ) {
 	$time = strval($obj['endTime']);
 
 	// データを登録するためのSQLを作成
-	for($i=2;$i<=5;$i++) {
+	//for($i=2;$i<=5;$i++) {
 
 	//$player = $obj[$i];
 	//$score = $obj[$i]["score"];
@@ -55,7 +55,7 @@ if( $pg_conn ) {
 	// SQLクエリ実行
 	//$res = pg_query( $pg_conn, $sql);
 	//var_dump($res);
-	}
+	//}
 	//$return_text = "データ登録しました";
 	
 } else {

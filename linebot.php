@@ -114,7 +114,7 @@ if(strpos($message_text,'確認') !== false){
 			// データベースとの接続を切断
 			pg_close($pg_conn);
 
-	$headertitle=str_pad("回戦", 4, " ", STR_PAD_LEFT).str_pad($playerToday[0], 4, " ", STR_PAD_LEFT).str_pad($playerToday[1], 4, " ", STR_PAD_LEFT).str_pad($playerToday[2], 4, " ", STR_PAD_LEFT).str_pad($playerToday[3], 4, " ", STR_PAD_LEFT)."\n";
+	$headertitle=str_pad("回戦", 4, " ", STR_PAD_LEFT).str_pad($playerToday[0], 5, " ", STR_PAD_LEFT).str_pad($playerToday[1], 5, " ", STR_PAD_LEFT).str_pad($playerToday[2], 5, " ", STR_PAD_LEFT).str_pad($playerToday[3], 5, " ", STR_PAD_LEFT)."\n";
 	$return_message_text=$return_message_text."今日のゲームの履歴です"."\n".$headertitle.$resultScore;
 
 } else {

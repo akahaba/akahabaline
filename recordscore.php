@@ -52,7 +52,7 @@ if( $pg_conn ) {
 	$player,$score,$rank,$scoringPoints,$umaPoints,$totalPoints
 	)";
 	
-	$return_text = var_dump($json);
+	$return_text = "むずい";
 	//$return_text = $sql;
 	// SQLクエリ実行
 	//$res = pg_query( $pg_conn, $sql);

@@ -50,6 +50,11 @@ function return_score($message_text) {
 		$totalPoints[$key] = "+".$totalPoints[$key];
 			}
 
+		//JSON用arrayへの代入
+		$arrPlayerResult = array("name"=>$key,"rank"=>($i+1),"score"=>$gameResult[$key],"scoringPoints"=>$scoringPoints[$key],"umaPoints"=>$umaPoints[$i],"totalPoints"=>$totalPoints[$key]);
+		$arrPlayerResult = json_encode($arrPlayerResult);
+		file_put_contents("test.json" , $arrPlayerResult);
+
 		$return_message_text = $key . "さんは" . $scoringPoints[$key]."\t".$uma[$i]."\t".$totalPoints[$key]."\n".$return_message_text;
 		$i = $i-1;
 		}

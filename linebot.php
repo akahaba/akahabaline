@@ -48,6 +48,8 @@ if(strpos($message_text,'確認') !== false){
 				$sqlhndno ="SELECT MAX(handnumber) FROM mjtable WHERE date='".$date_s."';";
 				$resHandnumber = pg_query( $pg_conn, $sqlhndno);
 
+				$val = pg_fetch_result($resHandnumber, 0, 0);
+
 				// SQLクエリ実行
 				$res = pg_query( $pg_conn, $sqlcmd);
 				//var_dump($res);
@@ -67,7 +69,7 @@ if(strpos($message_text,'確認') !== false){
 			// データベースとの接続を切断
 			pg_close($pg_conn);
 
-	$return_message_text=$return_message_text."\n\n".$resHandnumber.$resultScore;
+	$return_message_text=$return_message_text."\n\n".$val.$resultScore;
 
 } else {
   //messageの先頭に'確認'が含まれていない場合

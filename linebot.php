@@ -95,7 +95,7 @@ from mjtable group by rollup(handnumber) order by handnumber asc;";
 			$resultScore ="";
 			for ($i = 0 ; $i < pg_num_rows($res) ; $i++){
 			    $rows = pg_fetch_array($res, NULL, PGSQL_ASSOC);
-			    $resultScore=$resultScore.$rows['handnumber']."\t".$rows['朝倉']."\t".$rows['甘蔗']."\t".$rows['嵯峨']."\n";
+			    $resultScore=$resultScore.$rows[0]."\t".$rows[1]."\t".$rows[2]."\t".$rows[3]."\n";
 			}
 
 				$db_message = "クエリ実行できました";

@@ -69,19 +69,7 @@ function return_score($message_text) {
 		//$arrGame = json_encode($arrGame);
 		//$arrPlayerResult = json_encode($arrPlayerResult);
 		//file_put_contents("/tmp/test.json" , $arrGame);
-/*
-		if($cmdstr=='登録') {
-			$return_message_text = $return_message_text."\n登録モードです\n"."ゲーム番号".$gameNm;
-		
-		} elseif($cmdstr=='修正') {
-			$return_message_text =  $return_message_text."\n修正モードです\n"."ゲーム番号".$gameNm;
-		} elseif($cmdstr=='削除') {
-			$return_message_text =  $return_message_text."\n削除モードです\n"."ゲーム番号".$gameNm;
-		} else {	//表示モード
-		
-			$return_message_text = $return_message_text. "\nみなさん頑張ってくださいね～";
-		}
-*/
+
 	return $return_message_text;
 
 	}

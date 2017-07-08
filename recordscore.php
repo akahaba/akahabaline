@@ -52,7 +52,7 @@ if( $pg_conn ) {
 	$player,$score,$rank,$scoringPoints,$umaPoints,$totalPoints
 	)";
 	
-	$return_text = sizeof($obj);
+	$return_text = sizeof($json);
 	//$return_text = $sql;
 	// SQLクエリ実行
 	//$res = pg_query( $pg_conn, $sql);

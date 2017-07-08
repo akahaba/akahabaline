@@ -34,7 +34,6 @@ if(strpos($message_text,'確認') !== false){
 //	$return_message_text = record_score();
 	$date_s=(string)date("Ymd");
 
-
 	$sqlcmd="SELECT player, Sum(scoringpoints) As pt,Sum(umapoints) As uma,Sum(totalpoints) As total FROM mjtable WHERE date='".$date_s."' GROUP BY player order by total desc;";
 
 		//DB接続
@@ -58,6 +57,45 @@ if(strpos($message_text,'確認') !== false){
 			for ($i = 0 ; $i < pg_num_rows($res) ; $i++){
 			    $rows = pg_fetch_array($res, NULL, PGSQL_ASSOC);
 			    $resultScore=$resultScore.$rows['player']."\t".$rows['pt']."\t".$rows['uma']."\t".$rows['total']."\n";
+			}
+
+				$db_message = "クエリ実行できました";
+				
+			} else {
+				$db_message = "クエリ実行できまませんでした";
+			}
+
+			// データベースとの接続を切断
+			pg_close($pg_conn);
+
+	$return_message_text=$return_message_text."\n\n".$val."回戦終了時点トータル\n".$resultScore;
+
+} elseif(preg_match('/^([履歴]+)/',$message_text)) {
+	//messageの先頭に履歴が含まれている場合
+
+
+$sqlrollup = "select handnumber As '回戦'
+,sum(case player when '朝倉' then totalpoints else 0 end) as '朝倉'
+,sum(case player when '甘蔗' then totalpoints else 0 end) as '甘蔗'
+,sum(case player when '嵯峨' then totalpoints else 0 end) as '嵯峨'
+,sum(case player when '寳閣' then totalpoints else 0 end) as '寳閣'
+from mjtable group by rollup(handnumber) order by handnumber asc;";
+
+		//DB接続
+		// 各種パラメータを指定して接続
+			$pg_conn = pg_connect(DB_CONECT);
+
+			if( $pg_conn ) {
+				$db_message = "接続に成功しました";
+
+				// SQLクエリ実行
+				$res = pg_query( $pg_conn, $sqlrollup);
+				//var_dump($res);
+
+			$resultScore ="";
+			for ($i = 0 ; $i < pg_num_rows($res) ; $i++){
+			    $rows = pg_fetch_array($res, NULL, PGSQL_ASSOC);
+			    $resultScore=$resultScore.$rows['handnumber']."\t".$rows['朝倉']."\t".$rows['甘蔗']."\t".$rows['嵯峨']."\n";
 			}
 
 				$db_message = "クエリ実行できました";

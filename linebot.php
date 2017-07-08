@@ -25,11 +25,6 @@ $message_text = $json_object->{"events"}[0]->{"message"}->{"text"};    //メッ�
 
 $date_s=(string)date("Ymd");
 
-//絵文字
-$code='100079';
-$bin = hex2bin(str_repeat('0', 8 - strlen($code)) . $code);
-$charemoji =  mb_convert_encoding($bin, 'UTF-8', 'UTF-32BE');
-
 
 //メッセージタイプが「text」以外のときは何も返さず終了
 if($message_type != "text") exit;
@@ -38,7 +33,7 @@ if(strpos($message_text,'確認') !== false){
 //  if(preg_match('/^([確認]+)/',$message_text)) {
   //messageの先頭に'確認'が含まれている場合
 
-	$return_message_text = "現在の結果だよ".$charemoji;
+	$return_message_text = "現在の結果だよ!";
 //	$return_message_text = record_score();
 
 	$sqlcmd="SELECT player, Sum(scoringpoints) As pt,Sum(umapoints) As uma,Sum(totalpoints) As total FROM mjtable WHERE date='".$date_s."' GROUP BY player order by total desc;";

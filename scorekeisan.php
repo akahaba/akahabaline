@@ -161,14 +161,18 @@ function return_score($message_text)
 				$db_message = "接続に成功しました";
 
 				// SQLクエリ実行
-				$res = pg_query( $pg_conn, $sqlUpd[0]);
-				$res = pg_query( $pg_conn, $sqlUpd[1]);
-				$res = pg_query( $pg_conn, $sqlUpd[2]);
-				$res = pg_query( $pg_conn, $sqlUpd[3]);
+				$UpdRows=0;
+				for($n=0;$n<4;$n++){
+				$res = pg_query( $pg_conn, $sqlUpd[$n]);
+				$UpdRows += pg_affected_rows($res);
+				}
+				//$res = pg_query( $pg_conn, $sqlUpd[1]);
+				//$res = pg_query( $pg_conn, $sqlUpd[2]);
+				//$res = pg_query( $pg_conn, $sqlUpd[3]);
 				//var_dump($res);
-
+				
 				if($res) {
-				$db_message = "データ更新しました";
+				$db_message = $UpdRows."件データ更新しました";
 				} else {
 				$db_message = "データ更新できませんでした";
 				}

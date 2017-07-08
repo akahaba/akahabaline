@@ -167,7 +167,11 @@ function return_score($message_text)
 				$res = pg_query( $pg_conn, $sqlUpd[3]);
 				//var_dump($res);
 
+				if($res) {
 				$db_message = "データ更新しました";
+				} else {
+				$db_message = "データ更新できませんでした";
+				}
 				
 			} else {
 				$db_message = "接続できませんでした";

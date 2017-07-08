@@ -14,13 +14,13 @@ $pg_conn = pg_connect(DB_CONECT);
 //$pg_conn = pg_connect("host=localhost port=5432 dbname=test user=testuser password=testtest");
 
 if( $pg_conn ) {
-	return var_dump("接続に成功しました");
+	$return_text = "接続に成功しました";
 } else {
-	return var_dump("接続できませんでした");
+	$return_text = "接続できませんでした";
 }
 
 // データベースとの接続を切断
 pg_close($pg_conn);
-
+return $return_text;
 }
 ?>

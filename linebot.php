@@ -74,14 +74,23 @@ if(strpos($message_text,'確認') !== false){
 	//messageの先頭に履歴が含まれている場合
 
 
-$sqlrollup = "select handnumber,sum(case player when '朝倉' then totalpoints else 0 end) ,sum(case player when '甘蔗' then totalpoints else 0 end) ,sum(case player when '嵯峨' then totalpoints else 0 end) ,sum(case player when '寳閣' then totalpoints else 0 end) from mjtable group by rollup(handnumber) order by handnumber asc;";
-
 		//DB接続
 		// 各種パラメータを指定して接続
 			$pg_conn = pg_connect(DB_CONECT);
 
 			if( $pg_conn ) {
 				$db_message = "接続に成功しました";
+
+				$sqlPlayer="select player from mjtable where date='".$date_s."' group by player order by player desc;";
+				//参加者名の取得
+				$playerToday = array();
+				$resPlayer = pg_query( $pg_conn, $sqlPlayer);
+				for ($i = 0 ; $i < pg_num_rows($resPlayer) ; $i++){
+				    $rows = pg_fetch_array($resPlayer, NULL,PGSQL_NUM );
+				$playerToday[$i]=$rows[0];
+				}
+
+				$sqlrollup = "select handnumber,sum(case player when '朝倉' then totalpoints else 0 end) ,sum(case player when '甘蔗' then totalpoints else 0 end) ,sum(case player when '嵯峨' then totalpoints else 0 end) ,sum(case player when '寳閣' then totalpoints else 0 end) from mjtable group by rollup(handnumber) order by handnumber asc;";
 
 				// SQLクエリ実行
 				$res = pg_query( $pg_conn, $sqlrollup);

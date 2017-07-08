@@ -69,7 +69,7 @@ function return_score($message_text) {
 		//$arrGame = json_encode($arrGame);
 		//$arrPlayerResult = json_encode($arrPlayerResult);
 		//file_put_contents("/tmp/test.json" , $arrGame);
-
+/*
 		if($cmdstr=='登録') {
 			$return_message_text = $return_message_text."\n登録モードです\n"."ゲーム番号".$gameNm;
 		
@@ -81,7 +81,7 @@ function return_score($message_text) {
 		
 			$return_message_text = $return_message_text. "\nみなさん頑張ってくださいね～";
 		}
-
+*/
 	return $return_message_text;
 
 	}

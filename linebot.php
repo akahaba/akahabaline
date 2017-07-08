@@ -16,7 +16,7 @@ $message_text = $json_object->{"events"}[0]->{"message"}->{"text"};    //メッ�
 if($message_type != "text") exit;
 
 //if(strpos($message_text,'登録') !== false){
-  if(preg_match('/^([登録]+)/',$message_text) {
+  if(preg_match('/^([登録]+)/',$message_text)) {
   //messageのなかに'登録'が含まれている場合
 
 	$return_message_text = "あかんやん";

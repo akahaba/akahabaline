@@ -103,7 +103,7 @@ if(strpos($message_text,'確認') !== false){
 			$resultScore ="";
 			for ($i = 0 ; $i < pg_num_rows($res) ; $i++){
 			    $rows = pg_fetch_array($res, NULL,PGSQL_NUM );
-			    $resultScore=$resultScore.str_pad($rows[0], 4, " ", STR_PAD_LEFT)."|".str_pad($rows[1], 5, " ", STR_PAD_LEFT)."|".str_pad($rows[2], 5, " ", STR_PAD_LEFT)."|".str_pad($rows[3], 5, " ", STR_PAD_LEFT)."|".str_pad($rows[4], 5, " ", STR_PAD_LEFT)."|\n";
+			    $resultScore=$resultScore.str_pad($rows[0], 5, " ", STR_PAD_LEFT)."|".str_pad($rows[1], 5, " ", STR_PAD_LEFT)."|".str_pad($rows[2], 5, " ", STR_PAD_LEFT)."|".str_pad($rows[3], 5, " ", STR_PAD_LEFT)."|".str_pad($rows[4], 5, " ", STR_PAD_LEFT)."|\n";
 			}
 
 				$db_message = "クエリ実行できました";

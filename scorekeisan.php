@@ -190,10 +190,10 @@ function return_score($message_text)
 			// データベースとの接続を切断
 			pg_close($pg_conn);
 
-			$return_message_text =$return_message_text."\n";
+			$return_message_text =$return_message_text."\n".$db_message;
 
 		} elseif($cmdstr=='削除') {
-			$return_message_text =  $return_message_text."\n削除モードです\n"."ゲーム番号".$gameNm."\n".$UpdRows."件削除";
+			$return_message_text =  $return_message_text."\n削除モードです\n"."ゲーム番号".$gameNm."\n";
 
 		//DB接続
 		// 各種パラメータを指定して接続
@@ -217,7 +217,7 @@ function return_score($message_text)
 			// データベースとの接続を切断
 			pg_close($pg_conn);
 
-			$return_message_text =  $return_message_text;
+			$return_message_text =  $return_message_text"\n".$db_message;
 
 		} else {	//表示モード
 		

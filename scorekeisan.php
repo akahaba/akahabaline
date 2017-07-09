@@ -158,7 +158,7 @@ function return_score($message_text)
 			pg_close($pg_conn);
 
 
-			$return_message_text = $return_message_text."\n".$db_message.$sqlCheck.pg_num_rows($resCheck);
+			$return_message_text = $return_message_text."\n".$db_message;
 		
 		} elseif($cmdstr=='修正') {
 			$return_message_text =  $return_message_text."\n修正モードです\n"."ゲーム番号".$gameNm;
@@ -190,7 +190,7 @@ function return_score($message_text)
 			// データベースとの接続を切断
 			pg_close($pg_conn);
 
-			$return_message_text =$return_message_text."\n".$db_message."\n";
+			$return_message_text =$return_message_text."\n";
 
 		} elseif($cmdstr=='削除') {
 			$return_message_text =  $return_message_text."\n削除モードです\n"."ゲーム番号".$gameNm."\n";
@@ -217,7 +217,7 @@ function return_score($message_text)
 			// データベースとの接続を切断
 			pg_close($pg_conn);
 
-			$return_message_text =  $return_message_text.$db_message;
+			$return_message_text =  $return_message_text;
 
 		} else {	//表示モード
 		

@@ -58,7 +58,7 @@ if(strpos($message_text,'確認') !== false){
 			$resultScore ="";
 			for ($i = 0 ; $i < pg_num_rows($res) ; $i++){
 			    $rows = pg_fetch_array($res, NULL, PGSQL_ASSOC);
-			    $resultScore=$resultScore.$rows['player'].str_pad($rows['pt'], 4, " ", STR_PAD_LEFT).str_pad($rows['uma'], 4, " ", STR_PAD_LEFT).str_pad($rows['total'], 4, " ", STR_PAD_LEFT)."\n";
+			    $resultScore=$resultScore.$rows['player'].str_pad($rows['pt'], 5, " ", STR_PAD_LEFT).str_pad($rows['uma'], 5, " ", STR_PAD_LEFT).str_pad($rows['total'], 5, " ", STR_PAD_LEFT)."\n";
 			}
 
 				$db_message = "クエリ実行できました";

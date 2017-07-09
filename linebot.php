@@ -95,10 +95,17 @@ if(strpos($message_text,'確認') !== false){
 				}
 				
 				$sqlrollup = "select handnumber,sum(case player when '".$playerToday[0]."' then totalpoints else 0 end) ,sum(case player when '".$playerToday[1]."' then totalpoints else 0 end) ,sum(case player when '".$playerToday[2]."' then totalpoints else 0 end) ,sum(case player when '".$playerToday[3]."' then totalpoints else 0 end) from mjtable where date='".$date_s."' group by rollup(handnumber) order by handnumber asc;";
+				$sqlrollupRank = "select handnumber,sum(case player when '".$playerToday[0]."' then rank else 0 end) ,sum(case player when '".$playerToday[1]."' then rank else 0 end) ,sum(case player when '".$playerToday[2]."' then rank else 0 end) ,sum(case player when '".$playerToday[3]."' then rank else 0 end) from mjtable where date='".$date_s."' group by rollup(handnumber) order by handnumber asc;";
 
 				// SQLクエリ実行
 				$res = pg_query( $pg_conn, $sqlrollup);
 				//var_dump($res);
+
+				// SQLクエリ実行 終了ゲーム数
+				$sqlhndno ="SELECT MAX(handnumber) FROM mjtable WHERE date='".$date_s."';";
+				$resHandnumber = pg_query( $pg_conn, $sqlhndno);
+
+				$val = pg_fetch_result($resHandnumber, 0, 0);
 
 			$resultScore ="";
 			for ($i = 0 ; $i < pg_num_rows($res) ; $i++){

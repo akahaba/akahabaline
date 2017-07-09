@@ -64,11 +64,14 @@ function return_score($message_text)
 	$scoringPoints_s=0;
 	$umaPoints_s=0;
 	$totalPoints_s=0;
+	$totalCheck = 0;
 	
 	asort($gameResult);
     
 	$i = 3;
 	foreach($gameResult as $key => $value){
+
+		$totalCheck += $gameResult[$key];
 
 		$basePoints[$key] = ($gameResult[$key] - 30000)/1000;
 		if($basePoints[$key]<0){
@@ -120,6 +123,7 @@ function return_score($message_text)
 		//$arrPlayerResult = json_encode($arrPlayerResult);
 		//file_put_contents("/tmp/test.json" , $arrGame);
 
+		$return_message_text =$return_message_text."\n".$totalCheck;
 
 		if($cmdstr=='登録') {
 			$return_message_text = $return_message_text."\n登録モードです\n"."ゲーム番号".$gameNm;

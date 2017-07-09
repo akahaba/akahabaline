@@ -161,7 +161,7 @@ function return_score($message_text)
 			$return_message_text = $return_message_text."\n".$db_message;
 		
 		} elseif($cmdstr=='修正') {
-			$return_message_text =  $return_message_text."\n修正モードです\n"."ゲーム番号".$gameNm;
+			$return_message_text =  $return_message_text."\n修正モードです\n"."ゲーム番号".$gameNm."\n".$UpdRows."件更新";
 
 		//DB接続
 		// 各種パラメータを指定して接続
@@ -193,7 +193,7 @@ function return_score($message_text)
 			$return_message_text =$return_message_text."\n";
 
 		} elseif($cmdstr=='削除') {
-			$return_message_text =  $return_message_text."\n削除モードです\n"."ゲーム番号".$gameNm."\n";
+			$return_message_text =  $return_message_text."\n削除モードです\n"."ゲーム番号".$gameNm."\n".$UpdRows."件削除";
 
 		//DB接続
 		// 各種パラメータを指定して接続

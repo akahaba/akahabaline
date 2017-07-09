@@ -94,7 +94,7 @@ if(strpos($message_text,'確認') !== false){
 				//$return_message_text=$return_message_text.$playerToday[$i];
 				}
 				
-				$sqlrollup = "select handnumber,sum(case player when '".$playerToday[0]."' then totalpoints else 0 end) ,sum(case player when '".$playerToday[1]."' then totalpoints else 0 end) ,sum(case player when '".$playerToday[2]."' then totalpoints else 0 end) ,sum(case player when '".$playerToday[3]."' then totalpoints else 0 end) from mjtable group by rollup(handnumber) order by handnumber asc;";
+				$sqlrollup = "select handnumber,sum(case player when '".$playerToday[0]."' then totalpoints else 0 end) ,sum(case player when '".$playerToday[1]."' then totalpoints else 0 end) ,sum(case player when '".$playerToday[2]."' then totalpoints else 0 end) ,sum(case player when '".$playerToday[3]."' then totalpoints else 0 end) from mjtable where date='".$date_s."' group by rollup(handnumber) order by handnumber asc;";
 
 				// SQLクエリ実行
 				$res = pg_query( $pg_conn, $sqlrollup);
@@ -116,7 +116,7 @@ if(strpos($message_text,'確認') !== false){
 			pg_close($pg_conn);
 
 	$headertitle=str_pad("回戦", 4, " ", STR_PAD_LEFT).str_pad($playerToday[0], 5, " ", STR_PAD_LEFT).str_pad($playerToday[1], 5, " ", STR_PAD_LEFT).str_pad($playerToday[2], 5, " ", STR_PAD_LEFT).str_pad($playerToday[3], 5, " ", STR_PAD_LEFT)."\n";
-	$return_message_text=$return_message_text."今日のゲームの履歴です"."\n".$headertitle.$resultScore.$sqlcmd.$date_s;
+	$return_message_text=$return_message_text."今日のゲームの履歴です"."\n".$headertitle.$resultScore;
 
 } elseif(strpos($message_text,'精算') !== false){
 	//messageに'精算'が含まれている場合

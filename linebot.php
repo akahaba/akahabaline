@@ -144,7 +144,7 @@ if(strpos($message_text,'確認') !== false){
 			$resultScore ="";
 			for ($i = 0 ; $i < pg_num_rows($res) ; $i++){
 			    $rows = pg_fetch_array($res, NULL, PGSQL_ASSOC);
-			    $resultScore=$resultScore.$rows['player']."\t".$rows['total']."円\n";
+			    $resultScore=$resultScore.$rows['player'].str_pad($rows['total'],10, " ", STR_PAD_LEFT)."円\n";
 			}
 
 				$db_message = "クエリ実行できました";

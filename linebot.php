@@ -116,7 +116,7 @@ if(strpos($message_text,'確認') !== false){
 			pg_close($pg_conn);
 
 	$headertitle=str_pad("回戦", 4, " ", STR_PAD_LEFT).str_pad($playerToday[0], 5, " ", STR_PAD_LEFT).str_pad($playerToday[1], 5, " ", STR_PAD_LEFT).str_pad($playerToday[2], 5, " ", STR_PAD_LEFT).str_pad($playerToday[3], 5, " ", STR_PAD_LEFT)."\n";
-	$return_message_text=$return_message_text."今日のゲームの履歴です"."\n".$headertitle.$resultScore;
+	$return_message_text=$return_message_text."今日のゲームの履歴です"."\n".$headertitle.$resultScore.$sqlcmd;
 
 } elseif(strpos($message_text,'精算') !== false){
 	//messageに'精算'が含まれている場合

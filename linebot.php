@@ -206,7 +206,7 @@ if(strpos($message_text,'確認') !== false){
 	if($val>0) {
 	$headertitle=str_pad("回戦", 6, " ", STR_PAD_LEFT)."|".str_pad($playerToday[0], 6, " ", STR_PAD_LEFT)."|".str_pad($playerToday[1], 6, " ", STR_PAD_LEFT)."|".str_pad($playerToday[2], 6, " ", STR_PAD_LEFT)."|".str_pad($playerToday[3], 6, " ", STR_PAD_LEFT)."|"."\n";
 	$devidechr="----+----+----+----+----+\n";
-	$footertotalavg=str_pad(" ", 6, " ", STR_PAD_LEFT)."|".str_pad($valRank0avg, 6, " ", STR_PAD_LEFT)."|".str_pad($valRank1avg, 6, " ", STR_PAD_LEFT)."|".str_pad($valRank2avg, 6, " ", STR_PAD_LEFT)."|".str_pad($valRank3avg, 6, " ", STR_PAD_LEFT)."|"."\n";
+	$footertotalavg=str_pad(" ", 4, " ", STR_PAD_LEFT)."|".str_pad($valRank0avg, 4, " ", STR_PAD_LEFT)."|".str_pad($valRank1avg, 4, " ", STR_PAD_LEFT)."|".str_pad($valRank2avg, 4, " ", STR_PAD_LEFT)."|".str_pad($valRank3avg, 4, " ", STR_PAD_LEFT)."|"."\n";
 	$return_message_text=$return_message_text."本日のゲームの順位履歴です"."\n".$headertitle.$devidechr.$resultScore.$footertotalavg;
 	//$return_message_text=$return_message_text.$valRank0."\n".$val."\n".$sqlranktotal_0;
 	} else {

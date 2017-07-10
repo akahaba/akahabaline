@@ -169,7 +169,7 @@ if(strpos($message_text,'確認') !== false){
 				$resRank2 = pg_query( $pg_conn, $sqlranktotal_2);
 				$resRank3 = pg_query( $pg_conn, $sqlranktotal_3);
 
-				$valRank0 = pg_fetch_result($resRank0, 1, 0);
+				$valRank0 = pg_fetch_result($resRank0, 0, 0);
 				$valRank1 = pg_fetch_result($resRank1, 0, 0);
 				$valRank2 = pg_fetch_result($resRank2, 0, 0);
 				$valRank3 = pg_fetch_result($resRank3, 0, 0);

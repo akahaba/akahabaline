@@ -156,10 +156,10 @@ if(strpos($message_text,'確認') !== false){
 				//順位履歴を取得するSQL文
 				$sqlrollupRank = "select handnumber,sum(case player when '".$playerToday[0]."' then rank else 0 end) ,sum(case player when '".$playerToday[1]."' then rank else 0 end) ,sum(case player when '".$playerToday[2]."' then rank else 0 end) ,sum(case player when '".$playerToday[3]."' then rank else 0 end) from mjtable where date='".$date_s."' group by handnumber order by handnumber asc;";
 				//平均順位を計算するための順位合計値の取得SQL文
-				$sqlranktotal_0 = "select sum(rank) from mjtable where date='".$date_s."' and player='.$playerToday[0].';";
-				$sqlranktotal_1 = "select sum(rank) from mjtable where date='".$date_s."' and player='.$playerToday[1].';";
-				$sqlranktotal_2 = "select sum(rank) from mjtable where date='".$date_s."' and player='.$playerToday[2].';";
-				$sqlranktotal_3 = "select sum(rank) from mjtable where date='".$date_s."' and player='.$playerToday[3].';";
+				$sqlranktotal_0 = "select sum(rank) from mjtable where date='".$date_s."' and player='".$playerToday[0]."';";
+				$sqlranktotal_1 = "select sum(rank) from mjtable where date='".$date_s."' and player='".$playerToday[1]."';";
+				$sqlranktotal_2 = "select sum(rank) from mjtable where date='".$date_s."' and player='".$playerToday[2]."';";
+				$sqlranktotal_3 = "select sum(rank) from mjtable where date='".$date_s."' and player='".$playerToday[3]."';";
 
 				// SQLクエリ実行
 				$res = pg_query( $pg_conn, $sqlrollupRank);

@@ -30,7 +30,6 @@ $date_s=(string)date("Ymd");
 if($message_type != "text") exit;
 
 if(strpos($message_text,'確認') !== false){
-//  if(preg_match('/^([確認]+)/',$message_text)) {
   //messageの先頭に'確認'が含まれている場合
 
 	$return_message_text = "現在の結果だよ!";
@@ -49,12 +48,13 @@ if(strpos($message_text,'確認') !== false){
 				$sqlhndno ="SELECT MAX(handnumber) FROM mjtable WHERE date='".$date_s."';";
 				$resHandnumber = pg_query( $pg_conn, $sqlhndno);
 
+				//終了ゲーム数
 				$val = pg_fetch_result($resHandnumber, 0, 0);
 
 				// SQLクエリ実行
 				$res = pg_query( $pg_conn, $sqlcmd);
-				//var_dump($res);
 
+			//現時点でのスコア状況の取得
 			$resultScore ="";
 			for ($i = 0 ; $i < pg_num_rows($res) ; $i++){
 			    $rows = pg_fetch_array($res, NULL, PGSQL_ASSOC);
@@ -67,14 +67,18 @@ if(strpos($message_text,'確認') !== false){
 				$db_message = "クエリ実行できまませんでした";
 			}
 
-			// データベースとの接続を切断
+			//データベースとの接続を切断
 			pg_close($pg_conn);
 
-	$return_message_text=$return_message_text."\n\n".$val."回戦終了時点トータル\n".$resultScore;
+			//ゲーム数０の場合の切り分け
+			if($val>0) {
+				$return_message_text=$return_message_text."\n\n".$val."回戦終了時点トータル\n".$resultScore;
+			} else {
+				$return_message_text=$return_message_text."本日、記録されているゲーム結果はありません";
+			}
 
 } elseif(strpos($message_text,'履歴') !== false) {
 	//messageに履歴が含まれている場合
-
 
 		//DB接続
 		// 各種パラメータを指定して接続
@@ -91,7 +95,6 @@ if(strpos($message_text,'確認') !== false){
 				for ($i = 0 ; $i < pg_num_rows($resPlayer) ; $i++){
 				    $rows = pg_fetch_array($resPlayer, NULL,PGSQL_NUM );
 				$playerToday[$i]=$rows[0];
-				//$return_message_text=$return_message_text.$playerToday[$i];
 				}
 				
 				$sqlrollup = "select handnumber,sum(case player when '".$playerToday[0]."' then totalpoints else 0 end) ,sum(case player when '".$playerToday[1]."' then totalpoints else 0 end) ,sum(case player when '".$playerToday[2]."' then totalpoints else 0 end) ,sum(case player when '".$playerToday[3]."' then totalpoints else 0 end) from mjtable where date='".$date_s."' group by rollup(handnumber) order by handnumber asc;";
@@ -99,18 +102,16 @@ if(strpos($message_text,'確認') !== false){
 
 				// SQLクエリ実行
 				$res = pg_query( $pg_conn, $sqlrollup);
-				//var_dump($res);
 
 				// SQLクエリ実行 終了ゲーム数
 				$sqlhndno ="SELECT MAX(handnumber) FROM mjtable WHERE date='".$date_s."';";
 				$resHandnumber = pg_query( $pg_conn, $sqlhndno);
-
+				//終了ゲーム数
 				$val = pg_fetch_result($resHandnumber, 0, 0);
-
+			//ゲーム履歴の取得
 			$resultScore ="";
 			for ($i = 0 ; $i < pg_num_rows($res) ; $i++){
 			    $rows = pg_fetch_array($res, NULL,PGSQL_NUM );
-//			    $resultScore=$resultScore.str_pad($rows[0], 5, ".", STR_PAD_LEFT)."|".str_pad($rows[1], 5, ".", STR_PAD_LEFT)."|".str_pad($rows[2], 5, ".", STR_PAD_LEFT)."|".str_pad($rows[3], 5, ".", STR_PAD_LEFT)."|".str_pad($rows[4], 5, ".", STR_PAD_LEFT)."|\n";
 			    $resultScore=$resultScore.str_pad($rows[0], 5, " ", STR_PAD_LEFT)."|".str_pad($rows[1], 5, " ", STR_PAD_LEFT)."|".str_pad($rows[2], 5, " ", STR_PAD_LEFT)."|".str_pad($rows[3], 5, " ", STR_PAD_LEFT)."|".str_pad($rows[4], 5, " ", STR_PAD_LEFT)."|\n";
 			}
 
@@ -123,9 +124,14 @@ if(strpos($message_text,'確認') !== false){
 			// データベースとの接続を切断
 			pg_close($pg_conn);
 
+	//ゲーム数０の切り分け
+	if($val>0) {
 	$headertitle=str_pad("回戦", 6, " ", STR_PAD_LEFT)."|".str_pad($playerToday[0], 6, " ", STR_PAD_LEFT)."|".str_pad($playerToday[1], 6, " ", STR_PAD_LEFT)."|".str_pad($playerToday[2], 6, " ", STR_PAD_LEFT)."|".str_pad($playerToday[3], 6, " ", STR_PAD_LEFT)."|"."\n";
 	$devidechr="----+----+----+----+----+\n";
-	$return_message_text=$return_message_text."今日のゲームの履歴です"."\n".$headertitle.$devidechr.$resultScore;
+	$return_message_text=$return_message_text."本日のゲームの履歴です"."\n".$headertitle.$devidechr.$resultScore;
+	} else {
+	$return_message_text=$return_message_text."本日、記録されているゲーム結果はありません";
+	}
 
 } elseif(strpos($message_text,'精算') !== false){
 	//messageに'精算'が含まれている場合
@@ -173,7 +179,7 @@ if(strpos($message_text,'確認') !== false){
 	if(preg_match('/^[^0-9]+[0-9]+/',$message_text)) {
 		$return_message_text = return_score($message_text);
 	} else {
-		$return_message_text = "麻雀したいなぁ～～～";
+		$return_message_text = "麻雀したいなぁ～～～\n麻雀できる日あったら教えてね～～";
 	}
 }
 

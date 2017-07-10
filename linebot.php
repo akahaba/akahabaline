@@ -208,6 +208,8 @@ if(strpos($message_text,'確認') !== false){
 	$devidechr="----+----+----+----+----+\n";
 	$footertotalavg=str_pad(" ", 6, " ", STR_PAD_LEFT)."|".str_pad($valRank0avg, 6, " ", STR_PAD_LEFT)."|".str_pad($valRank1avg, 6, " ", STR_PAD_LEFT)."|".str_pad($valRank2avg, 6, " ", STR_PAD_LEFT)."|".str_pad($valRank3avg, 6, " ", STR_PAD_LEFT)."|"."\n";
 	$return_message_text=$return_message_text."本日のゲームの順位履歴です"."\n".$headertitle.$devidechr.$resultScore.$footertotalavg;
+
+	$return_message_text=$return_message_text.$valRank0."\n".$val;
 	} else {
 	$return_message_text=$return_message_text."本日、記録されているゲーム結果はありません";
 	}

@@ -43,7 +43,7 @@ function return_score($message_text)
 	    //intval($matches[2]); // 得点部分
 	    //$matches[3]; // 飛ばし箱
 
-		$gameResult = $gameResult + array($matches[1]=>intval($matches[2]));
+		$gameResult = $gameResult + array($matches[1]=>array(intval($matches[2]),$matches[3]);
 		$qas = $matches[3];
 		}
 

@@ -43,7 +43,7 @@ function return_score($message_text)
 	    //intval($matches[2]); // 得点部分
 	    //$matches[3]; // 飛ばし箱
 
-		$gameResult = $gameResult + array($matches[1]=>array(intval($matches[2]),$matches[3]); //<-変更
+		$gameResult = $gameResult + array($matches[1]=>intval($matches[2]));
 		$qas = $matches[3];
 		}
 
@@ -77,9 +77,9 @@ function return_score($message_text)
 	$i = 3;
 	foreach($gameResult as $key => $value){
 
-		$totalCheck += $gameResult[$key][0]; //<-変更
+		$totalCheck += $gameResult[$key];
 
-		$basePoints[$key] = ($gameResult[$key][0] - 30000)/1000;
+		$basePoints[$key] = ($gameResult[$key] - 30000)/1000;
 		if($basePoints[$key]<0){
 			$oka = $oka + ceil($basePoints[$key]);
 			$scoringPoints[$key] = ceil($basePoints[$key]);
@@ -98,7 +98,7 @@ function return_score($message_text)
 			} //if
 
 		$player_s= $key;
-		$score_s= intval($gameResult[$key][0]);
+		$score_s= intval($gameResult[$key]);
 		$rank_s=$i+1;
 		$scoringPoints_s=intval($scoringPoints[$key]);
 		$umaPoints_s=intval($umaPoints[$i]);

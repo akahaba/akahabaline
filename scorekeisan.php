@@ -136,12 +136,12 @@ function return_score($message_text)
 		
 		if($umatobiPt>0) {
 			$umatobi = str_repeat("〇",$umatobiPt);
-		} else {
+		} elseif($umatobiPt<0) {
 			$umatobiPt = $umatobiPt*-1;
 			$umatobi = str_repeat("✕",$umatobiPt);
 		}
-		
-		
+		if(abs($umatobiPt)==1) { $umatobi = $umatobi."　　";}
+		if(abs($umatobiPt)==2) { $umatobi = $umatobi."　";}
 
 		$return_message_text = $key . "さんは" . $scoringPoints[$key]."\t".$umatobi."\t".$totalPoints[$key]."\n".$return_message_text;
 		$i = $i-1;

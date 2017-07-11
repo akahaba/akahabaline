@@ -129,6 +129,10 @@ function return_score($message_text)
 		//update削除の場合のSQL文
 		$sqlDel[$i]="DELETE FROM mjtable WHERE player='".$player_s."' and date='".$date_s."' and handnumber=".$handnumber.";";
 
+		//飛ばし箱の〇✕をウマの〇✕に反映
+		$umatobi = $umaPoints[$i] + $gameResultTobi[$key];
+
+
 		$return_message_text = $key . "さんは" . $scoringPoints[$key]."\t".$uma[$i]."\t".$totalPoints[$key]."\n".$return_message_text;
 		$i = $i-1;
 		}

@@ -21,7 +21,7 @@ function return_score($message_text)
 	$i = 0;
 	$uma = array("〇〇〇","〇　　","✕　　","✕✕✕");
 	$umaPoints = array(30,10,-10,-30);
-	$tobiarr = ("ト"=>"10","ト2"=>"20","ト3"=>"30","ハ"=>"-10");
+	$tobiarr = array("ト"=>10,"ト2"=>20,"ト3"=>30,"ハ"=>-10);
 	$qas ="ト";
 
 	//DB接続用パラメーター

@@ -130,7 +130,7 @@ if(strpos($message_text,'確認') !== false){
 	$devidechr="----+----+----+----+----+\n";
 	$return_message_text=$return_message_text."本日のゲームの履歴です"."\n".$headertitle.$devidechr.$resultScore;
 	} else {
-	$return_message_text=$return_message_text."\n本日、記録されているゲーム結果はありません";
+	$return_message_text=$return_message_text."本日、記録されているゲーム結果はありません";
 	}
 
 //順位履歴の表示

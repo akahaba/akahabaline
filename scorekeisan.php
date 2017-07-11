@@ -58,7 +58,7 @@ function return_score($message_text)
 	
 	//$sql = "INSERT INTO mjtable (date,time,player,score,rank,scoringPoints,umaPoints,totalPoints
 	//) VALUES ($player,$score,$rank,$scoringPoints,$umaPoints,$totalPoints)";
-	$sql_str = "INSERT INTO mjtable (date,time,handnumber,player,score,rank,scoringPoints,umaPoints,totalPoints) VALUES (";
+	$sql_str = "INSERT INTO mjtable (date,time,handnumber,player,score,rank,scoringPoints,umaPoints,totalPoints,tobi) VALUES (";
 	$sql = array();
 	$sqlUpd = array();
 	$sqlDel = array();

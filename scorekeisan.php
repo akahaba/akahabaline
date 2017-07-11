@@ -100,7 +100,7 @@ function return_score($message_text)
 				}
 		}
 
-		$totalPoints[$key] = intval($scoringPoints[$key])+$umaPoints[$i];
+		$totalPoints[$key] = intval($scoringPoints[$key])+$umaPoints[$i]+$gameResultTobi[$key];
 		if($totalPoints[$key]>0){
 		$totalPoints[$key] = "+".$totalPoints[$key];
 			} //if
@@ -129,7 +129,7 @@ function return_score($message_text)
 		//update削除の場合のSQL文
 		$sqlDel[$i]="DELETE FROM mjtable WHERE player='".$player_s."' and date='".$date_s."' and handnumber=".$handnumber.";";
 
-		$return_message_text = $key . "さんは" . $scoringPoints[$key]."\t".$uma[$i]."\t".$totalPoints[$key].$gameResultTobi[$key]."\n".$return_message_text;
+		$return_message_text = $key . "さんは" . $scoringPoints[$key]."\t".$uma[$i]."\t".$totalPoints[$key]."\n".$return_message_text;
 		$i = $i-1;
 		}
 

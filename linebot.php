@@ -130,7 +130,7 @@ if(strpos($message_text,'確認') !== false){
 	$devidechr="----+----+----+----+----+\n";
 	$return_message_text=$return_message_text."本日のゲームの履歴です"."\n".$headertitle.$devidechr.$resultScore;
 	} else {
-	$return_message_text=$return_message_text."本日、記録されているゲーム結果はありません";
+	$return_message_text=$return_message_text."\n本日、記録されているゲーム結果はありません";
 	}
 
 //順位履歴の表示
@@ -254,7 +254,12 @@ if(strpos($message_text,'確認') !== false){
 			// データベースとの接続を切断
 			pg_close($pg_conn);
 
+			//ゲーム数０の切り分け
+			if($val>0) {
 			$return_message_text=$return_message_text."\n\n".$val."回戦終了時点精算額\n".$resultScore;
+			} else {
+			$return_message_text=$return_message_text."\n本日、記録されているゲーム結果はありません";
+			}
 
 } else {
   //messageに'確認''履歴''精算'が含まれていない場合

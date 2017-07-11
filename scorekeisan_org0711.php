@@ -15,14 +15,12 @@ function return_score($message_text)
 	$basePoints = array();
 	$scoringPoints = array();
 	$totalPoints = array();
-	$tobiPoints = array(); //飛ばし箱ポイント 0711追加
 	$return_message_textscore = array();
 	$gameResult = array();
 	$oka = 0;
 	$i = 0;
-	$uma = array("〇〇〇","〇","✕","✕✕✕");
+	$uma = array("〇〇〇","〇　　","✕　　","✕✕✕");
 	$umaPoints = array(30,10,-10,-30);
-	$tobiarr = ("ト"=>10,"ト2"=>20,"ト3"=>30,"ハ"=>-10);
 
 	//DB接続用パラメーター
 	$DB_SERVER = getenv('DB_HOST');
@@ -35,13 +33,12 @@ function return_score($message_text)
 
 
 	foreach($array as $value){
-	    preg_match('/^([一-龥ぁ-ん]+)([-]*[0-9]+)(ト[1-3]?|ハ)/', $value, $matches);
+	    preg_match('/^([一-龥ぁ-ん]+)([-]*[0-9]+)/', $value, $matches);
 	 
 	    //$matches[1]; // 名前部分
 	    //intval($matches[2]); // 得点部分
-	    //$matches[3]; // 飛ばし、箱
 
-		$gameResult = $gameResult + array($matches[1]=>array(intval($matches[2]),$matches[3]));
+		$gameResult = $gameResult + array($matches[1]=>intval($matches[2]));
 		}
 
 	//最後の行はコマンド　登録　修正　削除＋ゲーム番号
@@ -53,7 +50,7 @@ function return_score($message_text)
 	
 	//$sql = "INSERT INTO mjtable (date,time,player,score,rank,scoringPoints,umaPoints,totalPoints
 	//) VALUES ($player,$score,$rank,$scoringPoints,$umaPoints,$totalPoints)";
-	$sql_str = "INSERT INTO mjtable (date,time,handnumber,player,score,rank,scoringPoints,umaPoints,totalPoints,tobi) VALUES (";
+	$sql_str = "INSERT INTO mjtable (date,time,handnumber,player,score,rank,scoringPoints,umaPoints,totalPoints) VALUES (";
 	$sql = array();
 	$sqlUpd = array();
 	$sqlDel = array();
@@ -68,16 +65,15 @@ function return_score($message_text)
 	$umaPoints_s=0;
 	$totalPoints_s=0;
 	$totalCheck = 0;
-	$tobi_s = 0;
 	
 	asort($gameResult);
     
 	$i = 3;
 	foreach($gameResult as $key => $value){
 
-		$totalCheck += $gameResult[$key][0];
+		$totalCheck += $gameResult[$key];
 
-		$basePoints[$key] = ($gameResult[$key][0] - 30000)/1000;
+		$basePoints[$key] = ($gameResult[$key] - 30000)/1000;
 		if($basePoints[$key]<0){
 			$oka = $oka + ceil($basePoints[$key]);
 			$scoringPoints[$key] = ceil($basePoints[$key]);
@@ -90,38 +86,42 @@ function return_score($message_text)
 				}
 		}
 
-		//飛ばし箱ルーチン
-		if($gameResult[$key][1]) {
-		$tobiPoints[$key] = $tobiarr("$gameResult[$key][1]");
-		} else {
-		$tobiPoints[$key] = 0;
-		}
-
-		$totalPoints[$key] = intval($scoringPoints[$key])+$umaPoints[$i]+$tobiPoints[$key];
+		$totalPoints[$key] = intval($scoringPoints[$key])+$umaPoints[$i];
 		if($totalPoints[$key]>0){
 		$totalPoints[$key] = "+".$totalPoints[$key];
 			} //if
 
 		$player_s= $key;
-		$score_s= intval($gameResult[$key][0]);
+		$score_s= intval($gameResult[$key]);
 		$rank_s=$i+1;
 		$scoringPoints_s=intval($scoringPoints[$key]);
 		$umaPoints_s=intval($umaPoints[$i]);
 		$totalPoints_s=intval($totalPoints[$key]);
-		$tobi_s = intval($tobiPoints[$key]);
+
+		//JSON用arrayへの代入
+		//$arrPlayerResult = array("rank"=>($i+1),"score"=>$gameResult[$key],"scoringPoints"=>$scoringPoints[$key],"umaPoints"=>$umaPoints[$i],"totalPoints"=>$totalPoints[$key]);
+		//$result = array_merge($arrGame,"name"=>$key);
+		//$arrGame += array($key=>$arrPlayerResult);
+
+		//.$date_s."','".$endTime_s."','"
+		//$sql[$i]= $sql_str. $key .",". $gameResult[$key].",".$scoringPoints[$key]).",". $umaPoints[$i].",".$totalPoints[$key].");";
 		
 		//insert登録の場合のSQL文
-		$sql[$i]=$sql_str."'".$date_s."','".$endTime_s."',".$handnumber.",'".$player_s."',".$score_s.",".$rank_s.",".$scoringPoints_s.",".$umaPoints_s.",".$totalPoints_s.",".$tobi_s.");";
+		$sql[$i]=$sql_str."'".$date_s."','".$endTime_s."',".$handnumber.",'".$player_s."',".$score_s.",".$rank_s.",".$scoringPoints_s.",".$umaPoints_s.",".$totalPoints_s.");";
 
 		//update修正の場合のSQL文
-		$sqlUpd[$i]="UPDATE mjtable SET date='".$date_s."',time='".$endTime_s."',handnumber=".$handnumber.",player='".$player_s."',score=".$score_s.",rank=".$rank_s.",scoringPoints=".$scoringPoints_s.",umaPoints=".$umaPoints_s.",totalPoints=".$totalPoints_s.",".$tobi_s." WHERE player='".$player_s."' and date='".$date_s."' and handnumber=".$handnumber.";";
+		$sqlUpd[$i]="UPDATE mjtable SET date='".$date_s."',time='".$endTime_s."',handnumber=".$handnumber.",player='".$player_s."',score=".$score_s.",rank=".$rank_s.",scoringPoints=".$scoringPoints_s.",umaPoints=".$umaPoints_s.",totalPoints=".$totalPoints_s."WHERE player='".$player_s."' and date='".$date_s."' and handnumber=".$handnumber.";";
 
 		//update削除の場合のSQL文
 		$sqlDel[$i]="DELETE FROM mjtable WHERE player='".$player_s."' and date='".$date_s."' and handnumber=".$handnumber.";";
 
-		$return_message_text = $key . "さんは" . $scoringPoints[$key]."\t".$uma[$i]+$tobiPoints[$key]."\t".$totalPoints[$key]."\n".$return_message_text;
+		$return_message_text = $key . "さんは" . $scoringPoints[$key]."\t".$uma[$i]."\t".$totalPoints[$key]."\n".$return_message_text;
 		$i = $i-1;
 		}
+
+		//$arrGame = json_encode($arrGame);
+		//$arrPlayerResult = json_encode($arrPlayerResult);
+		//file_put_contents("/tmp/test.json" , $arrGame);
 
 		$return_message_text =$return_message_text."持ち点合計".$totalCheck."\n";
 

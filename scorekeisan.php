@@ -75,12 +75,13 @@ function return_score($message_text)
 	$i = 3;
 	foreach($gameResult as $key => $value){
 
+		//foreach($value as $key2=>$val2){
 		$totalCheck += $gameResult[$key][0];
 
-		$basePoints[$key] = ($gameResult[$key][0] - 30000)/1000;
+		$basePoints[$key] = ($gameResult[$key][0] - 30000)/1000;  //basePoinsts
 		if($basePoints[$key]<0){
 			$oka = $oka + ceil($basePoints[$key]);
-			$scoringPoints[$key] = ceil($basePoints[$key]);
+			$scoringPoints[$key] = ceil($basePoints[$key]);    //scoringPoints
 		} else {
 			$oka = $oka + floor($basePoints[$key]);
 			if($i==0){
@@ -91,11 +92,14 @@ function return_score($message_text)
 		}
 
 		//飛ばし箱ルーチン
-		if($gameResult[$key][1]) {
-		$tobiPoints[$key] = $tobiarr("$gameResult[$key][1]");
-		} else {
-		$tobiPoints[$key] = 0;
-		}
+		//if($gameResult[$key]) {
+		//$tobiPoints[$key] = $tobiarr("$gameResult[$key]");
+		//} else {
+		//$tobiPoints[$key] = 0;
+		//}
+
+		//}
+	}
 
 		$totalPoints[$key] = intval($scoringPoints[$key])+$umaPoints[$i]+$tobiPoints[$key];
 		if($totalPoints[$key]>0){

@@ -77,6 +77,12 @@ function return_score($message_text)
 	asort($gameResult);
     
 	$i = 3;
+	
+	//飛ばし箱判定ルーチン
+	//foreach($gameResultTobi as $key => $value) {
+	//	$gameResultTobi[$key] = 
+	//}
+	
 	foreach($gameResult as $key => $value){
 
 		$totalCheck += $gameResult[$key];
@@ -123,7 +129,7 @@ function return_score($message_text)
 		//update削除の場合のSQL文
 		$sqlDel[$i]="DELETE FROM mjtable WHERE player='".$player_s."' and date='".$date_s."' and handnumber=".$handnumber.";";
 
-		$return_message_text = $key . "さんは" . $scoringPoints[$key]."\t".$uma[$i]."\t".$totalPoints[$key]."\n".$return_message_text.$qas;
+		$return_message_text = $key . "さんは" . $scoringPoints[$key]."\t".$uma[$i]."\t".$totalPoints[$key]."\n".$return_message_text.$gameResultTobi[$key];
 		$i = $i-1;
 		}
 

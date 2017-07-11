@@ -137,7 +137,7 @@ if(strpos($message_text,'確認') !== false){
 } elseif(strpos($message_text,'順位') !== false) {
 	//messageに順位が含まれている場合
 
-		//DB接続
+		//DB接続 
 		// 各種パラメータを指定して接続
 			$pg_conn = pg_connect(DB_CONECT);
 

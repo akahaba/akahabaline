@@ -79,9 +79,9 @@ function return_score($message_text)
 	$i = 3;
 	
 	//飛ばし箱判定ルーチン
-	//foreach($gameResultTobi as $key => $value) {
-	//	$gameResultTobi[$key] = 
-	//}
+	foreach($gameResultTobi as $key => $value) {
+		$gameResultTobi[$key] = $tobiarr($gameResultTobi[$key]);
+	}
 	
 	foreach($gameResult as $key => $value){
 

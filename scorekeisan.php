@@ -42,7 +42,7 @@ function return_score($message_text)
 	    //$matches[3]; // 飛ばし箱
 
 		$gameResult = $gameResult + array($matches[1]=>intval($matches[2]));
-		$qas = $matches[3];
+		//$qas = $matches[3];
 		}
 
 	//最後の行はコマンド　登録　修正　削除＋ゲーム番号

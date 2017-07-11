@@ -74,7 +74,7 @@ if(strpos($message_text,'確認') !== false){
 			if($val>0) {
 				$return_message_text=$return_message_text."\n\n".$val."回戦終了時点トータル\n".$resultScore;
 			} else {
-				$return_message_text=$return_message_text."本日、記録されているゲーム結果はありません";
+				$return_message_text=$return_message_text."\n本日、記録されているゲーム結果はありません";
 			}
 
 } elseif(strpos($message_text,'履歴') !== false) {

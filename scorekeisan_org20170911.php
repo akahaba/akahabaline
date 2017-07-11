@@ -21,8 +21,6 @@ function return_score($message_text)
 	$i = 0;
 	$uma = array("〇〇〇","〇　　","✕　　","✕✕✕");
 	$umaPoints = array(30,10,-10,-30);
-	$tobiarr = ("ト"=>10,"ト2"=>20,"ト3"=>30,"ハ"=>-10);
-	$qas ="";
 
 	//DB接続用パラメーター
 	$DB_SERVER = getenv('DB_HOST');
@@ -35,14 +33,12 @@ function return_score($message_text)
 
 
 	foreach($array as $value){
-	    preg_match('/^([一-龥ぁ-ん]+)([-]*[0-9]+)(ト[1-3]?|ハ)/', $value, $matches);
+	    preg_match('/^([一-龥ぁ-ん]+)([-]*[0-9]+)/', $value, $matches);
 	 
 	    //$matches[1]; // 名前部分
 	    //intval($matches[2]); // 得点部分
-	    //$matches[3]; // 飛ばし箱
 
 		$gameResult = $gameResult + array($matches[1]=>intval($matches[2]));
-		$qas = $matches[3];
 		}
 
 	//最後の行はコマンド　登録　修正　削除＋ゲーム番号
@@ -119,7 +115,7 @@ function return_score($message_text)
 		//update削除の場合のSQL文
 		$sqlDel[$i]="DELETE FROM mjtable WHERE player='".$player_s."' and date='".$date_s."' and handnumber=".$handnumber.";";
 
-		$return_message_text = $key . "さんは" . $scoringPoints[$key]."\t".$uma[$i]."\t".$totalPoints[$key]."\n".$return_message_text.$qas;
+		$return_message_text = $key . "さんは" . $scoringPoints[$key]."\t".$uma[$i]."\t".$totalPoints[$key]."\n".$return_message_text;
 		$i = $i-1;
 		}
 

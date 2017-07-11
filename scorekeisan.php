@@ -41,7 +41,7 @@ function return_score($message_text)
 	    //intval($matches[2]); // 得点部分
 	    //$matches[3]; // 飛ばし、箱
 
-		$gameResult = $gameResult + array($matches[1]=>array(intval($matches[2]),$matches[3]));
+		$gameResult = $gameResult + array($matches[1]=>intval($matches[2]));
 		}
 
 	//最後の行はコマンド　登録　修正　削除＋ゲーム番号
@@ -76,9 +76,9 @@ function return_score($message_text)
 	foreach($gameResult as $key => $value){
 
 		//foreach($value as $key2=>$val2){
-		$totalCheck += $gameResult[$key][0];
+		$totalCheck += $gameResult[$key];
 
-		$basePoints[$key] = ($gameResult[$key][0] - 30000)/1000;  //basePoinsts
+		$basePoints[$key] = ($gameResult[$key] - 30000)/1000;  //basePoinsts
 		if($basePoints[$key]<0){
 			$oka = $oka + ceil($basePoints[$key]);
 			$scoringPoints[$key] = ceil($basePoints[$key]);    //scoringPoints

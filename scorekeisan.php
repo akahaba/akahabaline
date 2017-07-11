@@ -35,8 +35,8 @@ function return_score($message_text)
 
 
 	foreach($array as $value){
-//	    preg_match('/^([一-龥ぁ-ん]+)([-]*[0-9]+)(ト[1-3]?|ハ)/', $value, $matches);
-	    preg_match('/^([一-龥ぁ-ん]+)([-]*[0-9]+)/', $value, $matches);
+	    preg_match('/^([一-龥ぁ-ん]+)([-]*[0-9]+)(ト[1-3]?|ハ)?/', $value, $matches);
+//	    preg_match('/^([一-龥ぁ-ん]+)([-]*[0-9]+)/', $value, $matches);
 
 	 
 	    //$matches[1]; // 名前部分

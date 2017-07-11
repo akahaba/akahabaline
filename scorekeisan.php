@@ -22,7 +22,7 @@ function return_score($message_text)
 	$uma = array("〇〇〇","〇　　","✕　　","✕✕✕");
 	$umaPoints = array(30,10,-10,-30);
 	//$tobiarr = ("ト"=>10,"ト2"=>20,"ト3"=>30,"ハ"=>-10);
-	$qas ="";
+	$qas ="ト";
 
 	//DB接続用パラメーター
 	$DB_SERVER = getenv('DB_HOST');

@@ -111,6 +111,7 @@ function return_score($message_text)
 		$scoringPoints_s=intval($scoringPoints[$key]);
 		$umaPoints_s=intval($umaPoints[$i]);
 		$totalPoints_s=intval($totalPoints[$key]);
+		$tobihakoPoints_s=intval($gameResultTobi[$key]);
 
 		//JSON用arrayへの代入
 		//$arrPlayerResult = array("rank"=>($i+1),"score"=>$gameResult[$key],"scoringPoints"=>$scoringPoints[$key],"umaPoints"=>$umaPoints[$i],"totalPoints"=>$totalPoints[$key]);
@@ -121,10 +122,10 @@ function return_score($message_text)
 		//$sql[$i]= $sql_str. $key .",". $gameResult[$key].",".$scoringPoints[$key]).",". $umaPoints[$i].",".$totalPoints[$key].");";
 		
 		//insert登録の場合のSQL文
-		$sql[$i]=$sql_str."'".$date_s."','".$endTime_s."',".$handnumber.",'".$player_s."',".$score_s.",".$rank_s.",".$scoringPoints_s.",".$umaPoints_s.",".$totalPoints_s.");";
+		$sql[$i]=$sql_str."'".$date_s."','".$endTime_s."',".$handnumber.",'".$player_s."',".$score_s.",".$rank_s.",".$scoringPoints_s.",".$umaPoints_s.",".$totalPoints_s.",".$tobihakoPoints_s.");";
 
 		//update修正の場合のSQL文
-		$sqlUpd[$i]="UPDATE mjtable SET date='".$date_s."',time='".$endTime_s."',handnumber=".$handnumber.",player='".$player_s."',score=".$score_s.",rank=".$rank_s.",scoringPoints=".$scoringPoints_s.",umaPoints=".$umaPoints_s.",totalPoints=".$totalPoints_s."WHERE player='".$player_s."' and date='".$date_s."' and handnumber=".$handnumber.";";
+		$sqlUpd[$i]="UPDATE mjtable SET date='".$date_s."',time='".$endTime_s."',handnumber=".$handnumber.",player='".$player_s."',score=".$score_s.",rank=".$rank_s.",scoringPoints=".$scoringPoints_s.",umaPoints=".$umaPoints_s.",totalPoints=".$totalPoints_s.", tobi=".$tobihakoPoints_s." WHERE player='".$player_s."' and date='".$date_s."' and handnumber=".$handnumber.";";
 
 		//update削除の場合のSQL文
 		$sqlDel[$i]="DELETE FROM mjtable WHERE player='".$player_s."' and date='".$date_s."' and handnumber=".$handnumber.";";

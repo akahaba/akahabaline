@@ -22,6 +22,7 @@ function return_score($message_text)
 	$uma = array("〇〇〇","〇　　","✕　　","✕✕✕");
 	$umaPoints = array(30,10,-10,-30);
 	$tobiarr = array("ト"=>10,"ト2"=>20,"ト3"=>30,"ハ"=>-10);
+	$gameResultTobi = array();
 	$qas ="ト";
 
 	//DB接続用パラメーター
@@ -44,6 +45,7 @@ function return_score($message_text)
 	    //$matches[3]; // 飛ばし箱
 
 		$gameResult = $gameResult + array($matches[1]=>intval($matches[2]));
+		$gameResultTobi = $gameResultTobi+array($matches[1]=>$matches[3]);
 		$qas = $matches[3];
 		}
 

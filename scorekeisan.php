@@ -130,10 +130,20 @@ function return_score($message_text)
 		$sqlDel[$i]="DELETE FROM mjtable WHERE player='".$player_s."' and date='".$date_s."' and handnumber=".$handnumber.";";
 
 		//飛ばし箱の〇✕をウマの〇✕に反映
-		$umatobi = $umaPoints[$i] + $gameResultTobi[$key];
+		$umatobiPt = $umaPoints[$i] + $gameResultTobi[$key];
+		$umatobiPt = $umatobiPt/10;
+		$umatobi = "　　　";
+		
+		if($umatobiPt>0) {
+			$umatobi = str_repeat("〇",$umatobiPt);
+		} else {
+			$umatobiPt = $umatobiPt*-1;
+			$umatobi = str_repeat("✕",$umatobiPt);
+		}
+		
+		
 
-
-		$return_message_text = $key . "さんは" . $scoringPoints[$key]."\t".$uma[$i]."\t".$totalPoints[$key]."\n".$return_message_text;
+		$return_message_text = $key . "さんは" . $scoringPoints[$key]."\t".$umatobi."\t".$totalPoints[$key]."\n".$return_message_text;
 		$i = $i-1;
 		}
 

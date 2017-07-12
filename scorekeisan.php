@@ -1,6 +1,6 @@
 <?php
 
-function return_score($message_text) 
+function return_score($message_text)
 {
 
 	//JSON用変数宣言
@@ -37,32 +37,30 @@ function return_score($message_text)
 
 	foreach($array as $value){
 	    preg_match('/^([一-龥ぁ-ん]+)([-]*[0-9]+)(ト[1-3]?|ハ)?/', $value, $matches);
-//	    preg_match('/^([一-龥ぁ-ん]+)([-]*[0-9]+)/', $value, $matches);
-
-	 
 	    //$matches[1]; // 名前部分
 	    //intval($matches[2]); // 得点部分
-	    //$matches[3]; // 飛ばし箱
+	    //$matches[3]; // 飛ばしハコ
 
-		$gameResult = $gameResult + array($matches[1]=>intval($matches[2]));
-		$gameResultTobi = $gameResultTobi+array($matches[1]=>$matches[3]);
-		$qas = $matches[3];
-		}
+			//得点が1/100で入力されることを補正 2017.07.12
+			$gameResult = $gameResult + array($matches[1]=>intval($matches[2])*100);
+			$gameResultTobi = $gameResultTobi+array($matches[1]=>$matches[3]);
+			$qas = $matches[3];
+			}
 
-	//最後の行はコマンド　登録　修正　削除＋ゲーム番号
+			//最後の行はコマンド　登録　修正　削除＋ゲーム番号
 			$cmdstr = get_last_key($gameResult);
 			$gameNm = get_last_value($gameResult);
-	if($cmdstr == '登録' || $cmdstr == '修正' || $cmdstr == '削除') {
-			array_pop($gameResult);
-		}
-	
+			if($cmdstr == '登録' || $cmdstr == '修正' || $cmdstr == '削除') {
+					array_pop($gameResult); //コマンド行の内容を配列から削除
+				}
+
 	//$sql = "INSERT INTO mjtable (date,time,player,score,rank,scoringPoints,umaPoints,totalPoints
 	//) VALUES ($player,$score,$rank,$scoringPoints,$umaPoints,$totalPoints)";
 	$sql_str = "INSERT INTO mjtable (date,time,handnumber,player,score,rank,scoringPoints,umaPoints,totalPoints,tobi) VALUES (";
 	$sql = array();
 	$sqlUpd = array();
 	$sqlDel = array();
-	
+
 	$date_s=(string)date("Ymd");
 	$endTime_s=date("H:i:s", strtotime('+9 hour'));
 	$handnumber=$gameNm;
@@ -73,16 +71,16 @@ function return_score($message_text)
 	$umaPoints_s=0;
 	$totalPoints_s=0;
 	$totalCheck = 0;
-	
+
 	asort($gameResult);
-    
+
 	$i = 3;
-	
+
 	//飛ばし箱判定ルーチン
 	foreach($gameResultTobi as $key => $value) {
 		$gameResultTobi[$key] = $tobiarr[$gameResultTobi[$key]];
 	}
-	
+
 	foreach($gameResult as $key => $value){
 
 		$totalCheck += $gameResult[$key];
@@ -120,7 +118,7 @@ function return_score($message_text)
 
 		//.$date_s."','".$endTime_s."','"
 		//$sql[$i]= $sql_str. $key .",". $gameResult[$key].",".$scoringPoints[$key]).",". $umaPoints[$i].",".$totalPoints[$key].");";
-		
+
 		//insert登録の場合のSQL文
 		$sql[$i]=$sql_str."'".$date_s."','".$endTime_s."',".$handnumber.",'".$player_s."',".$score_s.",".$rank_s.",".$scoringPoints_s.",".$umaPoints_s.",".$totalPoints_s.",".$tobihakoPoints_s.");";
 
@@ -134,7 +132,7 @@ function return_score($message_text)
 		$umatobiPt = $umaPoints[$i] + $gameResultTobi[$key];
 		$umatobiPt = $umatobiPt/10;
 		$umatobi = "　　　";
-		
+
 		if($umatobiPt>0) {
 			$umatobi = str_repeat("〇",$umatobiPt);
 		} elseif($umatobiPt<0) {
@@ -176,7 +174,7 @@ function return_score($message_text)
 					$res = pg_query( $pg_conn, $sql[$n]);
 					$UpdRows += pg_affected_rows($res);
 					}
-				
+
 					$db_message = $UpdRows."件データ登録しました";
 				}
 			} else {
@@ -188,7 +186,7 @@ function return_score($message_text)
 
 
 			$return_message_text = $return_message_text."\n".$db_message."\n".pg_num_rows($resCheck);
-		
+
 		} elseif($cmdstr=='修正') {
 			$return_message_text =  $return_message_text."\n修正モードです\n"."ゲーム番号".$gameNm;
 
@@ -205,13 +203,13 @@ function return_score($message_text)
 				$res = pg_query( $pg_conn, $sqlUpd[$n]);
 				$UpdRows += pg_affected_rows($res);
 				}
-				
+
 				if($res) {
 				$db_message = $UpdRows."件データ更新しました";
 				} else {
 				$db_message = "データ更新できませんでした";
 				}
-				
+
 			} else {
 				$db_message = "接続できませんでした";
 			}
@@ -238,7 +236,7 @@ function return_score($message_text)
 				}
 
 				$db_message = $UpdRows."件データ削除しました";
-				
+
 			} else {
 				$db_message = "接続できませんでした";
 			}
@@ -249,7 +247,7 @@ function return_score($message_text)
 			$return_message_text =  $return_message_text.$db_message;
 
 		} else {	//表示モード
-		
+
 			$return_message_text = $return_message_text. "\n確認の上、登録ください";
 		}
 

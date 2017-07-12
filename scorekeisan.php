@@ -54,8 +54,6 @@ function return_score($message_text)
 					array_pop($gameResult); //コマンド行の内容を配列から削除
 				}
 
-	//$sql = "INSERT INTO mjtable (date,time,player,score,rank,scoringPoints,umaPoints,totalPoints
-	//) VALUES ($player,$score,$rank,$scoringPoints,$umaPoints,$totalPoints)";
 	$sql_str = "INSERT INTO mjtable (date,time,handnumber,player,score,rank,scoringPoints,umaPoints,totalPoints,tobi) VALUES (";
 	$sql = array();
 	$sqlUpd = array();
@@ -111,14 +109,6 @@ function return_score($message_text)
 		$totalPoints_s=intval($totalPoints[$key]);
 		$tobihakoPoints_s=intval($gameResultTobi[$key]);
 
-		//JSON用arrayへの代入
-		//$arrPlayerResult = array("rank"=>($i+1),"score"=>$gameResult[$key],"scoringPoints"=>$scoringPoints[$key],"umaPoints"=>$umaPoints[$i],"totalPoints"=>$totalPoints[$key]);
-		//$result = array_merge($arrGame,"name"=>$key);
-		//$arrGame += array($key=>$arrPlayerResult);
-
-		//.$date_s."','".$endTime_s."','"
-		//$sql[$i]= $sql_str. $key .",". $gameResult[$key].",".$scoringPoints[$key]).",". $umaPoints[$i].",".$totalPoints[$key].");";
-
 		//insert登録の場合のSQL文
 		$sql[$i]=$sql_str."'".$date_s."','".$endTime_s."',".$handnumber.",'".$player_s."',".$score_s.",".$rank_s.",".$scoringPoints_s.",".$umaPoints_s.",".$totalPoints_s.",".$tobihakoPoints_s.");";
 
@@ -146,17 +136,13 @@ function return_score($message_text)
 		$i = $i-1;
 		}
 
-		//$arrGame = json_encode($arrGame);
-		//$arrPlayerResult = json_encode($arrPlayerResult);
-		//file_put_contents("/tmp/test.json" , $arrGame);
-
 		$return_message_text =$return_message_text."持ち点合計".$totalCheck."\n";
 
 		if($cmdstr=='登録') {
 			$return_message_text = $return_message_text."\n登録モードです\n"."ゲーム番号".$gameNm;
 
-		//DB接続
-		// 各種パラメータを指定して接続
+			//DB接続
+			// 各種パラメータを指定して接続
 			$pg_conn = pg_connect(DB_CONECT);
 
 			if( $pg_conn ) {
@@ -271,6 +257,5 @@ function get_last_value($array)
 {
     return end($array);
 }
-
 
 ?>

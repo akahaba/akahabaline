@@ -19,11 +19,13 @@ function return_score($message_text)
 	$gameResult = array();
 	$oka = 0;
 	$i = 0;
+	//ウマの設定　ワンスリー
 	$uma = array("〇〇〇","〇　　","✕　　","✕✕✕");
 	$umaPoints = array(30,10,-10,-30);
+	//トビ罰符の設定　10
 	$tobiarr = array("ト"=>10,"ト2"=>20,"ト3"=>30,"ハ"=>-10);
 	$gameResultTobi = array();
-	$qas ="ト";
+	//$qas ="ト";  //デバッグ用
 
 	//DB接続用パラメーター
 	$DB_SERVER = getenv('DB_HOST');
@@ -49,7 +51,7 @@ function return_score($message_text)
 
 			//最後の行はコマンド　登録　修正　削除＋ゲーム番号
 			$cmdstr = get_last_key($gameResult);
-			$gameNm = get_last_value($gameResult);
+			$gameNm = get_last_value($gameResult/100);
 			if($cmdstr == '登録' || $cmdstr == '修正' || $cmdstr == '削除') {
 					array_pop($gameResult); //コマンド行の内容を配列から削除
 				}

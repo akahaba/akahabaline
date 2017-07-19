@@ -114,7 +114,7 @@ function return_score($message_text)
 		$rank_s=$i+1;
 		$scoringPoints_s=intval($scoringPoints[$key]);
 		$umaPoints_s=intval($umaPoints[$i]);
-		$totalPoints_s=intval($totalPoints[$key]-$badai[$i]); //場代調整修正2017.07.20
+		$totalPoints_s=intval($totalPoints[$key]); //場代調整修正2017.07.20
 		$tobihakoPoints_s=intval($gameResultTobi[$key]);
 
 		//insert登録の場合のSQL文

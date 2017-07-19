@@ -26,7 +26,7 @@ function return_score($message_text)
 	$uma = array("〇〇","〇　","✕　","✕✕");
 	$umaPoints = array(10,5,-5,-10);
   //場代調整 トップ-10
-  $badai[] = array(10,0,0,0);
+  $badai = array(10,0,0,0);
 
 	//トビ罰符の設定　10
 	$tobiarr = array("ト"=>10,"ト2"=>20,"ト3"=>30,"ハ"=>-10);
@@ -114,7 +114,7 @@ function return_score($message_text)
 		$rank_s=$i+1;
 		$scoringPoints_s=intval($scoringPoints[$key]);
 		$umaPoints_s=intval($umaPoints[$i]);
-		$totalPoints_s=intval($totalPoints[$key]); //場代調整修正2017.07.20
+		$totalPoints_s=intval($totalPoints[$key])-$badai[$i]; //場代調整修正2017.07.20
 		$tobihakoPoints_s=intval($gameResultTobi[$key]);
 
 		//insert登録の場合のSQL文
@@ -126,9 +126,9 @@ function return_score($message_text)
 		//update削除の場合のSQL文
 		$sqlDel[$i]="DELETE FROM mjtable WHERE player='".$player_s."' and date='".$date_s."' and handnumber=".$handnumber.";";
 
-		//飛ばし箱の〇✕をウマの〇✕に反映
+		//飛ばし箱の〇✕をウマの〇✕に反映  レートによって修正が必要！
 		$umatobiPt = $umaPoints[$i] + $gameResultTobi[$key];
-		$umatobiPt = $umatobiPt/5;  //10->ワンスリー 5->ゴットー
+		$umatobiPt = $umatobiPt/5;  //10->ワンスリー 5->ゴットー 2017.07.20
 		$umatobi = "　　　";
 
 		if($umatobiPt>0) {

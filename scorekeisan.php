@@ -28,8 +28,8 @@ function return_score($message_text)
   //場代調整 トップ-10
   $badai = array(10,0,0,0);
 
-	//トビ罰符の設定　10
-	$tobiarr = array("ト"=>10,"ト2"=>20,"ト3"=>30,"ハ"=>-10);
+	//トビ罰符の設定　ワンスリー->10 ゴットー->5
+	$tobiarr = array("ト"=>5,"ト2"=>10,"ト3"=>15,"ハ"=>-5);
 	$gameResultTobi = array();
 	//$qas ="ト";  //デバッグ用
 

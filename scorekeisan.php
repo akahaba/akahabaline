@@ -23,12 +23,13 @@ function return_score($message_text)
 	//$uma = array("〇〇〇","〇　　","✕　　","✕✕✕");
 	//$umaPoints = array(30,10,-10,-30);
 	//ウマの設定　ゴットー
-	$uma = array("〇〇","〇　","✕　","✕✕");
+	$uma = array("〇〇","〇","✕","✕✕");
 	$umaPoints = array(10,5,-5,-10);
-  //場代調整 トップ-10
-  $badai = array(10,0,0,0);
+  	//場代調整 トップ-10
+  	$badai = array(10,0,0,0);
 
 	//トビ罰符の設定　ワンスリー->10 ゴットー->5
+  	//$tobiarr = array("ト"=>10,"ト2"=>20,"ト3"=>30,"ハ"=>-10);
 	$tobiarr = array("ト"=>5,"ト2"=>10,"ト3"=>15,"ハ"=>-5);
 	$gameResultTobi = array();
 	//$qas ="ト";  //デバッグ用
@@ -137,8 +138,8 @@ function return_score($message_text)
 			$umatobiPt = $umatobiPt*-1;
 			$umatobi = str_repeat("✕",$umatobiPt);
 		}
-		if(abs($umatobiPt)==1) { $umatobi = $umatobi."　　";}
-		if(abs($umatobiPt)==2) { $umatobi = $umatobi."　";}
+		if(abs($umatobiPt)==1) { $umatobi = $umatobi."　　";} //ワンスリー用の設定
+		if(abs($umatobiPt)==2) { $umatobi = $umatobi."　";} //ワンスリー用の設定
 
 		$return_message_text = $key . "さん:" . $scoringPoints[$key]."\t".$umatobi."\t".$totalPoints[$key]."\n".$return_message_text;
 		$i = $i-1;

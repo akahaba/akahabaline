@@ -98,13 +98,13 @@ function return_score($message_text)
 		} else {
 			$oka = $oka + floor($basePoints[$key]);
 			if($i==0){
-			$scoringPoints[$key] = "+".(floor($basePoints[$key])-$oka);
+			$scoringPoints[$key] = "+".((floor($basePoints[$key])-$oka)-$badai[$i]); //場代調整修正2017.07.20
 			} else {
-			$scoringPoints[$key] = "+".floor($basePoints[$key]);
+			$scoringPoints[$key] = "+".(floor($basePoints[$key])-$badai[$i]); //場代調整修正2017.07.20
 				}
 		}
 
-		$totalPoints[$key] = intval($scoringPoints[$key])+$umaPoints[$i]+$gameResultTobi[$key]-$badai[$i]; //場代調整修正2017.07.20
+		$totalPoints[$key] = intval($scoringPoints[$key])+$umaPoints[$i]+$gameResultTobi[$key];
 		if($totalPoints[$key]>0){
 		$totalPoints[$key] = "+".$totalPoints[$key];
 			} //if

@@ -104,7 +104,7 @@ function return_score($message_text)
 				}
 		}
 
-		$totalPoints[$key] = intval($scoringPoints[$key])+$umaPoints[$i]+$gameResultTobi[$key];
+		$totalPoints[$key] = intval($scoringPoints[$key])+$umaPoints[$i]+$gameResultTobi[$key]-$badai[$i]; //場代調整修正2017.07.20
 		if($totalPoints[$key]>0){
 		$totalPoints[$key] = "+".$totalPoints[$key];
 			} //if
@@ -114,7 +114,7 @@ function return_score($message_text)
 		$rank_s=$i+1;
 		$scoringPoints_s=intval($scoringPoints[$key]);
 		$umaPoints_s=intval($umaPoints[$i]);
-		$totalPoints_s=intval($totalPoints[$key])-$badai[$i]; //場代調整修正2017.07.20
+		$totalPoints_s=intval($totalPoints[$key]);
 		$tobihakoPoints_s=intval($gameResultTobi[$key]);
 
 		//insert登録の場合のSQL文

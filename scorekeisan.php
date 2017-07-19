@@ -128,7 +128,7 @@ function return_score($message_text)
 
 		//飛ばし箱の〇✕をウマの〇✕に反映
 		$umatobiPt = $umaPoints[$i] + $gameResultTobi[$key];
-		$umatobiPt = $umatobiPt/10;
+		$umatobiPt = $umatobiPt/5;  //10->ワンスリー 5->ゴットー
 		$umatobi = "　　　";
 
 		if($umatobiPt>0) {

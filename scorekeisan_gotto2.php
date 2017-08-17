@@ -97,7 +97,7 @@ function return_score($message_text)
 		$basePoints[$key] = ($gameResult[$key] - 30000)/1000;
 		if($basePoints[$key]<0){
 			$oka = $oka + ceil($basePoints[$key]);
-			$scoringPoints[$key] = ceil($basePoints[$key]);
+			$scoringPoints[$key] = ceil($basePoints[$key])-$badai[$i]; //場代調整修正2017.08.18
 		} else {
 			$oka = $oka + floor($basePoints[$key]);
 			if($i==0){

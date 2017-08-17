@@ -104,6 +104,10 @@ function return_score($message_text)
 			$scoringPoints[$key] = "+".((floor($basePoints[$key])-$oka)-$badai[$i]); //場代調整修正2017.07.20
 			} else {
 			$scoringPoints[$key] = (floor($basePoints[$key])-$badai[$i]); //場代調整修正2017.07.20
+				if($scoringPoints[$key]>0) {
+					$scoringPoints[$key] = "+".$scoringPoints[$key];
+				} //場代調整でプラスの場合に＋をつける
+
 				}
 		}
 

@@ -27,7 +27,8 @@ function return_score($message_text)
 	$umaPoints = array(10,5,-5,-10);
   	//場代調整 トップ-10
   	//$badai = array(10,0,0,0);
-  	$badai = array(0,0,0,0);
+  	//$badai = array(0,0,0,0);
+  	$badai = array(4,3,2,1);
 
 	//トビ罰符の設定　ワンスリー->10 ゴットー->5
   	//$tobiarr = array("ト"=>10,"ト2"=>20,"ト3"=>30,"ハ"=>-10);

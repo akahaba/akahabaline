@@ -1,0 +1,173 @@
+select handnumber,
+sum(case player when '甘蔗' then score else 0 end) as "甘蔗",
+sum(case player when '磯山' then score else 0 end) as "磯山",
+sum(case player when '高木' then score else 0 end) as "高木",
+sum(case player when '寳閣' then score else 0 end) as "寳閣"
+from mjtable where date='20170817' group by handnumber order by handnumber asc;
+
+create view v_mjtable as
+select handnumber as "回戦",
+round((sum(case player when '甘蔗' then score else 0 end)-30000)/1000,1) as "甘蔗",
+round((sum(case player when '磯山' then score else 0 end)-30000)/1000,1) as "磯山",
+round((sum(case player when '高木' then score else 0 end)-30000)/1000,1) as "高木",
+round((sum(case player when '寳閣' then score else 0 end)-30000)/1000,1) as "寳閣"
+from mjtable where date='20170817' group by handnumber order by handnumber asc;
+
+//v_mjtable2
+create view v_mjtable as
+select handnumber, player, 
+(score-30000)/1000 as score,rank
+from mjtable where date='20170817' group by handnumber,player,score,rank
+order by handnumber,rank asc;
+//v_mjtable2oka
+create view v_mjtableoka as
+select handnumber,sum((score-30000)/1000) as oka
+from mjtable where date='20170817' group by handnumber;
+
+//オカを足したスコア計算
+create view v_totalscoremj as
+select
+v_mjtable.handnumber,
+v_mjtable.player,
+case when v_mjtable.rank=1 then
+	v_mjtable.score - v_mjtableoka.oka
+else
+	v_mjtable.score
+end,
+v_mjtable.rank,
+case when v_mjtable.rank=1 then 10
+	when v_mjtable.rank=2 then 5
+	when v_mjtable.rank=3 then -5
+	when v_mjtable.rank=4 then -10
+end as umagotto,
+case when v_mjtable.rank=1 then 30
+	when v_mjtable.rank=2 then 10
+	when v_mjtable.rank=3 then -10
+	when v_mjtable.rank=4 then -30
+end as umaonethree,
+case when v_mjtable.rank=1 then -10
+	else 0
+end as badaitop,
+case when v_mjtable.rank=1 then -4
+	when v_mjtable.rank=2 then -3
+	when v_mjtable.rank=3 then -2
+	when v_mjtable.rank=4 then -1
+end as badai4321
+from v_mjtable,v_mjtableoka
+where v_mjtable.handnumber=v_mjtableoka.handnumber
+;
+
+//集計
+select
+player,
+sum(score) as score,
+sum(umagotto) as uma,
+sum(score)+sum(umagotto) as total,
+(sum(score)+sum(umagotto))*100 as "精算金額"
+from v2_totalscoremj group by player;
+
+SELECT handnumber,MAX(score),player AS rank1score
+                           FROM v_mjtable
+                           GROUP BY handnumber;
+
+
+select handnumber as "回戦",
+sum(case player when '甘蔗' then rank else 0 end) as "甘蔗",
+sum(case player when '磯山' then rank else 0 end) as "磯山",
+sum(case player when '高木' then rank else 0 end) as "高木",
+sum(case player when '寳閣' then rank else 0 end) as "寳閣"
+from mjtable where date='20170817' group by handnumber order by handnumber asc;
+
+select "回戦","甘蔗","磯山","高木","寳閣",sum("回戦")
+from v_mjtable group by "回戦";
+
+create view v_mjtable as
+select date,handnumber, player, 
+(score-30000)/1000 as score,rank
+from mjtable group by date,handnumber,player,score,rank
+order by date,handnumber,rank asc;
+
+create view v_mjtableoka as
+select date,handnumber,sum((score-30000)/1000) as oka
+from mjtable group by date,handnumber order by date,handnumber;
+
+create view v2_totalscoremj as
+select
+v_mjtable.date,
+v_mjtable.handnumber,
+v_mjtable.player,
+case when v_mjtable.rank=1 then
+	v_mjtable.score - v_mjtableoka.oka
+else
+	v_mjtable.score
+end,
+v_mjtable.rank,
+case when v_mjtable.rank=1 then 10
+	when v_mjtable.rank=2 then 5
+	when v_mjtable.rank=3 then -5
+	when v_mjtable.rank=4 then -10
+end as umagotto,
+case when v_mjtable.rank=1 then 30
+	when v_mjtable.rank=2 then 10
+	when v_mjtable.rank=3 then -10
+	when v_mjtable.rank=4 then -30
+end as umaonethree,
+case when v_mjtable.rank=1 then -10
+	else 0
+end as badaitop,
+case when v_mjtable.rank=1 then -4
+	when v_mjtable.rank=2 then -3
+	when v_mjtable.rank=3 then -2
+	when v_mjtable.rank=4 then -1
+end as badai4321
+from v_mjtable,v_mjtableoka
+where v_mjtable.date=v_mjtableoka.date and
+v_mjtable.handnumber=v_mjtableoka.handnumber
+;
+
+//場代割り勘
+\copy (
+select
+date,
+player,
+sum(score) as score,
+sum(umagotto) as uma,
+sum(score)+sum(umagotto) as total,
+(sum(score)+sum(umagotto))*100 as "精算金額"
+from v2_totalscoremj group by date,player) TO dump.csv CSV DELIMITER ','
+
+//トップ-10
+select
+date,
+player,
+sum(score) as score,
+sum(umagotto) as uma,
+sum(badaitop) as badai,
+sum(score)+sum(umagotto)+sum(badaitop) as total,
+(sum(score)+sum(umagotto)+sum(badaitop))*100 as "精算金額"
+from v2_totalscoremj group by date,player;
+
+//場代4321
+select
+date,
+player,
+sum(score) as score,
+sum(umagotto) as uma,
+sum(badai4321) as badai,
+sum(score)+sum(umagotto)+sum(badai4321) as total,
+(sum(score)+sum(umagotto)+sum(badai4321))*100 as "精算金額"
+from v2_totalscoremj group by date,player;
+
+\copy (select date, player,sum(score) as score,sum(umagotto) as uma,sum(score)+sum(umagotto) as total,(sum(score)+sum(umagotto))*100 as "精算金額" from v2_totalscoremj group by date,player) TO dump.csv CSV DELIMITER ','
+
+\copy (select date,player,sum(score) as score,sum(umagotto) as uma,sum(badaitop) as badai,sum(score)+sum(umagotto)+sum(badaitop) as total,(sum(score)+sum(umagotto)+sum(badaitop))*100 as "精算金額" from v2_totalscoremj group by date,player) TO dump2.csv CSV DELIMITER ','
+
+select
+date,
+player,
+sum(score) as score,
+sum(umagotto) as uma,
+sum(badai4321) as badai,
+sum(score)+sum(umagotto)+sum(badai4321) as total,
+(sum(score)+sum(umagotto)+sum(badai4321))*100 as "精算金額"
+from v2_totalscoremj group by date,player;

@@ -1,10 +1,11 @@
+Options -Indexes
+
 <Files ~ "^\.(htaccess|htpasswd)$">
 deny from all
 </Files>
-Options -Indexes
+
 DirectoryIndex index.html       
 AuthUserFile /app/.htpasswd
 AuthType Basic
 AuthName “Restricted Access”
 Require valid-user
-order deny,allow

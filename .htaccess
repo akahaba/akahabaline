@@ -1,10 +1,5 @@
-Options -Indexes
-
-<Files ~ "^\.(htaccess|htpasswd)$">
-deny from all
-</Files>
-
-DirectoryIndex index.html       
+If “%{HTTP_HOST} != ‘example.com'”
+DirectoryIndex index.html index.php
 AuthUserFile /app/.htpasswd
 AuthType Basic
 AuthName “Restricted Access”

@@ -36,11 +36,12 @@ if( $pg_conn ) {
   <table>
   <caption>PostgreSQL データベース一覧</caption>
   <tr>
+
 <?php
   $flds = pg_num_fields($result);
   for($i=0; $i<$flds; $i++){
     $field = pg_field_name($result, $i);
-    printf("<th abbr=\"%s\">%s</th>\n", $field, $field);
+    printf("<th abbr='"%s'">%s</th>\n", $field, $field);
   }
   echo "</tr>";
 

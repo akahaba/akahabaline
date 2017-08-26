@@ -21,8 +21,8 @@ $replyToken = $json_object->{"events"}[0]->{"replyToken"};        //返信用ト
 $message_type = $json_object->{"events"}[0]->{"message"}->{"type"};    //メッセージタイプ
 $message_text = $json_object->{"events"}[0]->{"message"}->{"text"};    //メッセージ内容
 
-//$date_s=(string)date("Ymd");
-$date_s="20170825"; //デバッグ用
+$date_s=(string)date("Ymd");
+//$date_s="20170709"; //デバッグ用
 //精算レート 点５->50 点ピン->100
 $ratevalue=100;
 
@@ -205,70 +205,6 @@ if(strpos($message_text,'確認') !== false){
       	} else {
       	$return_message_text=$return_message_text."本日、記録されているゲーム結果はありません";
       	}
-
-//順位分布の表示
-} elseif(strpos($message_text,'分布') !== false) {
-	//messageに分布が含まれている場合
-
-		//DB接続
-		// 各種パラメータを指定して接続
-			$pg_conn = pg_connect(DB_CONECT);
-
-			if( $pg_conn ) {
-				$db_message = "接続に成功しました";
-
-				$sqlPlayer="select player from mjtable where date='".$date_s."' group by player order by player desc;";
-
-				//参加者名の取得
-				$playerToday = array();
-				$resPlayer = pg_query( $pg_conn, $sqlPlayer);
-				for ($i = 0 ; $i < pg_num_rows($resPlayer) ; $i++){
-				    $rows = pg_fetch_array($resPlayer, NULL,PGSQL_NUM );
-				$playerToday[$i]=$rows[0];
-				}
-				//順位分布を取得するSQL文
-				$sqlRankdistribution = "select rank,sum(case player when '".$playerToday[0]."' then 1 else 0 end),sum(case player when '".$playerToday[1]."' then 1 else 0 end),sum(case player when '".$playerToday[2]."' then 1 else 0 end),sum(case player when '".$playerToday[3]."' then 1 else 0 end) from mjtable where date='".$date_s."' group by rank;";
-
-				//$sqlRankdistribution = "select rank as "順位",sum(case player when '".$playerToday[0]."' then 1 else 0 end),sum(case player when '".$playerToday[1]."' then 1 else 0 end),sum(case player when '".$playerToday[2]."' then 1 else 0 end),sum(case player when '".$playerToday[3]."' then 1 else 0 end) from mjtable group by rank;";
-				// SQLクエリ実行
-				$res = pg_query( $pg_conn, $sqlRankdistribution);
-
-				// SQLクエリ実行 終了ゲーム数
-				$sqlhndno ="SELECT MAX(handnumber) FROM mjtable WHERE date='".$date_s."';";
-				$resHandnumber = pg_query( $pg_conn, $sqlhndno);
-				//終了ゲーム数
-				$val = pg_fetch_result($resHandnumber, 0, 0);
-
-
-  			//ゲーム履歴の取得
-  			$resultScore ="";
-  			for ($i = 0 ; $i < pg_num_rows($res) ; $i++){
-  			    $rows = pg_fetch_array($res, NULL,PGSQL_NUM );
-  			    $resultScore=$resultScore.str_pad($rows[0], 5, " ", STR_PAD_LEFT)."|".str_pad($rows[1], 5, " ", STR_PAD_LEFT)."|".str_pad($rows[2], 5, " ", STR_PAD_LEFT)."|".str_pad($rows[3], 5, " ", STR_PAD_LEFT)."|".str_pad($rows[4], 5, " ", STR_PAD_LEFT)."|\n";
-  			}
-
-  				$db_message = "クエリ実行できました";
-
-  			} else {
-  				$db_message = "クエリ実行できまませんでした";
-  			}
-
-  			// データベースとの接続を切断
-			pg_close($pg_conn);
-
-      	//ゲーム数０の切り分け
-      	if($val>0) {
-      	$headertitle=str_pad("順位", 6, " ", STR_PAD_LEFT)."|".str_pad($playerToday[0], 6, " ", STR_PAD_LEFT)."|".str_pad($playerToday[1], 6, " ", STR_PAD_LEFT)."|".str_pad($playerToday[2], 6, " ", STR_PAD_LEFT)."|".str_pad($playerToday[3], 6, " ", STR_PAD_LEFT)."|"."\n";
-      	$devidechr="----+----+----+----+----+\n";
-      	//$footertotalavg=str_pad(" ", 4, " ", STR_PAD_LEFT)."|".str_pad($valRank0avg, 4, " ", STR_PAD_LEFT)."|".str_pad($valRank1avg, 4, " ", STR_PAD_LEFT)."|".str_pad($valRank2avg, 4, " ", STR_PAD_LEFT)."|".str_pad($valRank3avg, 4, " ", STR_PAD_LEFT)."|"."\n";
-      	$footertotalavg="";
-      	$return_message_text=$return_message_text."本日のゲームの順位分布です"."\n".$headertitle.$devidechr.$resultScore.$footertotalavg;
-      	//$return_message_text=$return_message_text.$valRank0."\n".$val."\n".$sqlranktotal_0;
-      	} else {
-      	$return_message_text=$return_message_text."本日、記録されているゲーム結果はありません";
-      	}
-//ここまで
-
 
 //messageに'精算'が含まれている場合 精算内容の表示
 } elseif(strpos($message_text,'精算') !== false){

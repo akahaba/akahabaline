@@ -7,5 +7,66 @@
 </head>
 <body>
 長重雀の会のサイト　工事中
+
+<?php
+  /* ### "pg_fetch_all()"によるデータ取得 ### */
+
+//DB接続用パラメーター
+$DB_SERVER = getenv('DB_HOST');
+$Port = "5432";
+$DB_NAME = getenv('DB_DATABASE');
+$DB_UID = getenv('DB_USERNAME');
+$DB_PASS = getenv('DB_PASSWORD');
+
+define("DB_CONECT","host=$DB_SERVER port=$Port dbname=$DB_NAME user=$DB_UID password=$DB_PASS");
+
+//DB接続
+// 各種パラメータを指定して接続
+$pg_conn = pg_connect(DB_CONECT);
+
+if( $pg_conn ) {
+	$db_message = "接続に成功しました";
+
+  //SQLの実行
+  $result = pg_query($pg_conn, "SELECT * FROM pg_database ORDER BY datname");
+
+  //データの取得
+  $arr = pg_fetch_all($result);
+
+  print "<table id=\"dblist\" summary=\"PostgreSQLのデータベースの一覧\">\n";
+  print "<caption>PostgreSQL データベース一覧</caption>\n";
+
+  //テーブルヘッダとしてフィールド（カラム）名を出力
+  print "<tr>\n";
+  $flds = pg_num_fields($result);
+  for($i=0; $i<$flds; $i++){
+    $field = pg_field_name($result, $i);
+    printf("<th abbr=\"%s\">%s</th>\n", $field, $field);
+  }
+  print "</tr>\n";
+
+  //データの出力
+  foreach($arr as $rows){
+    print "<tr>\n";
+    foreach($rows as $value){
+      printf("<td>%s</td>\n", $value);
+    }
+    print "</tr>\n";
+  }
+
+  print "</table>\n";
+
+
+}
+	$db_message = "クエリ実行できました";
+} else {
+	$db_message = "クエリ実行できまませんでした";
+}
+
+//データベースとの接続を切断
+pg_close($pg_conn);
+
+?>
+
 </body>
 </html>

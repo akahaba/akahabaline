@@ -33,7 +33,7 @@ if( $pg_conn ) {
   //データの取得
   $arr = pg_fetch_all($result);
 
-  print "<table id=\"dblist\" summary=\"PostgreSQLのデータベースの一覧\">\n";
+  print "<table>\n";
   print "<caption>PostgreSQL データベース一覧</caption>\n";
 
   //テーブルヘッダとしてフィールド（カラム）名を出力

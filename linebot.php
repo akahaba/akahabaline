@@ -227,7 +227,7 @@ if(strpos($message_text,'確認') !== false){
 				$playerToday[$i]=$rows[0];
 				}
 				//順位分布を取得するSQL文
-				$sqlRankdistribution = "select rank,sum(case player when '朝倉' then 1 else 0 end),sum(case player when '甘蔗' then 1 else 0 end),sum(case player when '河原' then 1 else 0 end),sum(case player when '寳閣' then 1 else 0 end) from mjtable where date='20170825' group by rank;";
+				$sqlRankdistribution = "select rank,sum(case player when '".$playerToday[0]."' then 1 else 0 end),sum(case player when '".$playerToday[1]."' then 1 else 0 end),sum(case player when '".$playerToday[2]."' then 1 else 0 end),sum(case player when '".$playerToday[3]."' then 1 else 0 end) from mjtable where date='".$date_s."' group by rank;";
 
 				//$sqlRankdistribution = "select rank as "順位",sum(case player when '".$playerToday[0]."' then 1 else 0 end),sum(case player when '".$playerToday[1]."' then 1 else 0 end),sum(case player when '".$playerToday[2]."' then 1 else 0 end),sum(case player when '".$playerToday[3]."' then 1 else 0 end) from mjtable group by rank;";
 				// SQLクエリ実行
@@ -258,7 +258,7 @@ if(strpos($message_text,'確認') !== false){
 
       	//ゲーム数０の切り分け
       	if($val>0) {
-      	$headertitle=str_pad("回戦", 6, " ", STR_PAD_LEFT)."|".str_pad($playerToday[0], 6, " ", STR_PAD_LEFT)."|".str_pad($playerToday[1], 6, " ", STR_PAD_LEFT)."|".str_pad($playerToday[2], 6, " ", STR_PAD_LEFT)."|".str_pad($playerToday[3], 6, " ", STR_PAD_LEFT)."|"."\n";
+      	$headertitle=str_pad("順位", 6, " ", STR_PAD_LEFT)."|".str_pad($playerToday[0], 6, " ", STR_PAD_LEFT)."|".str_pad($playerToday[1], 6, " ", STR_PAD_LEFT)."|".str_pad($playerToday[2], 6, " ", STR_PAD_LEFT)."|".str_pad($playerToday[3], 6, " ", STR_PAD_LEFT)."|"."\n";
       	$devidechr="----+----+----+----+----+\n";
       	//$footertotalavg=str_pad(" ", 4, " ", STR_PAD_LEFT)."|".str_pad($valRank0avg, 4, " ", STR_PAD_LEFT)."|".str_pad($valRank1avg, 4, " ", STR_PAD_LEFT)."|".str_pad($valRank2avg, 4, " ", STR_PAD_LEFT)."|".str_pad($valRank3avg, 4, " ", STR_PAD_LEFT)."|"."\n";
       	$footertotalavg="";

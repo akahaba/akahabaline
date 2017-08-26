@@ -162,12 +162,16 @@ from v2_totalscoremj group by date,player;
 
 \copy (select date,player,sum(score) as score,sum(umagotto) as uma,sum(badaitop) as badai,sum(score)+sum(umagotto)+sum(badaitop) as total,(sum(score)+sum(umagotto)+sum(badaitop))*100 as "精算金額" from v2_totalscoremj group by date,player) TO dump2.csv CSV DELIMITER ','
 
-select
-date,
-player,
-sum(score) as score,
-sum(umagotto) as uma,
-sum(badai4321) as badai,
-sum(score)+sum(umagotto)+sum(badai4321) as total,
-(sum(score)+sum(umagotto)+sum(badai4321))*100 as "精算金額"
-from v2_totalscoremj group by date,player;
+\copy (select date,player,sum(score) as score,sum(umagotto) as uma,sum(badai4321) as badai,sum(score)+sum(umagotto)+sum(badai4321) as total,(sum(score)+sum(umagotto)+sum(badai4321))*100 as "精算金額" from v2_totalscoremj group by date,player) TO dump3.csv CSV DELIMITER ','
+
+\copy (select date,time,handnumber from mjtable where rank=1) TO dump4.csv CSV DELIMITER ','
+
+//順位
+select 
+rank as "順位"
+,sum(case player when '朝倉' then 1 else 0 end) as "朝倉"
+,sum(case player when '甘蔗' then 1 else 0 end) as "甘蔗"
+,sum(case player when '河原' then 1 else 0 end) as "河原"
+,sum(case player when '寳閣' then 1 else 0 end) as "寳閣"
+from mjtable where date='20170825' group by rank;
+

@@ -175,3 +175,22 @@ rank as "順位"
 ,sum(case player when '寳閣' then 1 else 0 end) as "寳閣"
 from mjtable where date='20170825' group by rank;
 
+select 
+rank as "順位"
+,sum(case player when '朝倉' then 1 else 0 end) as "朝倉"
+,sum(case player when '甘蔗' then 1 else 0 end) as "甘蔗"
+,sum(case player when '河原' then 1 else 0 end) as "河原"
+,sum(case player when '嵯峨' then 1 else 0 end) as "嵯峨"
+,sum(case player when '寳閣' then 1 else 0 end) as "寳閣"
+from mjtable group by rank;
+
+select 
+rank
+,sum(case player when '朝倉' then 1 else 0 end)
+,sum(case player when '甘蔗' then 1 else 0 end)
+,sum(case player when '河原' then 1 else 0 end)
+,sum(case player when '寳閣' then 1 else 0 end)
+from mjtable where date='20170825' group by rank;
+
+
+select sum(score) from mjtable where date='20170825' and player='朝倉';

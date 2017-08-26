@@ -32,12 +32,11 @@ if( $pg_conn ) {
 
   //データの取得
   $arr = pg_fetch_all($result);
-
-  echo "<table>";
-  echo "<caption>PostgreSQL データベース一覧</caption>";
-
-  //テーブルヘッダとしてフィールド（カラム）名を出力
-  echo "<tr>";
+?>
+  <table>
+  <caption>PostgreSQL データベース一覧</caption>
+  <tr>
+<?php
   $flds = pg_num_fields($result);
   for($i=0; $i<$flds; $i++){
     $field = pg_field_name($result, $i);

@@ -227,9 +227,9 @@ if(strpos($message_text,'確認') !== false){
 				$playerToday[$i]=$rows[0];
 				}
 				//順位分布を取得するSQL文
-				$sqlrollupRank = "select handnumber,sum(case player when '".$playerToday[0]."' then rank else 0 end) ,sum(case player when '".$playerToday[1]."' then rank else 0 end) ,sum(case player when '".$playerToday[2]."' then rank else 0 end) ,sum(case player when '".$playerToday[3]."' then rank else 0 end) from mjtable where date='".$date_s."' group by handnumber order by handnumber asc;";
+				//$sqlrollupRank = "select handnumber,sum(case player when '".$playerToday[0]."' then rank else 0 end) ,sum(case player when '".$playerToday[1]."' then rank else 0 end) ,sum(case player when '".$playerToday[2]."' then rank else 0 end) ,sum(case player when '".$playerToday[3]."' then rank else 0 end) from mjtable where date='".$date_s."' group by handnumber order by handnumber asc;";
 
-				$sqlRankdistribution = "select rank as "順位",sum(case player when '".$playerToday[0]."' then 1 else 0 end),sum(case player when '".$playerToday[1]."' then 1 else 0 end),sum(case player when '".$playerToday[2]."' then 1 else 0 end),sum(case player when '".$playerToday[3]."' then 1 else 0 end) from mjtable group by rank;";
+				$sqlRankdistribution = "select rank as "順位",sum(case player when '".$playerToday[0]."' then 1 else 0 end),sum(case player when '".$playerToday[1]."' then 1 else 0 end),sum(case player when '".$playerToday[2]."' then 1 else 0 end),sum(case player when '".$playerToday[3]."' then 1 else 0 end) from mjtable where date='".$date_s."' group by rank;";
 				// SQLクエリ実行
 				$res = pg_query( $pg_conn, $sqlRankdistribution);
 

@@ -1,15 +1,54 @@
-$con    = pg_connect("dbname=TEST");  // データベースに接続
-  $result = pg_exec($con, "SELECT * FROM zaiko ;"); // クエリを発行
-  $rows   = pg_numrows($result);  // レコードの総数を取得
-  $row    = 0;  // 行カウンタを初期化
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<title>長重雀の会</title>
+</head>
+<body>
+長重雀の会のサイト　工事中
 
-  echo "<TABLE border=1><TR><TH>hinmei</TH><TH>zaiko</TH></TR>\n";
+<?php
+  /* ### "pg_fetch_all()"によるデータ取得 ### */
 
-  while( $row < $rows ){
-    $DATA = pg_fetch_object( $result, $row );  // 結果セットからレコードを1行取得する
-    echo "<TR><TD>{$DATA->hinmei}</TD><TD>{$DATA->zaiko}</TD></TR>\n";
-    // オブジェクトの場合は、変数名->カラム名 でそのカラムのデータを参照できます
+//DB接続用パラメーター
+$DB_SERVER = getenv('DB_HOST');
+$Port = "5432";
+$DB_NAME = getenv('DB_DATABASE');
+$DB_UID = getenv('DB_USERNAME');
+$DB_PASS = getenv('DB_PASSWORD');
 
-    $row ++;  // 行カウンタを進める
-  }
-  echo "</TABLE>\n";
+date_s="20170825"; //デバッグ用
+
+define("DB_CONECT","host=$DB_SERVER port=$Port dbname=$DB_NAME user=$DB_UID password=$DB_PASS");
+
+//DB接続
+// 各種パラメータを指定して接続
+$pg_conn = pg_connect(DB_CONECT);
+
+if( $pg_conn ) {
+  $db_message = "接続に成功しました";
+
+        // SQLクエリ実行 終了ゲーム数
+        $sqlhndno ="SELECT MAX(handnumber) FROM mjtable WHERE date='".$date_s."';";
+        $resHandnumber = pg_query( $pg_conn, $sqlhndno);
+        //終了ゲーム数の取得
+        $val = pg_fetch_result($resHandnumber, 0, 0);
+
+echo $val;
+
+}
+  $db_message = "クエリ実行できました";
+} else {
+  $db_message = "クエリ実行できまませんでした";
+}
+
+//データベースとの接続を切断
+pg_close($pg_conn);
+
+echo $db_message;
+?>
+
+
+</body>
+</html>

@@ -38,13 +38,3 @@ pg_close($pg_conn);
 
 echo $db_message;
 ?>
-<html>
-<head>
-<meta http-equiv="Content-type" content="text/html; charset=utf-8">
-<title>長重雀の会</title>
-</head>
-<body>
-長重雀の会のサイト　工事中
-
-</body>
-</html>

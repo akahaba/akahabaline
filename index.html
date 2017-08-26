@@ -18,6 +18,8 @@ $DB_NAME = getenv('DB_DATABASE');
 $DB_UID = getenv('DB_USERNAME');
 $DB_PASS = getenv('DB_PASSWORD');
 
+date_s="20170825"; //デバッグ用
+
 define("DB_CONECT","host=$DB_SERVER port=$Port dbname=$DB_NAME user=$DB_UID password=$DB_PASS");
 
 //DB接続
@@ -27,35 +29,13 @@ $pg_conn = pg_connect(DB_CONECT);
 if( $pg_conn ) {
 	$db_message = "接続に成功しました";
 
-  //SQLの実行
-  $result = pg_query($pg_conn, "SELECT * FROM pg_database ORDER BY datname");
+				// SQLクエリ実行 終了ゲーム数
+				$sqlhndno ="SELECT MAX(handnumber) FROM mjtable WHERE date='".$date_s."';";
+				$resHandnumber = pg_query( $pg_conn, $sqlhndno);
+				//終了ゲーム数の取得
+				$val = pg_fetch_result($resHandnumber, 0, 0);
 
-  //データの取得
-  $arr = pg_fetch_all($result);
-?>
-  <table>
-  <caption>PostgreSQL データベース一覧</caption>
-  <tr>
-
-<?php
-  $flds = pg_num_fields($result);
-  for($i=0; $i<$flds; $i++){
-    $field = pg_field_name($result, $i);
-    printf("<th abbr='"%s'">%s</th>\n", $field, $field);
-  }
-  echo "</tr>";
-
-  //データの出力
-  foreach($arr as $rows){
-    print "<tr>\n";
-    foreach($rows as $value){
-      printf("<td>%s</td>\n", $value);
-    }
-    print "</tr>\n";
-  }
-
-  echo "</table>";
-
+echo $val;
 
 }
 	$db_message = "クエリ実行できました";

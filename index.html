@@ -33,17 +33,17 @@ if( $pg_conn ) {
   //データの取得
   $arr = pg_fetch_all($result);
 
-  print "<table>\n";
-  print "<caption>PostgreSQL データベース一覧</caption>\n";
+  echo "<table>";
+  echo "<caption>PostgreSQL データベース一覧</caption>";
 
   //テーブルヘッダとしてフィールド（カラム）名を出力
-  print "<tr>\n";
+  echo "<tr>";
   $flds = pg_num_fields($result);
   for($i=0; $i<$flds; $i++){
     $field = pg_field_name($result, $i);
     printf("<th abbr=\"%s\">%s</th>\n", $field, $field);
   }
-  print "</tr>\n";
+  echo "</tr>";
 
   //データの出力
   foreach($arr as $rows){
@@ -54,7 +54,7 @@ if( $pg_conn ) {
     print "</tr>\n";
   }
 
-  print "</table>\n";
+  echo "</table>";
 
 
 }

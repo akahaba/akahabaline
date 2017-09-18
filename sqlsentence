@@ -194,3 +194,6 @@ from mjtable where date='20170825' group by rank;
 
 
 select sum(score) from mjtable where date='20170825' and player='朝倉';
+select sum(totalpoints) from mjtable where player='朝倉';
+
+select rank,sum(case player when '朝倉' then 1 else 0 end),sum(case player when '甘蔗' then 1 else 0 end),sum(case player when '嵯峨' then 1 else 0 end),sum(case player when '寳閣' then 1 else 0 end) from mjtable group by rank;

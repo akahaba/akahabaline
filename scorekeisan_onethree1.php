@@ -9,7 +9,7 @@ function return_score($message_text)
 	$array = explode("\n", $message_text); // とりあえず行に分割
 	$array = array_map('trim', $array); // 各行にtrim()をかける
 	$array = array_filter($array, 'strlen'); // 文字数が0の行を取り除く
-	//$array = array_values($array); // これはキーを連番に振りなおしてるだけ
+	$array = array_values($array); // これはキーを連番に振りなおしてるだけ
 
 	$points = array();
 	$basePoints = array();
@@ -26,8 +26,8 @@ function return_score($message_text)
 	//$uma = array("〇〇","〇","✕","✕✕");
 	//$umaPoints = array(10,5,-5,-10);
   	//場代調整 トップ-10
-  	//$badai = array(10,0,0,0);
-  	$badai = array(0,0,0,0);
+  	$badai = array(10,0,0,0);
+  	//$badai = array(0,0,0,0);
 
 	//トビ罰符の設定　ワンスリー->10 ゴットー->5
   	$tobiarr = array("ト"=>10,"ト2"=>20,"ト3"=>30,"ハ"=>-10);

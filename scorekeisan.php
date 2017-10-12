@@ -81,7 +81,7 @@ function return_score($message_text)
 	$totalCheck = 0;
 
 	//asort($gameResult);
-	$ar2 = array(1,2,3,4);
+	$ar2 = array(4,3,2,1);
 	array_multisort($gameResult, $ar2);
 
 	$i = 3;

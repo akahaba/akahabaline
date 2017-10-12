@@ -80,7 +80,9 @@ function return_score($message_text)
 	$totalPoints_s=0;
 	$totalCheck = 0;
 
-	asort($gameResult);
+	//asort($gameResult);
+	$ar2 = array(1,2,3,4);
+	array_multisort($gameResult, $ar2);
 
 	$i = 3;
 

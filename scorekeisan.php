@@ -52,8 +52,8 @@ function return_score($message_text)
 	    //$matches[3]; // 飛ばしハコ
 
 			//得点が1/100で入力されることを補正 2017.07.12
-			$gameResult = $gameResult + array($matches[1]=>intval($matches[2])*100);
-			$gameResultTobi = $gameResultTobi + array($matches[1]=>$matches[3]);
+			$gameResult[$key] = array($matches[1]=>intval($matches[2])*100);
+			$gameResultTobi[$key] = array($matches[1]=>$matches[3]);
 			$qas = $matches[3];
 			}
 

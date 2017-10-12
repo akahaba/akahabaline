@@ -45,7 +45,7 @@ function return_score($message_text)
 	define("DB_CONECT","host=$DB_SERVER port=$Port dbname=$DB_NAME user=$DB_UID password=$DB_PASS");
 
 
-	foreach($array as $value){
+	foreach($array as $key => $value){
 	    preg_match('/^([一-龥ぁ-ん]+)([-]*[0-9]+)(ト[1-3]?|ハ)?/', $value, $matches);
 	    //$matches[1]; // 名前部分
 	    //intval($matches[2]); // 得点部分

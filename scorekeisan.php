@@ -52,12 +52,12 @@ function return_score($message_text)
 	    //$matches[3]; // 飛ばしハコ
 
 			//得点が1/100で入力されることを補正 2017.07.12
-			$gameResult = $gameResult + array($matches[1]=>intval($matches[2])*100);
-			$gameResultTobi = $gameResultTobi+array($matches[1]=>$matches[3]);
+			$gameResult = array_push($gameResult, array($matches[1]=>intval($matches[2])*100));
+			$gameResultTobi = array_push($gameResultTobi, array($matches[1]=>$matches[3]));
 			$qas = $matches[3];
 			}
 
-			//最後の行はコマンド　登録　修正　削除＋ゲーム番号
+			//最後の行はコマンド　登録　修正　削除＋ゲーム番号()
 			$cmdstr = get_last_key($gameResult);
 			$gameNm = get_last_value($gameResult)/100;
 			if($cmdstr == '登録' || $cmdstr == '修正' || $cmdstr == '削除') {

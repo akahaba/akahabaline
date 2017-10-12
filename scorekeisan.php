@@ -9,7 +9,7 @@ function return_score($message_text)
 	$array = explode("\n", $message_text); // とりあえず行に分割
 	$array = array_map('trim', $array); // 各行にtrim()をかける
 	$array = array_filter($array, 'strlen'); // 文字数が0の行を取り除く
-	//$array = array_values($array); // これはキーを連番に振りなおしてるだけ
+	$array = array_values($array); // これはキーを連番に振りなおしてるだけ
 
 	$points = array();
 	$basePoints = array();
@@ -53,11 +53,11 @@ function return_score($message_text)
 
 			//得点が1/100で入力されることを補正 2017.07.12
 			$gameResult = $gameResult + array($matches[1]=>intval($matches[2])*100);
-			$gameResultTobi = $gameResultTobi + array($matches[1]=>$matches[3]);
+			$gameResultTobi = $gameResultTobi+array($matches[1]=>$matches[3]);
 			$qas = $matches[3];
 			}
 
-			//最後の行はコマンド　登録　修正　削除＋ゲーム番号()
+			//最後の行はコマンド　登録　修正　削除＋ゲーム番号
 			$cmdstr = get_last_key($gameResult);
 			$gameNm = get_last_value($gameResult)/100;
 			if($cmdstr == '登録' || $cmdstr == '修正' || $cmdstr == '削除') {

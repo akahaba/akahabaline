@@ -45,15 +45,15 @@ function return_score($message_text)
 	define("DB_CONECT","host=$DB_SERVER port=$Port dbname=$DB_NAME user=$DB_UID password=$DB_PASS");
 
 
-	foreach($array as $key => $value){
+	foreach($array as $value){
 	    preg_match('/^([一-龥ぁ-ん]+)([-]*[0-9]+)(ト[1-3]?|ハ)?/', $value, $matches);
 	    //$matches[1]; // 名前部分
 	    //intval($matches[2]); // 得点部分
 	    //$matches[3]; // 飛ばしハコ
 
 			//得点が1/100で入力されることを補正 2017.07.12
-			$gameResult[$key] = array($matches[1]=>intval($matches[2])*100);
-			$gameResultTobi[$key] = array($matches[1]=>$matches[3]);
+			$gameResult = $gameResult + array($matches[1]=>intval($matches[2])*100);
+			$gameResultTobi = $gameResultTobi + array($matches[1]=>$matches[3]);
 			$qas = $matches[3];
 			}
 

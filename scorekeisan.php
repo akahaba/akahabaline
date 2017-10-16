@@ -81,9 +81,7 @@ function return_score($message_text)
 	$totalPoints_s=0;
 	$totalCheck = 0;
 
-	//同得点時の判定の処理 2017.10.12
-	$ar2 = array(4,3,2,1);
-	array_multisort($gameResult, $ar2);
+	asort($gameResult);
 
 
 	$i = 3;

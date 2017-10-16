@@ -1,5 +1,4 @@
 <?php
-<?php
 
 function return_score($message_text)
 {

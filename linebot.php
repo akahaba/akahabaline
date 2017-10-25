@@ -22,9 +22,9 @@ $message_type = $json_object->{"events"}[0]->{"message"}->{"type"};    //メッ�
 $message_text = $json_object->{"events"}[0]->{"message"}->{"text"};    //メッセージ内容
 
 $date_s=(string)date("Ymd");
-//$date_s="20171016"; //デバッグ用
+//$date_s="20170825"; //デバッグ用
 //精算レート 点５->50 点ピン->100
-$ratevalue=50;
+$ratevalue=100;
 
 //メッセージタイプが「text」以外のときは何も返さず終了
 if($message_type != "text") exit;

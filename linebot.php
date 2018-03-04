@@ -140,7 +140,7 @@ if(strpos($message_text,'確認') !== false){
 
 		    	$return_message_text=$return_message_text."本日のゲームのスコア履歴です"."\n".$headertitle.$devidechr.$resultScore;
   			} else {
-  				$return_message_text=$return_message_text."本日のゲームの累積記録です"."\n".$headertitle.$devidechr.$resultScoreAccum;
+  				$return_message_text=$return_message_text."本日のゲームの累積スコアです"."\n".$headertitle.$devidechr.$resultScoreAccum;
 
   			}
 

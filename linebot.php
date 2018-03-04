@@ -135,7 +135,16 @@ if(strpos($message_text,'確認') !== false){
     	if($val>0) {
     	$headertitle=str_pad("回戦", 6, " ", STR_PAD_LEFT)."|".str_pad($playerToday[0], 6, " ", STR_PAD_LEFT)."|".str_pad($playerToday[1], 6, " ", STR_PAD_LEFT)."|".str_pad($playerToday[2], 6, " ", STR_PAD_LEFT)."|".str_pad($playerToday[3], 6, " ", STR_PAD_LEFT)."|"."\n";
     	$devidechr="----+----+----+----+----+\n";
-    	$return_message_text=$return_message_text."本日のゲームの履歴です"."\n".$headertitle.$devidechr.$resultScoreAccum;
+  
+			if(strpos($message_text,'履歴') !== false) {    		
+
+		    	$return_message_text=$return_message_text."本日のゲームのスコア履歴です"."\n".$headertitle.$devidechr.$resultScore;
+  			} else {
+  				$return_message_text=$return_message_text."本日のゲームの累積記録です"."\n".$headertitle.$devidechr.$resultScoreAccum;
+
+  			}
+
+
     	} else {
     	$return_message_text=$return_message_text."本日、記録されているゲーム結果はありません";
     	}

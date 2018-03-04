@@ -22,7 +22,7 @@ $message_type = $json_object->{"events"}[0]->{"message"}->{"type"};    //メッ�
 $message_text = $json_object->{"events"}[0]->{"message"}->{"text"};    //メッセージ内容
 
 $date_s=(string)date("Ymd");
-//$date_s="20170825"; //デバッグ用
+$date_s="20180227"; //デバッグ用
 //精算レート 点５->50 点ピン->100
 $ratevalue=100;
 
@@ -72,7 +72,7 @@ if(strpos($message_text,'確認') !== false){
 				$return_message_text=$return_message_text."\n\n本日、記録されているゲーム結果はありません";
 			}
 //messageの先頭に'履歴'が含まれている場合
-} elseif(strpos($message_text,'履歴') !== false) {
+} elseif(strpos($message_text,'履歴') !== false || strpos($message_text,'累積') !== false) {
 
   		//DB接続
   		// 各種パラメータを指定して接続

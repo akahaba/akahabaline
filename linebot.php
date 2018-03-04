@@ -117,9 +117,9 @@ if(strpos($message_text,'確認') !== false){
   			    $playerB = $playerB + $rows[2];
   			    $playerC = $playerC + $rows[3];
   			    $playerD = $playerD + $rows[4];
-
+  			    if($i<$val) {
   			    $resultScoreAccum=$resultScoreAccum.str_pad($rows[0], 5, " ", STR_PAD_LEFT)."|".str_pad($playerA, 5, " ", STR_PAD_LEFT)."|".str_pad($playerB, 5, " ", STR_PAD_LEFT)."|".str_pad($playerC, 5, " ", STR_PAD_LEFT)."|".str_pad($playerD, 5, " ", STR_PAD_LEFT)."|\n";
-
+  				}
   			}
 
 				$db_message = "クエリ実行できました";

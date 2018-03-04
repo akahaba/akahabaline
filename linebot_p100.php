@@ -72,7 +72,7 @@ if(strpos($message_text,'確認') !== false){
 				$return_message_text=$return_message_text."\n\n本日、記録されているゲーム結果はありません";
 			}
 //messageの先頭に'履歴'が含まれている場合
-} elseif(strpos($message_text,'履歴') !== false) {
+} elseif(strpos($message_text,'履歴') !== false || strpos($message_text,'累積') !== false) {
 
   		//DB接続
   		// 各種パラメータを指定して接続

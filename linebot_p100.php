@@ -22,7 +22,7 @@ $message_type = $json_object->{"events"}[0]->{"message"}->{"type"};    //メッ�
 $message_text = $json_object->{"events"}[0]->{"message"}->{"text"};    //メッセージ内容
 
 $date_s=(string)date("Ymd");
-//$date_s="20170825"; //デバッグ用
+//$date_s="20180227"; //デバッグ用
 //精算レート 点５->50 点ピン->100
 $ratevalue=100;
 
@@ -90,10 +90,10 @@ if(strpos($message_text,'確認') !== false){
 				$playerToday[$i]=$rows[0];
 				}
 
-				//$sqlrollupRank = "select handnumber,sum(case player when '".$playerToday[0]."' then rank else 0 end) ,sum(case player when '".$playerToday[1]."' then rank else 0 end) ,sum(case player when '".$playerToday[2]."' then rank else 0 end) ,sum(case player when '".$playerToday[3]."' then rank else 0 end) from mjtable where date='".$date_s."' group by rollup(handnumber) order by handnumber asc;";
 
 				// SQLクエリ実行 得点履歴の取得
         $sqlrollup = "select handnumber,sum(case player when '".$playerToday[0]."' then totalpoints else 0 end) ,sum(case player when '".$playerToday[1]."' then totalpoints else 0 end) ,sum(case player when '".$playerToday[2]."' then totalpoints else 0 end) ,sum(case player when '".$playerToday[3]."' then totalpoints else 0 end) from mjtable where date='".$date_s."' group by rollup(handnumber) order by handnumber asc;";
+
 				$res = pg_query( $pg_conn, $sqlrollup);
 
 				// SQLクエリ実行 終了ゲーム数
@@ -103,9 +103,23 @@ if(strpos($message_text,'確認') !== false){
 				$val = pg_fetch_result($resHandnumber, 0, 0);
   			//ゲーム履歴の取得
   			$resultScore ="";
+  			$resultScoreAccum ="";
+  			$playerA = 0;
+  			$playerB = 0;
+  			$playerC = 0;
+  			$playerD = 0;
+
   			for ($i = 0 ; $i < pg_num_rows($res) ; $i++){
   			    $rows = pg_fetch_array($res, NULL,PGSQL_NUM );
   			    $resultScore=$resultScore.str_pad($rows[0], 5, " ", STR_PAD_LEFT)."|".str_pad($rows[1], 5, " ", STR_PAD_LEFT)."|".str_pad($rows[2], 5, " ", STR_PAD_LEFT)."|".str_pad($rows[3], 5, " ", STR_PAD_LEFT)."|".str_pad($rows[4], 5, " ", STR_PAD_LEFT)."|\n";
+
+  			    $playerA = $playerA + $rows[1];
+  			    $playerB = $playerB + $rows[2];
+  			    $playerC = $playerC + $rows[3];
+  			    $playerD = $playerD + $rows[4];
+  			    if($i<$val) {
+  			    $resultScoreAccum=$resultScoreAccum.str_pad($rows[0], 5, " ", STR_PAD_LEFT)."|".str_pad($playerA, 5, " ", STR_PAD_LEFT)."|".str_pad($playerB, 5, " ", STR_PAD_LEFT)."|".str_pad($playerC, 5, " ", STR_PAD_LEFT)."|".str_pad($playerD, 5, " ", STR_PAD_LEFT)."|\n";
+  				}
   			}
 
 				$db_message = "クエリ実行できました";
@@ -121,7 +135,16 @@ if(strpos($message_text,'確認') !== false){
     	if($val>0) {
     	$headertitle=str_pad("回戦", 6, " ", STR_PAD_LEFT)."|".str_pad($playerToday[0], 6, " ", STR_PAD_LEFT)."|".str_pad($playerToday[1], 6, " ", STR_PAD_LEFT)."|".str_pad($playerToday[2], 6, " ", STR_PAD_LEFT)."|".str_pad($playerToday[3], 6, " ", STR_PAD_LEFT)."|"."\n";
     	$devidechr="----+----+----+----+----+\n";
-    	$return_message_text=$return_message_text."本日のゲームの履歴です"."\n".$headertitle.$devidechr.$resultScore;
+  
+			if(strpos($message_text,'履歴') !== false) {    		
+
+		    	$return_message_text=$return_message_text."本日のゲームのスコア履歴です"."\n".$headertitle.$devidechr.$resultScore;
+  			} else {
+  				$return_message_text=$return_message_text."本日のゲームの累積スコアです"."\n".$headertitle.$devidechr.$resultScoreAccum;
+
+  			}
+
+
     	} else {
     	$return_message_text=$return_message_text."本日、記録されているゲーム結果はありません";
     	}

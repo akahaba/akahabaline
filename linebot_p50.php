@@ -365,7 +365,7 @@ if(strpos($message_text,'確認') !== false){
 				$sqlconfigRead ="SELECT rate,uma1,uma2,badai FROM mjconfig;";
 				$resConfigRead = pg_query( $pg_conn, $sqlconfigRead);
 
-				$val = pg_fetch_result($resConfigRead, 0, 0);
+				$val = pg_fetch_array($resConfigRead, 0, PGSQL_NUM);
 
 
 			$resultScore ="";
@@ -385,7 +385,7 @@ if(strpos($message_text,'確認') !== false){
 
 			//ゲーム数０の切り分け
 			if($val>0) {
-			$return_message_text=$return_message_text."\n\n".$val."ゲーム設定値\n";
+			$return_message_text=$return_message_text."\n"."ゲーム設定値\nレート".$val[0]."\nウマ".$val[1]."-".$val[2];
 			} else {
 			$return_message_text=$return_message_text."\n本日、記録されているゲーム結果はありません";
 			}

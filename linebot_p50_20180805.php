@@ -338,60 +338,6 @@ if(strpos($message_text,'確認') !== false){
 			$return_message_text=$return_message_text."\n本日、記録されているゲーム結果はありません";
 			}
 
-//レート設定
-} elseif(strpos($message_text,'設定') !== false){
-	$return_message_text = "ゲームの設定をします";
-
-	$rate_s = 5;
-	$uma1_s =5;
-	$uma2_s =15;
-	$badai_s = 0;
-
-	$sqlcmd="UPDATE mjconfig SET rate='".$rate_s."', uma1='".$uma1_s."', uma2='".$uma2_s."', badai='".$badai_s."';";
-
-  		//DB接続
-  		// 各種パラメータを指定して接続
-			$pg_conn = pg_connect(DB_CONECT);
-
-			if( $pg_conn ) {
-				$db_message = "接続に成功しました";
-
-
-				// SQLクエリ実行
-				$res = pg_query( $pg_conn, $sqlcmd);
-
-
-				// SQLクエリ実行 終了ゲーム数
-				$sqlconfigRead ="SELECT rate,uma1,uma2,badai FROM mjconfig;";
-				$resConfigRead = pg_query( $pg_conn, $sqlconfigRead);
-
-				$val = pg_fetch_array($resConfigRead, 0, PGSQL_NUM);
-
-
-			$resultScore ="";
-			for ($i = 0 ; $i < pg_num_rows($res) ; $i++){
-			    $rows = pg_fetch_array($res, NULL, PGSQL_ASSOC);
-			    $resultScore=$resultScore.$rows['player'].str_pad($rows['total'],10, " ", STR_PAD_LEFT)."円\n";
-			}
-
-				$db_message = "クエリ実行できました";
-
-			} else {
-				$db_message = "クエリ実行できまませんでした";
-			}
-
-			// データベースとの接続を切断
-			pg_close($pg_conn);
-
-			//ゲーム数０の切り分け
-			if($val>0) {
-			$return_message_text=$return_message_text."\n"."ゲーム設定値\nレート".$val[0]."\nウマ".$val[1]."-".$val[2];
-			} else {
-			$return_message_text=$return_message_text."\n本日、記録されているゲーム結果はありません";
-			}
-
-
-
 //messageに'確認''履歴''精算'が含まれていない場合
 } else {
   //messageに数字（得点）が含まれている場合、スコア計算関数の起動

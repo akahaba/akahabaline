@@ -20,13 +20,13 @@ function return_score($message_text)
 	$oka = 0;
 	$i = 0;
 	//ウマの設定　ワンスリー
-	//$uma = array("〇〇〇","〇　　","✕　　","✕✕✕");
+	$uma = array("〇〇〇","〇　　","✕　　","✕✕✕");
 	//$umaPoints = array(30,10,-10,-30);
 	//ウマの設定　5-15
-	$uma = array("〇〇","〇","✕","✕✕");
-	$umaPoints = array(15,5,-5,-15);
+	//$uma = array("〇〇","〇","✕","✕✕");
+	$umaPoints = array(9,3,-3,-9);
   	//場代調整 トップ-10
-  	$badai = array(10,0,0,0);
+  	$badai = array(0,0,0,0);
   	//$badai = array(4,3,2,1);
 
 	//トビ罰符の設定　ワンスリー->10 ゴットー->5
@@ -137,7 +137,7 @@ function return_score($message_text)
 
 		//飛ばし箱の〇✕をウマの〇✕に反映  レートによって修正が必要！
 		$umatobiPt = $umaPoints[$i] + $gameResultTobi[$key];
-		$umatobiPt = $umatobiPt/5;  //10->ワンスリー 5->ゴットー 2017.07.20
+		$umatobiPt = $umatobiPt/3;  //10->ワンスリー 5->ゴットー 2017.07.20
 		$umatobi = "　　　";
 
 		if($umatobiPt>0) {

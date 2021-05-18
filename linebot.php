@@ -24,7 +24,7 @@ $message_text = $json_object->{"events"}[0]->{"message"}->{"text"};    //メッ�
 $date_s=(string)date("Ymd");
 //$date_s="20210514"; //デバッグ用
 //精算レート 点５->50 点ピン->100
-$ratevalue=50;
+$ratevalue=getenv('rate');
 
 //メッセージタイプが「text」以外のときは何も返さず終了
 if($message_type != "text") exit;
@@ -398,7 +398,7 @@ if(strpos($message_text,'確認') !== false){
 	if(preg_match('/^[^0-9]+[0-9]+/',$message_text)) {
 		$return_message_text = return_score($message_text);
 	} else {
-		$return_message_text = "麻雀したいなぁ～～～\n麻雀できる日あったら教えてね～～".getenv('uma1');
+		$return_message_text = "麻雀したいなぁ～～～\n麻雀できる日あったら教えてね～～";
 	}
 }
 

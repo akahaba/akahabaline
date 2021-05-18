@@ -384,10 +384,9 @@ if(strpos($message_text,'確認') !== false){
 			pg_close($pg_conn);
 
 
-
 			//ゲーム数０の切り分け
 			if($val>0) {
-			$return_message_text=$return_message_text."\n".substr($message_text, 5)."\n"."ゲーム設定値\nレート".$val[0]."\nウマ".$val[1]."-".$val[2];
+			$return_message_text=$return_message_text."\n".mb_substr($message_text, 3, NULL, "UTF-8")."\n"."ゲーム設定値\nレート".$val[0]."\nウマ".$val[1]."-".$val[2];
 			} else {
 			$return_message_text=$return_message_text."\n本日、記録されているゲーム結果はありません";
 			}

@@ -20,7 +20,9 @@ function return_score($message_text)
 	$oka = 0;
 	$i = 0;
 	//ウマの設定　ワンスリー
-	$uma = array("〇〇〇","〇　　","✕　　","✕✕✕");
+
+	//$uma = array("〇〇〇","〇","✕","✕✕✕");
+	$uma = array(str_repeat("〇", getenv('uma1')/10),str_repeat("〇", getenv('uma2')/10),str_repeat("✕", getenv('uma2')/10),str_repeat("✕", getenv('uma1')/10));
 	$umaPoints = array(getenv('uma1'),getenv('uma2'),-1*getenv('uma2'),-1*getenv('uma1'));
 	//ウマの設定　ゴットー
 	//$uma = array("〇〇","〇","✕","✕✕");

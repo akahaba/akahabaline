@@ -398,7 +398,7 @@ if(strpos($message_text,'確認') !== false){
 	if(preg_match('/^[^0-9]+[0-9]+/',$message_text)) {
 		$return_message_text = return_score($message_text);
 	} else {
-		$return_message_text = "麻雀したいなぁ～～～\n麻雀できる日あったら教えてね～～";
+		$return_message_text = "麻雀したいなぁ～～～\n麻雀できる日あったら教えてね～～".getenv('uma1');
 	}
 }
 

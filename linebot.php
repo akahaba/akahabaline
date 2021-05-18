@@ -384,7 +384,7 @@ if(strpos($message_text,'確認') !== false){
 			pg_close($pg_conn);
 
 
-			preg_match('/設定/', $message_text, $matches);
+			preg_match('/^([一-龥ぁ-ん]+)(\d{1,3})[-](\d{1,3})[-](\d{1,3})/', $message_text, $matches);
 			$gamesetting = $matches[0];
 
 			//ゲーム数０の切り分け

@@ -390,7 +390,7 @@ if(strpos($message_text,'確認') !== false){
 			//ゲーム数０の切り分け
 			if($val>0) {
 			//$return_message_text=$return_message_text."\n".mb_substr($message_text, 3, NULL, "UTF-8")."\n"."ゲーム設定値\nレート".$val[0]."\nウマ".$val[1]."-".$val[2];
-			$return_message_text=$return_message_text."\n".$gamesetting."\n"."ゲーム設定値\nレート".$matches[1]/10."\nウマ".$matches[2]."-".$matches[3];
+			$return_message_text=$return_message_text."\n".$gamesetting."\n"."ゲーム設定値\nレート".$matches[2]/10."\nウマ".$matches[3]."-".$matches[4];
 			} else {
 			$return_message_text=$return_message_text."\n本日、記録されているゲーム結果はありません";
 			}

@@ -21,13 +21,13 @@ function return_score($message_text)
 	$i = 0;
 	//ウマの設定　ワンスリー
 	$uma = array("〇〇〇","〇　　","✕　　","✕✕✕");
-	$umaPoints = array(30,10,-10,-30);
+	$umaPoints = array(getenv('uma1'),getenv('uma2'),-1*getenv('uma2'),-1*getenv('uma1'));
 	//ウマの設定　ゴットー
 	//$uma = array("〇〇","〇","✕","✕✕");
 	//$umaPoints = array(10,5,-5,-10);
   	//場代調整 トップ-10
   	//$badai = array(10,0,0,0);
-  	$badai = array(0,0,0,0);
+  	$badai = array(getenv('badai'),0,0,0);
 
 	//トビ罰符の設定　ワンスリー->10 ゴットー->5
   	$tobiarr = array("ト"=>10,"ト2"=>20,"ト3"=>30,"ハ"=>-10);

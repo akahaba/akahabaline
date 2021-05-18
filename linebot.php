@@ -385,7 +385,7 @@ if(strpos($message_text,'確認') !== false){
 
 
 			preg_match('/設定/', $message_text, $matches);
-			$gamesetting = $matches[1];
+			$gamesetting = $matches[0];
 
 			//ゲーム数０の切り分け
 			if($val>0) {

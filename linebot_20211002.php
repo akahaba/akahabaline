@@ -36,7 +36,7 @@ if(strpos($message_text,'確認') !== false){
 
 		//DB接続
 		// 各種パラメータを指定して接続
-			$pg_conn = pg_connect(getenv("DATABASE_URL"));
+			$pg_conn = pg_connect(DB_CONECT);
 
 			if( $pg_conn ) {
 				$db_message = "接続に成功しました";
@@ -76,7 +76,7 @@ if(strpos($message_text,'確認') !== false){
 
   		//DB接続
   		// 各種パラメータを指定して接続
-			$pg_conn = pg_connect(getenv("DATABASE_URL"));
+			$pg_conn = pg_connect(DB_CONECT);
 
 			if( $pg_conn ) {
 				$db_message = "接続に成功しました";
@@ -155,7 +155,7 @@ if(strpos($message_text,'確認') !== false){
 
 		//DB接続
 		// 各種パラメータを指定して接続
-			$pg_conn = pg_connect(getenv("DATABASE_URL"));
+			$pg_conn = pg_connect(DB_CONECT);
 
 			if( $pg_conn ) {
 				$db_message = "接続に成功しました";
@@ -235,7 +235,7 @@ if(strpos($message_text,'確認') !== false){
 
 		//DB接続
 		// 各種パラメータを指定して接続
-			$pg_conn = pg_connect(getenv("DATABASE_URL"));
+			$pg_conn = pg_connect(DB_CONECT);
 
 			if( $pg_conn ) {
 				$db_message = "接続に成功しました";
@@ -301,7 +301,7 @@ if(strpos($message_text,'確認') !== false){
 
   		//DB接続
   		// 各種パラメータを指定して接続
-			$pg_conn = pg_connect(getenv("DATABASE_URL"));
+			$pg_conn = pg_connect(DB_CONECT);
 
 			if( $pg_conn ) {
 				$db_message = "接続に成功しました";
@@ -351,7 +351,7 @@ if(strpos($message_text,'確認') !== false){
 
   		//DB接続
   		// 各種パラメータを指定して接続
-			$pg_conn = pg_connect(getenv("DATABASE_URL"));
+			$pg_conn = pg_connect(DB_CONECT);
 
 			if( $pg_conn ) {
 				$db_message = "接続に成功しました";

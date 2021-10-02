@@ -162,7 +162,7 @@ function return_score($message_text)
 
 			//DB接続
 			// 各種パラメータを指定して接続
-			$pg_conn = pg_connect(DB_CONECT);
+			$pg_conn = pg_connect(getenv("DATABASE_URL"));
 
 			if( $pg_conn ) {
 				$db_message = "接続に成功しました";
@@ -197,7 +197,7 @@ function return_score($message_text)
 
 		//DB接続
 		// 各種パラメータを指定して接続
-			$pg_conn = pg_connect(DB_CONECT);
+			$pg_conn = pg_connect(getenv("DATABASE_URL"));
 
 			if( $pg_conn ) {
 				$db_message = "接続に成功しました";
@@ -229,7 +229,7 @@ function return_score($message_text)
 
 		//DB接続
 		// 各種パラメータを指定して接続
-			$pg_conn = pg_connect(DB_CONECT);
+			$pg_conn = pg_connect(getenv("DATABASE_URL"));
 
 			if( $pg_conn ) {
 				$db_message = "接続に成功しました";

@@ -151,7 +151,7 @@ function return_score($message_text)
 		if(abs($umatobiPt)==1) { $umatobi = $umatobi."　　";} //ワンスリー用の設定
 		if(abs($umatobiPt)==2) { $umatobi = $umatobi."　";} //ワンスリー用の設定
 
-		$return_message_text = $key . "さん:" . $scoringPoints[$key]."\t".$umatobiPt."\t".$totalPoints[$key]."\n".$return_message_text;
+		$return_message_text = $key . "ちゃん:" . $scoringPoints[$key]."\t".$umatobiPt."\t".$totalPoints[$key]."\n".$return_message_text;
 		$i = $i-1;
 		}
 

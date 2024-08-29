@@ -151,6 +151,9 @@ function return_score($message_text)
 		if(abs($umatobiPt)==1) { $umatobi = $umatobi."　　";} //ワンスリー用の設定
 		if(abs($umatobiPt)==2) { $umatobi = $umatobi."　";} //ワンスリー用の設定
 
+		//
+		$scoringPoints[$key] = str_pad($scoringPoints[$key], 3, " ", STR_PAD_RIGHT);
+			
 		$return_message_text = $key . "さん:" . $scoringPoints[$key]."\t".$umaPoints_s."\t".$tobihakoPoints_s."\t".$totalPoints[$key]."\n".$return_message_text;
 		$i = $i-1;
 		}
